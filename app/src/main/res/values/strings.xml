@@ -1,5 +1,17 @@
 <resources>
-    <string name="app_name">Student_schedule</string>
+    <string name="app_name">Рассписание</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="typeOfWeek">
+        <item>Чисельник</item>
+        <item>Знаменник</item>
+        <item>Кожна неділя</item>
+    </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

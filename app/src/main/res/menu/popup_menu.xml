@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ruslep.student_schedule.BaseActivity" >
+
+    <item
+        android:id="@+id/edit_subject"
+        android:title="Редагувати"
+        app:showAsAction="always"
+        android:visible="true"/>
+    <item
+        android:id="@+id/copy_subject"
+        android:title="Копіювати"
+        app:showAsAction="always"
+        android:visible="true"/>
+    <item
+        android:id="@+id/delete_subject"
+        android:title="Видалити"
+        app:showAsAction="always"
+        android:visible="true"/>
+
+</menu>

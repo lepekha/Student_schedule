@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/first_section" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_enter"
+            app:itemIconTint="@android:color/holo_blue_light"
+            android:icon="@drawable/ic_cloud_done_black_24dp"
+            android:title="Войти/Зарегистрироваться" />
+        <item
+            android:id="@+id/nav_save"
+            app:itemIconTint="@android:color/holo_green_light"
+            android:icon="@drawable/ic_cloud_upload_black_24dp"
+            android:title="Сохранить на сервер" />
+        <item
+            android:id="@+id/nav_load"
+            app:itemIconTint="@android:color/holo_orange_light"
+            android:icon="@drawable/ic_cloud_download_black_24dp"
+            android:title="Загрузить с сервера" />
+        <item
+            android:id="@+id/nav_friends"
+            app:itemIconTint="@android:color/holo_red_light"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="Контакты" />
+    </group>
+
+    <group android:id="@+id/second_section" android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_share"
+                android:title="Поделится" />
+            <item
+                android:id="@+id/nav_send"
+                android:title="Оставить отзыв" />
+
+            <item
+                android:id="@+id/nav_setting"
+                android:title="Настройки" />
+            <item
+                android:id="@+id/nav_exit"
+                android:title="Закрыть" />
+    </group>
+
+</menu>

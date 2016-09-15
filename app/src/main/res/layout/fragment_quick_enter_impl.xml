@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    tools:context="ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl">
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/listView"
+            android:layout_below="@+id/empty_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:headerDividersEnabled="false" />
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/secondary_text"
+            android:visibility="gone"
+            android:text="No Lessons"
+            android:textSize="30dp"
+            android:gravity="center_vertical|center_horizontal" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="right|bottom"
+            android:id="@+id/linearLayout4"
+            android:layout_below="@+id/listView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ВІДМІНА"
+                android:id="@+id/btnCancel"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ОЧИСТИТЬ"
+                android:id="@+id/btnClear"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginRight="8dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>

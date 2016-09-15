@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/item2fon">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lineTime"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/lineName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_access_time_black_18dp"
+                android:layout_alignTop="@+id/txtAud"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="5dp"
+                android:tint="@color/secondary_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="17:20-19:00"
+                android:id="@+id/txtTime"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/secondary_text"
+                android:textSize="16dp"
+                android:layout_alignTop="@+id/imageView2"
+                android:layout_toRightOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/imageView2"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/lineAud"
+            android:layout_above="@+id/view"
+            android:layout_alignRight="@+id/view"
+            android:layout_alignEnd="@+id/view">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/ic_place_black_18dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/txtAud"
+                android:layout_toStartOf="@+id/txtAud"
+                android:layout_marginRight="5dp"
+                android:tint="@color/secondary_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="54200"
+                android:id="@+id/txtAud"
+                android:layout_gravity="right|center_vertical"
+                android:textColor="@color/secondary_text"
+                android:textSize="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lineName"
+            android:layout_below="@+id/txtType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:visibility="visible">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@drawable/ic_account_circle_black_18dp"
+                android:layout_below="@+id/txtType"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/abc_primary_text_disable_only_material_dark"
+                android:backgroundTintMode="multiply"
+                android:tint="@color/secondary_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Лепеха Руслан Олегович"
+                android:id="@+id/txtName"
+                android:textColor="@color/secondary_text"
+                android:textSize="16dp"
+                android:layout_below="@+id/txtType"
+                android:layout_toRightOf="@+id/imageView3"
+                android:layout_toEndOf="@+id/imageView3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Прикладная математика"
+            android:id="@+id/txtNazvanie"
+            android:layout_gravity="center"
+            android:textColor="@color/primary_text"
+            android:textSize="20dp"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imgSubjectNumber"
+            android:layout_toEndOf="@+id/imgSubjectNumber"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Лабораторная"
+            android:id="@+id/txtType"
+            android:textColor="@color/primary_text"
+            android:textSize="16dp"
+            android:layout_below="@+id/txtNazvanie"
+            android:layout_toRightOf="@+id/imgSubjectNumber"
+            android:layout_toEndOf="@+id/imgSubjectNumber"
+            android:layout_marginLeft="5dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:id="@+id/view"
+            android:layout_below="@+id/lineTime"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imgSubjectNumber"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"
+        android:layout_marginRight="7dp" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnItemMenu"
+        android:tint="@color/secondary_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_more_vert_black_24dp"
+        android:layout_margin="5dp" />
+
+
+</RelativeLayout>
