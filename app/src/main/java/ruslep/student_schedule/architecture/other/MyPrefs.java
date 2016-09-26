@@ -1,5 +1,6 @@
 package ruslep.student_schedule.architecture.other;
 
+import org.androidannotations.annotations.sharedpreferences.DefaultBoolean;
 import org.androidannotations.annotations.sharedpreferences.DefaultInt;
 import org.androidannotations.annotations.sharedpreferences.DefaultLong;
 import org.androidannotations.annotations.sharedpreferences.DefaultString;
@@ -26,5 +27,17 @@ public interface MyPrefs {
 
     @DefaultInt(0)
     int day();
+
+    @DefaultBoolean(false)
+    boolean invertWeek();
+
+    @DefaultBoolean(false)
+    boolean flagAuth();
+
+    @DefaultBoolean(false)
+    boolean flagRegistration();
+
+    @DefaultString("Вы не авторизированы")
+    String MyPhoneNumber();
 
 }

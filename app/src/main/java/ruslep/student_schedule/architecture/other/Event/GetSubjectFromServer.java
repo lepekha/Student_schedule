@@ -3,10 +3,11 @@ package ruslep.student_schedule.architecture.other.Event;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 
 /**
- * Created by Ruslan on 28.08.2016.
+ * Created by Lepekha.R.O on 25.08.2016.
  */
-public class ChangeTypeOfWeek {
 
-    public ChangeTypeOfWeek() {
+public class GetSubjectFromServer {
+
+    public GetSubjectFromServer() {
     }
 }

@@ -12,6 +12,16 @@
         <item>Кожна неділя</item>
     </string-array>
 
+    <string-array name="setting_typeOfWeek">
+        <item>Чисельник</item>
+        <item>Знаменник</item>
+    </string-array>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_log_in">Log in</string>
+    <string name="navigation_drawer_save">Save to the server</string>
+    <string name="navigation_drawer_load">Download from the server</string>
+    <string name="navigation_drawer_friends">My friends</string>
+
 </resources>

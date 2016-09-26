@@ -5,7 +5,6 @@ package ruslep.student_schedule.architecture.other;
  */
 public interface Const {
     String BASE_URL = "http://raspisanie-lruslan.rhcloud.com/";
-    String PHONE = "+380660200178";
 
     /** type quickEnter*/
 
@@ -14,4 +13,8 @@ public interface Const {
     int TEACHER_TYPE = 2;
     int ROOM_TYPE = 3;
     int TIME_TYPE = 4;
+
+    enum TYPE_OF_WEEK {
+        Чисельник, Знаменник;
+    }
 }

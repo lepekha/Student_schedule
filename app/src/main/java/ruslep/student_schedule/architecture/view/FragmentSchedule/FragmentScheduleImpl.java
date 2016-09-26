@@ -4,13 +4,11 @@ package ruslep.student_schedule.architecture.view.FragmentSchedule;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Visibility;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,16 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
-import org.androidannotations.annotations.ItemLongClick;
-import org.androidannotations.annotations.LongClick;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
@@ -41,14 +35,16 @@ import java.util.List;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.Event.AddSubject;
+import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
 import ruslep.student_schedule.architecture.other.Event.DeleteSubject;
 import ruslep.student_schedule.architecture.other.Event.EditSubject;
+import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
 import ruslep.student_schedule.architecture.other.Event.ItemMenuClick;
 import ruslep.student_schedule.architecture.other.Event.PasteSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
+import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.PresenterPresenterFragmentScheduleImpl;
-import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog;
-import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog_;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog_;
 
@@ -62,10 +58,13 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
 
     private Menu menu;
 
-    private TextView txtEmpty_view;
+    private LinearLayout empty_view;
 
     @FragmentArg("currentPage")
     int currentPage;
+
+    @Bean(PresenterBaseImpl.class)
+    PresenterBase presenterBase;
 
     @Bean
     PresenterPresenterFragmentScheduleImpl presenterPresenterFragmentSchedule;
@@ -104,11 +103,11 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     public void setPlaceholder(){
         if (subjects.isEmpty()) {
             list.setVisibility(View.GONE);
-            txtEmpty_view.setVisibility(View.VISIBLE);
+            empty_view.setVisibility(View.VISIBLE);
         }
         else {
             list.setVisibility(View.VISIBLE);
-            txtEmpty_view.setVisibility(View.GONE);
+            empty_view.setVisibility(View.GONE);
         }
     }
 
@@ -118,26 +117,38 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule_impl, container, false);
 
-        txtEmpty_view = (TextView) view.findViewById(R.id.empty_view);
-
+        empty_view = (LinearLayout) view.findViewById(R.id.empty_view);
+        Log.e("dff","4");
 
         list=(RecyclerView) view.findViewById(R.id.listView);
 
         listManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(listManager);
-        subjects = presenterPresenterFragmentSchedule.getSubject(myPrefs.typeOfWeek().get(),currentPage);
+
+        subjects = presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(),currentPage);
         setPlaceholder();
-        Log.e("zzz",currentPage+"");
+        Log.e("zzz",subjects.size()+""+myPrefs.typeOfWeek().get()+" +"+currentPage);
         if (!subjects.isEmpty()) {
             adapter = new CustomFragmentAdapter(subjects);
             adapter.SetOnItemMenuClick(this);
             list.setAdapter(adapter);
         }
-
         return view;
     }
 
 
+    /** событие изменение типа недели*/
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onChangeTypeOfWeek(ChangeTypeOfWeek event) {
+        if(currentPage == myPrefs.day().get()) {
+            subjects.clear();
+            if (!presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                setPlaceholder();
+                adapter.refresh();
+            }
+        }
+    }
 
    /**  событие нажатие на меню в списке */
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -146,23 +157,55 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     }
 
 
-    //событие добавление занятия
+    /**событие добавление занятия*/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(AddSubject event) {
-        addSubject(event.message);
+        if(currentPage == myPrefs.day().get()) {
+            if (subjects.isEmpty()) {
+                subjects.clear();
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                setPlaceholder();
+                adapter = new CustomFragmentAdapter(subjects);
+                adapter.SetOnItemMenuClick(this);
+                list.setAdapter(adapter);
+            } else {
+                subjects.clear();
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                adapter.refresh();
+            }
+        }
     }
 
-    //событие изменения занятия
+    /**событие изменения занятия*/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEditSubject(EditSubject event) {
         if(currentPage == myPrefs.day().get()) {
             subjects.clear();
-            subjects.addAll(presenterPresenterFragmentSchedule.getSubject(myPrefs.typeOfWeek().get(), myPrefs.day().get()));
+            subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
             adapter.refresh();
         }
     }
 
-    //событие удаления занятия
+    /**событие загрузки занятий с сервера*/
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetSubjectFromServer(GetSubjectFromServer event) {
+        if(currentPage == myPrefs.day().get()) {
+            if (subjects.isEmpty()) {
+                subjects.clear();
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                setPlaceholder();
+                adapter = new CustomFragmentAdapter(subjects);
+                adapter.SetOnItemMenuClick(this);
+                list.setAdapter(adapter);
+            } else {
+                subjects.clear();
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                adapter.refresh();
+            }
+        }
+    }
+
+    /***событие удаления занятия*/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDeleteSubject(DeleteSubject event) {
         if(currentPage == myPrefs.day().get()) {
@@ -171,38 +214,30 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
             subjects.clear();
             subjects.addAll(deleteElement(ls, event.position));
             adapter.refresh();
+            setPlaceholder();
         }
     }
 
-    // событие вставка занятия после копирования
+    /**событие вставка занятия после копирования*/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPasteSubject(PasteSubject event) {
-        /** если предмет скопирован в буфер, то вставить*/
-        if(event.message != null){
-            addSubject(event.message);
-        }
-
-    }
-
-
-    ///метод добавления занятия
-    public void addSubject(Subject subject){
         if(currentPage == myPrefs.day().get()) {
-            if (this.subjects.isEmpty()) {
-                this.subjects.add(subject);
+            if (subjects.isEmpty()) {
+                subjects.clear();
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter = new CustomFragmentAdapter(this.subjects);
+                adapter = new CustomFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
             } else {
-                subjects.add(subject);
+                subjects.clear();
+                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 adapter.refresh();
-                //adapter.updateList(subject);
             }
         }
     }
 
-    //удаление елемента со списка
+    /**удаление елемента со списка*/
     public List<Subject> deleteElement(List<Subject> subjects, int position) {
         List<Subject> ls = new ArrayList<>();
         for (int i = 0; i < subjects.size(); i++) {

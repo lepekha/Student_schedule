@@ -7,4 +7,5 @@ import org.androidannotations.annotations.EBean;
  */
 
 public interface View {
+
 }

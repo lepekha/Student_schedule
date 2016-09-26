@@ -5,39 +5,39 @@
     <group android:id="@+id/first_section" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_enter"
-            app:itemIconTint="@android:color/holo_blue_light"
-            android:icon="@drawable/ic_cloud_done_black_24dp"
-            android:title="Войти/Зарегистрироваться" />
+            android:icon="@drawable/ic_assignment_ind_black_24px"
+            android:title="@string/navigation_drawer_log_in" />
         <item
             android:id="@+id/nav_save"
-            app:itemIconTint="@android:color/holo_green_light"
-            android:icon="@drawable/ic_cloud_upload_black_24dp"
-            android:title="Сохранить на сервер" />
+            android:icon="@drawable/ic_cloud_upload_black_24px"
+            android:title="@string/navigation_drawer_save" />
         <item
             android:id="@+id/nav_load"
-            app:itemIconTint="@android:color/holo_orange_light"
-            android:icon="@drawable/ic_cloud_download_black_24dp"
-            android:title="Загрузить с сервера" />
+            android:icon="@drawable/ic_cloud_download_black_24px"
+            android:title="@string/navigation_drawer_load" />
         <item
             android:id="@+id/nav_friends"
-            app:itemIconTint="@android:color/holo_red_light"
-            android:icon="@drawable/ic_group_black_24dp"
-            android:title="Контакты" />
+            android:icon="@drawable/ic_people_black_24px"
+            android:title="@string/navigation_drawer_friends" />
     </group>
 
     <group android:id="@+id/second_section" android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_black_24px"
                 android:title="Поделится" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_review"
+                android:icon="@drawable/ic_rate_review_black_24px"
                 android:title="Оставить отзыв" />
 
             <item
                 android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_settings_black_24px"
                 android:title="Настройки" />
             <item
                 android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_exit_to_app_black_24px"
                 android:title="Закрыть" />
     </group>
 

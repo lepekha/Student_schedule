@@ -3,6 +3,7 @@ package ruslep.student_schedule.architecture.presenter;
 import java.util.List;
 
 import ruslep.student_schedule.architecture.model.entity.Subject;
+import ruslep.student_schedule.architecture.view.BaseActivity;
 
 /**
  * Created by Lepekha.R.O on 20.08.2016.
@@ -24,6 +25,7 @@ public interface PresenterFragmentSchedule {
     void editSubject(Subject subject);
 
     boolean isCopy();
+
 
 }
 

@@ -1,13 +1,16 @@
 package ruslep.student_schedule.architecture.model.entity;
 
 
+import java.util.Comparator;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ruslep.student_schedule.architecture.view.BaseActivityImpl_;
 
 /**
  * Created by Ruslan on 11.08.2016.
  */
-public class Subject extends RealmObject {
+public class Subject extends RealmObject implements Comparable<Subject>  {
     @PrimaryKey
     private int id;
     private String numberSubject;
@@ -134,6 +137,7 @@ public class Subject extends RealmObject {
         return new Subject().new Builder();
     }
 
+
     public class Builder {
 
         private Builder() {
@@ -198,6 +202,21 @@ public class Subject extends RealmObject {
             return Subject.this;
         }
 
+    }
+
+    @Override
+    public int compareTo(Subject subject) {
+        return Comparators.NUMBER.compare(this, subject);
+    }
+
+    public static class Comparators {
+
+        public static Comparator<Subject> NUMBER = new Comparator<Subject>() {
+            @Override
+            public int compare(Subject o1, Subject o2) {
+                return Integer.valueOf(o1.numberSubject).compareTo(Integer.valueOf(o2.numberSubject));
+            }
+        };
     }
 
 }

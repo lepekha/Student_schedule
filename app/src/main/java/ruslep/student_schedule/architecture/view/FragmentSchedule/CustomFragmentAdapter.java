@@ -16,6 +16,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Subject;
@@ -77,6 +78,7 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
 
     public CustomFragmentAdapter(List<Subject> subjects) {
+        Collections.sort(subjects, Subject.Comparators.NUMBER);
         this.subjects = subjects;
     }
 
@@ -89,6 +91,12 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
 
     public void refresh(){
+        Collections.sort(this.subjects, Subject.Comparators.NUMBER);
+        notifyDataSetChanged();
+    }
+
+    public void add(Subject subject){
+        this.subjects.add(subject);
         notifyDataSetChanged();
     }
 
@@ -108,14 +116,9 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
         viewHolder.imgSubjectNumber.setImageDrawable(drawable);
         viewHolder.txtNazvanie.setText(subjects.get(position).getNameSubject());
 
-       /* viewHolder.btnItemMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventBus.getDefault().post(new ItemMenuClick(subjects.get(position).getId(),viewHolder.btnItemMenu));
-            }
-        });*/
         /**проверка на пустоту поля Аудитория*/
         if(checkField(subjects.get(position).getRoomSubject())){
+            viewHolder.lineTime.setVisibility(View.VISIBLE);
             viewHolder.txtAud.setText(subjects.get(position).getRoomSubject());
         }else{
             viewHolder.lineAud.setVisibility(View.GONE);
@@ -125,19 +128,19 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
         /**проверка на пустоту поля Время*/
         if(!subjects.get(position).getTimeStartSubject().equals("Початок") || !subjects.get(position).getTimeEndSubject().equals("Кінець")){
+            viewHolder.lineTime.setVisibility(View.VISIBLE);
             viewHolder.txtTime.setText(subjects.get(position).getTimeStartSubject()+" - "+subjects.get(position).getTimeEndSubject());
         }else{
             viewHolder.lineTime.setVisibility(View.GONE);
         }
 
-        /**проверка на пустоту поля Имя предмета*/
+        /**проверка на пустоту поля Имя преподавателя*/
         if(checkField(subjects.get(position).getTeacherSubject())){
+            viewHolder.lineName.setVisibility(View.VISIBLE);
             viewHolder.txtName.setText(subjects.get(position).getTeacherSubject());
         }else{
             viewHolder.lineName.setVisibility(View.GONE);
         }
-
-
     }
 
 

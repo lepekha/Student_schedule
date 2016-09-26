@@ -19,6 +19,7 @@ import ruslep.student_schedule.architecture.other.Event.DeleteSubject;
 import ruslep.student_schedule.architecture.other.Event.EditSubject;
 import ruslep.student_schedule.architecture.other.Event.PasteSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.view.BaseActivity;
 
 /**
  * Created by Lepekha.R.O on 20.08.2016.
@@ -36,6 +37,8 @@ public class PresenterPresenterFragmentScheduleImpl implements PresenterFragment
 
     @Pref
     MyPrefs_ myPrefs;
+
+    private BaseActivity view;
 
 
 
@@ -88,4 +91,5 @@ public class PresenterPresenterFragmentScheduleImpl implements PresenterFragment
             return false;
         }
     }
+
 }
