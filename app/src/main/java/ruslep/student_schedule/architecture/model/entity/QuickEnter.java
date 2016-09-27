@@ -1,12 +1,15 @@
 package ruslep.student_schedule.architecture.model.entity;
 
 
+import org.androidannotations.annotations.EBean;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Ruslan on 11.08.2016.
  */
+@EBean
 public class QuickEnter extends RealmObject {
     @PrimaryKey
     private int id;

@@ -8,6 +8,7 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
+import ruslep.student_schedule.architecture.model.entity.Contacts;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.RxUtil;
 import ruslep.student_schedule.architecture.other.network.API;
@@ -51,6 +52,13 @@ public class ModelImpl implements Model {
     public Observable<Response<ResponseBody>> setSchedule(String phoneMD5, String schedule) {
         return service
                 .setSchedule(phoneMD5,schedule)
+                .compose(RxUtil.applyIOToMainThreadSchedulers());
+    }
+
+    @Override
+    public Observable<List<Contacts>> getContacts(String contactsMD5) {
+        return service
+                .getContacts(contactsMD5)
                 .compose(RxUtil.applyIOToMainThreadSchedulers());
     }
 }

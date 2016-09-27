@@ -67,13 +67,14 @@
                             android:id="@+id/edSubjectName" />
 
                         <ImageButton
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:id="@+id/ibtnSubjectName"
-                            android:src="@android:drawable/ic_menu_help"
                             style="@style/Widget.AppCompat.Button"
                             android:tag="1"
-                            android:tint="@color/accent" />
+                            android:tint="@color/accent"
+                            android:background="#00000000"
+                            android:src="@drawable/ic_live_help_black_24px" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -105,7 +106,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/ibtnTypeSubject"
                             android:tag="2"
-                            android:src="@android:drawable/ic_menu_help"
+                            android:background="#00000000"
+                            android:src="@drawable/ic_live_help_black_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>
@@ -139,7 +141,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/ibtnSubjectTeacher"
                             android:tag="3"
-                            android:src="@android:drawable/ic_menu_help"
+                            android:background="#00000000"
+                            android:src="@drawable/ic_live_help_black_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>
@@ -173,7 +176,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/ibtnSubjectRoom"
                             android:tag="4"
-                            android:src="@android:drawable/ic_menu_help"
+                            android:background="#00000000"
+                            android:src="@drawable/ic_live_help_black_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>
@@ -217,7 +221,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/ibtnTime"
                             android:tag="5"
-                            android:src="@android:drawable/ic_menu_help"
+                            android:background="#00000000"
+                            android:src="@drawable/ic_live_help_black_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>

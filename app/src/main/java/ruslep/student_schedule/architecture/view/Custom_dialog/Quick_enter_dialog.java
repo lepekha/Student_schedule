@@ -51,7 +51,7 @@ import ruslep.student_schedule.architecture.view.FragmentSchedule.CustomFragment
 @EFragment
 public class Quick_enter_dialog extends DialogFragment {
 
-    ListView list;
+    private ListView list;
 
     @Bean(PresenterQuickEnterImpl.class)
     PresenterQuickEnter presenterQuickEnter;

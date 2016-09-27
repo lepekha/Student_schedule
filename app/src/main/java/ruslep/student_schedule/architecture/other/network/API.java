@@ -11,6 +11,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import ruslep.student_schedule.architecture.model.entity.Contacts;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import rx.Observable;
 
@@ -33,5 +34,10 @@ public interface API {
     @FormUrlEncoded
     @POST("rest/phone/getSchedule")
     Observable<List<Subject>> getSchedule(@Field("phoneMD5") String phoneMD5);
+
+    @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
+    @FormUrlEncoded
+    @POST("rest/phone/checkContacts")
+    Observable<List<Contacts>> getContacts(@Field("contactsMD5") String phoneMD5);
 
 }

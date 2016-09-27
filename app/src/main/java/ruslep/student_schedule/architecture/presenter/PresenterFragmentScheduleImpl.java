@@ -25,7 +25,7 @@ import ruslep.student_schedule.architecture.view.BaseActivity;
  * Created by Lepekha.R.O on 20.08.2016.
  */
 @EBean(scope = EBean.Scope.Singleton)
-public class PresenterPresenterFragmentScheduleImpl implements PresenterFragmentSchedule {
+public class PresenterFragmentScheduleImpl implements PresenterFragmentSchedule {
 
     private Subject subject = null;
 

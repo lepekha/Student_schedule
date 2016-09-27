@@ -44,7 +44,7 @@ import ruslep.student_schedule.architecture.other.Event.PasteSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
-import ruslep.student_schedule.architecture.presenter.PresenterPresenterFragmentScheduleImpl;
+import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog_;
 
@@ -67,7 +67,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     PresenterBase presenterBase;
 
     @Bean
-    PresenterPresenterFragmentScheduleImpl presenterPresenterFragmentSchedule;
+    PresenterFragmentScheduleImpl presenterFragmentSchedule;
 
     private List<Subject> subjects = null;
 
@@ -118,14 +118,11 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         View view = inflater.inflate(R.layout.fragment_schedule_impl, container, false);
 
         empty_view = (LinearLayout) view.findViewById(R.id.empty_view);
-        Log.e("dff","4");
-
         list=(RecyclerView) view.findViewById(R.id.listView);
-
         listManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(listManager);
 
-        subjects = presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(),currentPage);
+        subjects = presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(),currentPage);
         setPlaceholder();
         Log.e("zzz",subjects.size()+""+myPrefs.typeOfWeek().get()+" +"+currentPage);
         if (!subjects.isEmpty()) {
@@ -142,8 +139,8 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     public void onChangeTypeOfWeek(ChangeTypeOfWeek event) {
         if(currentPage == myPrefs.day().get()) {
             subjects.clear();
-            if (!presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+            if (!presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
                 adapter.refresh();
             }
@@ -163,14 +160,14 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         if(currentPage == myPrefs.day().get()) {
             if (subjects.isEmpty()) {
                 subjects.clear();
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
                 adapter = new CustomFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
             } else {
                 subjects.clear();
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 adapter.refresh();
             }
         }
@@ -181,7 +178,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     public void onEditSubject(EditSubject event) {
         if(currentPage == myPrefs.day().get()) {
             subjects.clear();
-            subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+            subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
             adapter.refresh();
         }
     }
@@ -192,14 +189,14 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         if(currentPage == myPrefs.day().get()) {
             if (subjects.isEmpty()) {
                 subjects.clear();
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
                 adapter = new CustomFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
             } else {
                 subjects.clear();
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 adapter.refresh();
             }
         }
@@ -224,14 +221,14 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         if(currentPage == myPrefs.day().get()) {
             if (subjects.isEmpty()) {
                 subjects.clear();
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
                 adapter = new CustomFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
             } else {
                 subjects.clear();
-                subjects.addAll(presenterPresenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 adapter.refresh();
             }
         }
@@ -252,7 +249,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.paste_subject:
-                presenterPresenterFragmentSchedule.popupPasteSubject();
+                presenterFragmentSchedule.popupPasteSubject();
                 break;
             default:
                 break;
@@ -265,7 +262,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         this.menu = menu;
-        if(!presenterPresenterFragmentSchedule.isCopy()) {
+        if(!presenterFragmentSchedule.isCopy()) {
             menu.findItem(R.id.paste_subject).setVisible(false);
         }
     }
@@ -287,14 +284,14 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    presenterPresenterFragmentSchedule.deleteSubject(subject,position);
+                                    presenterFragmentSchedule.deleteSubject(subject,position);
                                 }
                             });
                             builder.setNegativeButton("ОТМЕНА", null);
                             builder.show();
                             return true;
                         case R.id.copy_subject:
-                            presenterPresenterFragmentSchedule.popupCopySubject(subject);
+                            presenterFragmentSchedule.popupCopySubject(subject);
                             menu.findItem(R.id.paste_subject).setVisible(true);
                             return true;
                         case R.id.edit_subject:

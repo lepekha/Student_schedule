@@ -35,7 +35,8 @@
         </activity>
 
         <activity android:name=".architecture.view.ContactsActivityImpl_"
-            android:label="Мои контакты">
+            android:label="Мои контакты"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <meta-data

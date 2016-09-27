@@ -1,6 +1,8 @@
 package ruslep.student_schedule.architecture.model.entity;
 
 
+import org.androidannotations.annotations.EBean;
+
 import java.util.Comparator;
 
 import io.realm.RealmObject;
@@ -10,6 +12,7 @@ import ruslep.student_schedule.architecture.view.BaseActivityImpl_;
 /**
  * Created by Ruslan on 11.08.2016.
  */
+@EBean
 public class Subject extends RealmObject implements Comparable<Subject>  {
     @PrimaryKey
     private int id;

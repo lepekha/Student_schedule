@@ -68,7 +68,6 @@ public class PresenterBaseImpl implements PresenterBase {
 
     @Override
     public void setView(BaseActivity view) {
-        Log.e("dff","2");
         this.view = view;
     }
 
@@ -269,9 +268,9 @@ public class PresenterBaseImpl implements PresenterBase {
                         subjectRealm.saveAllToDB(list);
                         view.showMessage("Загрузка завершена.");
                         EventBus.getDefault().post(new GetSubjectFromServer());
+                        endLoading();
                     }
                 });
-        endLoading();
     }
 
     @Override

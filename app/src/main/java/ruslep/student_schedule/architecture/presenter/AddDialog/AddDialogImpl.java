@@ -10,7 +10,6 @@ import ruslep.student_schedule.architecture.model.DB.Subject.SubjectRealmImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.Event.AddSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
-import ruslep.student_schedule.architecture.presenter.PresenterPresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl_;
 import ruslep.student_schedule.architecture.view.View;
@@ -25,8 +24,6 @@ public class AddDialogImpl implements AddDialog {
     @Bean(SubjectRealmImpl.class)
     SubjectRealm subjectRealm;
 
-    @Bean
-    PresenterPresenterFragmentScheduleImpl presenterPresenterFragmentSchedule;
 
     @Pref
     MyPrefs_ myPrefs;

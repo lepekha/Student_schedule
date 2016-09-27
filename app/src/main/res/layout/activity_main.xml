@@ -30,8 +30,8 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:layout_gravity="right"
             android:gravity="right">
-            <ProgressBar
-                style="?android:attr/progressBarStyle"
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                style="@style/Widget.MaterialProgressBar.ProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBar"

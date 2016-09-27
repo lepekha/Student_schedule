@@ -31,7 +31,7 @@ import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.AddDialog.AddDialog;
 import ruslep.student_schedule.architecture.presenter.AddDialog.AddDialogImpl;
-import ruslep.student_schedule.architecture.presenter.PresenterPresenterFragmentScheduleImpl;
+import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.BaseActivityImpl;
 
 /**
@@ -59,7 +59,7 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
     int id;
 
     @Bean
-    PresenterPresenterFragmentScheduleImpl presenterPresenterFragmentSchedule;
+    PresenterFragmentScheduleImpl presenterFragmentSchedule;
 
     @Pref
     MyPrefs_ myPrefs;
@@ -78,7 +78,7 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
 
     @AfterViews
     public void afterView(){
-        subject = presenterPresenterFragmentSchedule.getSubjectByID(id);
+        subject = presenterFragmentSchedule.getSubjectByID(id);
         btnAdd.setText("ЗБЕРЕГТИ");
         edSubjectName.setText(subject.getNameSubject());
         edSubjectNumber.setText(subject.getNumberSubject());
@@ -114,7 +114,7 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
                 .setTypeOfWeek(spTypeOfWeek.getSelectedItem().toString())
                 .setDayOfWeek(myPrefs.day().get())
                 .build();
-        presenterPresenterFragmentSchedule.editSubject(sb);
+        presenterFragmentSchedule.editSubject(sb);
         dismiss();
     }
 

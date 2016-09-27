@@ -63,7 +63,7 @@ import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
-import ruslep.student_schedule.architecture.presenter.PresenterPresenterFragmentScheduleImpl;
+import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog_;
 import ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl_;
@@ -92,7 +92,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     TextView txtTypeOfWeek;
 
     @ViewById(R.id.progressBar)
-    ProgressBar progressBar;
+    me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
 
     @Pref
     MyPrefs_ myPrefs;
@@ -100,9 +100,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     private DrawerLayout drawer;
 
     private NavigationView navigationView;
-
-    @Bean
-    PresenterPresenterFragmentScheduleImpl presenterPresenterFragmentSchedule;
 
     @Bean
     PresenterBaseImpl presenterBase;
