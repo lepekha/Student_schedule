@@ -9,4 +9,4 @@
 Realm, EventBus, AndroidAnnotations, GSON.
 
 ![Скриншот_1](https://github.com/lepekha/Student_schedule/blob/master/screen_1.png)
-![Скриншот_2](https://github.com/lepekha/Student_schedule/blob/master/screen_2.png)
+![Скриншот_2](https://github.com/lepekha/Student_schedule/blob/master/screen_3.png)
