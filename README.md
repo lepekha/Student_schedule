@@ -7,5 +7,5 @@
 
 Проект был написан на основе MVP архитектуры с использованием популярных библиотек Android Support Library, RxAndroid, Retrofit,
 Realm, EventBus, AndroidAnnotations, GSON.
-![Скриншот_1](https://github.com/lepekha/Student_schedule/blob/master/Screenshot_1.png)
-![Скриншот_2](https://github.com/lepekha/Student_schedule/blob/master/Screenshot_2.png)
+![Скриншот_1](https://github.com/lepekha/Student_schedule/blob/master/scr_1.png)
+![Скриншот_2](https://github.com/lepekha/Student_schedule/blob/master/scr_2.png)
