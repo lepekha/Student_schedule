@@ -57,7 +57,7 @@ public class SubjectRealmImpl implements SubjectRealm {
                 .beginGroup()
                 .equalTo("typeOfWeek", typeOfWeek)
                 .or()
-                .equalTo("typeOfWeek", "Кожна неділя")
+                .equalTo("typeOfWeek", "Каждая неделя")
                 .endGroup()
                 .findAll();
         return realm.copyFromRealm(result);
