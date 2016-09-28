@@ -78,10 +78,10 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
 
     @Override
     public void setAdapter(List<Contacts> listContacts) {
+        presenterContacts.hideHolderView();
         if (!listContacts.isEmpty()) {
             adapter = new ContactsAdapter(listContacts);
             adapter.SetOnItemMenuClick(this);
-            presenterContacts.hideHolderView();
             list.setAdapter(adapter);
         }
     }

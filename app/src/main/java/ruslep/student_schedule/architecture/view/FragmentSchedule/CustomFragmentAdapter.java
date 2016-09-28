@@ -26,13 +26,15 @@ import ruslep.student_schedule.architecture.other.Event.ItemMenuClick;
 
 public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAdapter.ViewHolder>{
 
+    private static final int IMG_RADIUS = 10;
 
     private List<Subject> subjects = new ArrayList<>();
 
 
-    OnItemMenuClickListener onItemMenuClickListener;
+    private OnItemMenuClickListener onItemMenuClickListener;
 
-    ColorGenerator generator = ColorGenerator.MATERIAL;
+    private ColorGenerator generator = ColorGenerator.MATERIAL;
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -112,7 +114,7 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
                 .height(50) // height in px
                 .toUpperCase()
                 .endConfig()
-                .buildRoundRect(subjects.get(position).getNumberSubject(), color,10);
+                .buildRoundRect(subjects.get(position).getNumberSubject(), color,IMG_RADIUS);
         viewHolder.imgSubjectNumber.setImageDrawable(drawable);
         viewHolder.txtNazvanie.setText(subjects.get(position).getNameSubject());
 
@@ -127,7 +129,7 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
         viewHolder.txtType.setText(subjects.get(position).getTypeSubject());
 
         /**проверка на пустоту поля Время*/
-        if(!subjects.get(position).getTimeStartSubject().equals("Початок") || !subjects.get(position).getTimeEndSubject().equals("Кінець")){
+        if(!subjects.get(position).getTimeStartSubject().equals(R.string.dialogAdd_timeStart) || !subjects.get(position).getTimeEndSubject().equals(R.string.dialogAdd_timeEnd)){
             viewHolder.lineTime.setVisibility(View.VISIBLE);
             viewHolder.txtTime.setText(subjects.get(position).getTimeStartSubject()+" - "+subjects.get(position).getTimeEndSubject());
         }else{

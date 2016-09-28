@@ -6,16 +6,56 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="typeOfWeek">
-        <item>Чисельник</item>
-        <item>Знаменник</item>
-        <item>Кожна неділя</item>
-    </string-array>
 
     <string-array name="setting_typeOfWeek">
         <item>Чисельник</item>
         <item>Знаменник</item>
     </string-array>
+
+    <!--BaseActivity-->
+    <string name="baseActivity_dayOfWeek_monday">Понедельник</string>
+    <string name="baseActivity_dayOfWeek_tuesday">Вторник</string>
+    <string name="baseActivity_dayOfWeek_wednesday">Среда</string>
+    <string name="baseActivity_dayOfWeek_thursday">Четверг</string>
+    <string name="baseActivity_dayOfWeek_friday">Пятница</string>
+    <string name="baseActivity_dayOfWeek_saturday">Суббота</string>
+    <string name="baseActivity_dayOfWeek_sunday">Воскресенье</string>
+    <string name="baseActivity_auth_error">Авторизация прошла неудачно.</string>
+    <string name="baseActivity_typeOfWeek_Cheslitel">Чеслитель</string>
+    <string name="baseActivity_typeOfWeek_Znamenatel">Знаменатель</string>
+    <string name="baseActivity_share_message">Здесь будет текст!!!!</string>
+    <string name="baseActivity_share_header">Текст</string>
+    <string name="baseActivity_Schedule_error">Ошибка. Нет соединения с интернетом или проблемы на сервере.</string>
+    <string name="baseActivity_Schedule_needAuth">Для начала работы нужно авторизироваться.</string>
+    <string name="baseActivity_getSchedule_compl">Загрузка завершена.</string>
+    <string name="baseActivity_setSchedule_compl">Сохранение завершено.</string>
+    <string name="baseActivity_registerSchedule_error">Ошибка регистрации.</string>
+
+
+    <!--Dialog add-->
+    <string name="dialogAdd_timeStart">Начало</string>
+    <string name="dialogAdd_timeEnd">Конец</string>
+    <string-array name="dialogAdd_typeOfWeek">
+        <item>Чеслитель</item>
+        <item>Знаменатель</item>
+        <item>Каждая неделя</item>
+    </string-array>
+    <string name="dialogAdd_btn_OK">ДОБАВИТЬ</string>
+    <string name="dialogAdd_btn_Cancel">ОТМЕНА</string>
+    <string name="dialogAdd_txtSubjectNumber">№ занятия:</string>
+    <string name="dialogAdd_txtSubjectName">Название предмета:</string>
+    <string name="dialogAdd_txtTypeSubject">Тип занятия:</string>
+    <string name="dialogAdd_txtSubjectTeacher">Имя преподавателя:</string>
+    <string name="dialogAdd_txtSubjectRoom">Аудитория:</string>
+    <string name="dialogAdd_txtTime">Время:</string>
+    <string name="dialogAdd_txtTypeOfWeek">Тип недели:</string>
+
+
+    <!--Fragment schedule-->
+    <string name="fragmentSchedule_alertDialog_message">Вы действительно хотите удалить это занятие?</string>
+    <string name="fragmentSchedule_alertDialog_OK">OK</string>
+    <string name="fragmentSchedule_alertDialog_Cancel">Отмена</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

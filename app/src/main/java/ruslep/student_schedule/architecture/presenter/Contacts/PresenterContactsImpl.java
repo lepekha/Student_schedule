@@ -68,11 +68,15 @@ public class PresenterContactsImpl implements  PresenterContacts {
             //contacts.setId(phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
             contacts.setName(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));
             /**получаем номер с записной книжки, чистим его и берем мд5*/
-            contacts.setPhone(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
+            contacts.setPhone(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER))));
             //contacts.setPhone(md5.getMD5(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)))));
             contactsList.add(contacts);
         }
         phones.close();
+        Log.e("qaz","++++++"+contactsList.get(50).getPhone());
+        Log.e("qaz","++++++"+contactsList.get(60).getPhone());
+        Log.e("qaz","++++++"+contactsList.get(70).getPhone());
+        Log.e("qaz","++++++"+contactsList.get(80).getPhone());
         return contactsList;
     }
 
@@ -107,11 +111,13 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
     @Override
     public void getContacts(String contactsMD5) {
+        Log.e("qaz","++++++");
         model
                 .getContacts(contactsMD5)
                 .subscribe(new Observer<List<Contacts>>() {
                     @Override
                     public void onCompleted() {
+                        Log.e("qaz","------");
                     }
 
                     @Override
@@ -120,6 +126,8 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
                     @Override
                     public void onNext(List<Contacts> list) {
+                        Log.e("qaz","------");
+                        Log.e("qaz","------"+list.size());
                         conList = list;
                         contactsActivity.setAdapter(list);
                     }

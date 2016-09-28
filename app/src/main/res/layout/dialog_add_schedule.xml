@@ -33,7 +33,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="№ заняття"
+                        android:text="@string/dialogAdd_txtSubjectNumber"
                         android:id="@+id/txtSubjectNumber" />
 
                     <EditText
@@ -52,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Назва предмету:"
+                        android:text="@string/dialogAdd_txtSubjectName"
                         android:id="@+id/txtSubjectName" />
 
                     <LinearLayout
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Тип заняття:"
+                        android:text="@string/dialogAdd_txtTypeSubject"
                         android:id="@+id/txtTypeSubject" />
 
                     <LinearLayout
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Імя вчителя:"
+                        android:text="@string/dialogAdd_txtSubjectTeacher"
                         android:id="@+id/txtSubjectTeacher" />
 
                     <LinearLayout
@@ -158,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Аудиторія:"
+                        android:text="@string/dialogAdd_txtSubjectRoom"
                         android:id="@+id/txtSubjectRoom" />
 
                     <LinearLayout
@@ -193,7 +193,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Час:"
+                        android:text="@string/dialogAdd_txtTime"
                         android:id="@+id/txtTime" />
 
                     <LinearLayout
@@ -205,7 +205,7 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Початок"
+                            android:text="@string/dialogAdd_timeStart"
                             android:id="@+id/btnTimeStart"
                             style="@style/Widget.AppCompat.Button" />
 
@@ -213,7 +213,7 @@
                             style="@style/Widget.AppCompat.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Кінець"
+                            android:text="@string/dialogAdd_timeEnd"
                             android:id="@+id/btnTimeEnd" />
 
                         <ImageButton
@@ -238,7 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Тип неділі:"
+                        android:text="@string/dialogAdd_txtTypeOfWeek"
                         android:id="@+id/txtTypeOfWeek" />
 
                     <LinearLayout
@@ -250,7 +250,7 @@
                         <Spinner
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:entries="@array/typeOfWeek"
+                            android:entries="@array/dialogAdd_typeOfWeek"
                             android:id="@+id/spTypeOfWeek"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
@@ -276,7 +276,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ВІДМІНА"
+                android:text="@string/dialogAdd_btn_Cancel"
                 android:id="@+id/btnCancel"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
@@ -287,7 +287,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ДОДАТИ"
+                android:text="@string/dialogAdd_btn_OK"
                 android:id="@+id/btnAdd"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="24dp"

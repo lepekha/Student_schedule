@@ -75,6 +75,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     private static final String TWITTER_KEY = "5nyNFNF2jq8p4FaKV0t9tr3Cy";
     private static final String TWITTER_SECRET = "vhrRcQZb9w4DvTrjLnxVkgLGFeGplGw6XcCRm6jCIUpiADAGai";
+    private static final String ADD_DIALOG_TAG = "add_dialog_tag";
+    private static final int TOTAL_PAGE = 7;
 
     private ViewPager mViewPager;
 
@@ -104,7 +106,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @Bean
     PresenterBaseImpl presenterBase;
 
-    int currentPage;
+    private int currentPage;
 
     private Subject subject = new Subject();
 
@@ -112,7 +114,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     @AfterInject
     public void afterView(){
-        Log.e("dff","1");
         presenterBase.setView(this);
 
     }
@@ -146,7 +147,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
             @Override
             public void failure(DigitsException exception) {
-                showMessage("Авторизация прошла неудачно.");
+                showMessage(getString(R.string.baseActivity_auth_error));
             }
         });
 
@@ -168,7 +169,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         myPrefs.day().put(0);
         mViewPager = (ViewPager) findViewById(R.id.container);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        Log.e("dff","5");
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
@@ -180,7 +180,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
             @Override
             public void onPageSelected(int position) {
-                Log.e("ddd",position+"");
                 myPrefs.day().put(mViewPager.getCurrentItem());
                 currentPage = position;
             }
@@ -206,7 +205,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         // Add_schedule_dialog add_schedule_dialog = Add_schedule_dialog.newInstance(mViewPager.getCurrentItem());
         Add_schedule_dialog add_schedule_dialog = Add_schedule_dialog_.builder()
                 .build();
-        add_schedule_dialog.show(getSupportFragmentManager(), "add_subject");
+        add_schedule_dialog.show(getSupportFragmentManager(), ADD_DIALOG_TAG);
     }
 
 
@@ -254,7 +253,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         @Override
         public int getCount() {
             // Show 7 total pages.
-            return 7;
+            return TOTAL_PAGE;
         }
 
 
@@ -263,19 +262,19 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Понеділок";
+                    return getString(R.string.baseActivity_dayOfWeek_monday);
                 case 1:
-                    return "Вівторок";
+                    return getString(R.string.baseActivity_dayOfWeek_tuesday);
                 case 2:
-                    return "Середа";
+                    return getString(R.string.baseActivity_dayOfWeek_wednesday);
                 case 3:
-                    return "Четверг";
+                    return getString(R.string.baseActivity_dayOfWeek_thursday);
                 case 4:
-                    return "П\'ятниця";
+                    return getString(R.string.baseActivity_dayOfWeek_friday);
                 case 5:
-                    return "Суббота";
+                    return getString(R.string.baseActivity_dayOfWeek_saturday);
                 case 6:
-                    return "Неділя";
+                    return getString(R.string.baseActivity_dayOfWeek_sunday);
             }
             return null;
         }

@@ -51,6 +51,8 @@ import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dia
 @EFragment
 public class FragmentScheduleImpl extends Fragment implements FragmentScheduleView, CustomFragmentAdapter.OnItemMenuClickListener{
 
+    private static final String EDIT_DIALOG_TAG = "edit_dialog_tag";
+
     private CustomFragmentAdapter adapter;
     private RecyclerView list;
     private RecyclerView.Adapter listAdapter;
@@ -124,7 +126,6 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
 
         subjects = presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(),currentPage);
         setPlaceholder();
-        Log.e("zzz",subjects.size()+""+myPrefs.typeOfWeek().get()+" +"+currentPage);
         if (!subjects.isEmpty()) {
             adapter = new CustomFragmentAdapter(subjects);
             adapter.SetOnItemMenuClick(this);
@@ -150,7 +151,6 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
    /**  событие нажатие на меню в списке */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onItemMenuClick(ItemMenuClick event) {
-        Log.e("rty","sdfgsd");
     }
 
 
@@ -280,14 +280,14 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                             /** диалог подтверждения удаления сообщения*/
                             AlertDialog.Builder builder =
                                     new AlertDialog.Builder(getActivity());
-                            builder.setMessage("Вы действительно хотите удалить это занятие?");
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            builder.setMessage(getString(R.string.fragmentSchedule_alertDialog_message));
+                            builder.setPositiveButton(getString(R.string.fragmentSchedule_alertDialog_OK), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     presenterFragmentSchedule.deleteSubject(subject,position);
                                 }
                             });
-                            builder.setNegativeButton("ОТМЕНА", null);
+                            builder.setNegativeButton(getString(R.string.fragmentSchedule_alertDialog_Cancel), null);
                             builder.show();
                             return true;
                         case R.id.copy_subject:
@@ -298,7 +298,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                             Edit_schedule_dialog edit_schedule_dialog = Edit_schedule_dialog_.builder()
                                     .id(subject.getId())
                                     .build();
-                            edit_schedule_dialog.show(getActivity().getSupportFragmentManager(), "add_subject");
+                            edit_schedule_dialog.show(getActivity().getSupportFragmentManager(), EDIT_DIALOG_TAG);
                             return true;
                         default:
                             return true;

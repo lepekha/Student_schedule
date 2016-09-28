@@ -55,6 +55,33 @@ public class PresenterBaseImpl implements PresenterBase {
     @Bean(SubjectRealmImpl.class)
     SubjectRealm subjectRealm;
 
+    @StringRes(R.string.baseActivity_typeOfWeek_Cheslitel)
+    String CHESLITEL;
+
+    @StringRes(R.string.baseActivity_typeOfWeek_Znamenatel)
+    String ZNAMENATEL;
+
+    @StringRes(R.string.baseActivity_share_message)
+    String SHARE_MESSAEG;
+
+    @StringRes(R.string.baseActivity_share_header)
+    String SHARE_HEADER;
+
+    @StringRes(R.string.baseActivity_Schedule_error)
+    String SCHEDULE_ERROR;
+
+    @StringRes(R.string.baseActivity_getSchedule_compl)
+    String GET_SCHEDULE_COMPL;
+
+    @StringRes(R.string.baseActivity_Schedule_needAuth)
+    String SCHEDULE_NEED_AUTH;
+
+    @StringRes(R.string.baseActivity_registerSchedule_error)
+    String REGISTER_SCHEDULE_ERROR;
+
+    @StringRes(R.string.baseActivity_setSchedule_compl)
+    String SET_SCHEDULE_COMPL;
+
 
 
 
@@ -91,7 +118,7 @@ public class PresenterBaseImpl implements PresenterBase {
 
         switch (Const.TYPE_OF_WEEK.valueOf(typeOfWeek)){
             case Чисельник:
-                preferens.setTypeOfWeek("Чисельник");
+                preferens.setTypeOfWeek(CHESLITEL);
                 if(weekOfYear % 2 == 0){
                     preferens.setInvertTypeOfWeek(false);
                 }else{
@@ -99,7 +126,7 @@ public class PresenterBaseImpl implements PresenterBase {
                 }
                 break;
             case Знаменник:
-                preferens.setTypeOfWeek("Знаменник");
+                preferens.setTypeOfWeek(ZNAMENATEL);
                 if(weekOfYear % 2 == 0){
                     preferens.setInvertTypeOfWeek(true);
                 }else{
@@ -120,20 +147,20 @@ public class PresenterBaseImpl implements PresenterBase {
         switch (weekOfYear % 2){
             case 0:
                 if(preferens.getInvertTypeOfWeek() == false){
-                    preferens.setTypeOfWeek("Чисельник");
-                    view.setTextTypeOfWeek("Чисельник");
+                    preferens.setTypeOfWeek(CHESLITEL);
+                    view.setTextTypeOfWeek(CHESLITEL);
                 }else{
-                    preferens.setTypeOfWeek("Знаменник");
-                    view.setTextTypeOfWeek("Знаменник");
+                    preferens.setTypeOfWeek(ZNAMENATEL);
+                    view.setTextTypeOfWeek(ZNAMENATEL);
                 }
                 break;
             case 1:
                 if(preferens.getInvertTypeOfWeek() == false){
-                    preferens.setTypeOfWeek("Знаменник");
-                    view.setTextTypeOfWeek("Знаменник");
+                    preferens.setTypeOfWeek(ZNAMENATEL);
+                    view.setTextTypeOfWeek(ZNAMENATEL);
                 }else{
-                    preferens.setTypeOfWeek("Чисельник");
-                    view.setTextTypeOfWeek("Чисельник");
+                    preferens.setTypeOfWeek(CHESLITEL);
+                    view.setTextTypeOfWeek(CHESLITEL);
                 }
                 break;
             default:
@@ -144,10 +171,15 @@ public class PresenterBaseImpl implements PresenterBase {
     @Override
     public void review() {
         final String appPackageName = context.getPackageName();
+        Intent mobileIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
+        mobileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
+        webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            context.startActivity(mobileIntent);
         } catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            context.startActivity(webIntent);
         }
     }
 
@@ -155,8 +187,9 @@ public class PresenterBaseImpl implements PresenterBase {
     public void share() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Очень классная программа");
-        context.startActivity(Intent.createChooser(sharingIntent, "qweqweqwe"));
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, SHARE_MESSAEG );
+        sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(Intent.createChooser(sharingIntent, SHARE_HEADER));
     }
 
     @Override
@@ -181,21 +214,21 @@ public class PresenterBaseImpl implements PresenterBase {
                     @Override
                     public void onError(Throwable e) {
                         endLoading();
-                        view.showMessage("Ошибка. Нет соединения с интернетом или проблемы на сервере.");
+                        view.showMessage(SCHEDULE_ERROR);
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         switch (responseBodyResponse.code()){
                             case OK:
-                                view.showMessage("Сохранение завершено.");
+                                view.showMessage(SET_SCHEDULE_COMPL);
                                 break;
                             case NOT_FOUND:
                                 preferens.setRegistrations(false);
                                 registerUser(true,phoneMD5);
                                 break;
                             default:
-                                view.showMessage("Проблемы на сервере");
+                                view.showMessage(SCHEDULE_ERROR);
                                 break;
                         }
                         endLoading();
@@ -205,7 +238,6 @@ public class PresenterBaseImpl implements PresenterBase {
 
     @Override
     public void registerUser(boolean whereReturn, String phoneMD5) {
-        Log.e("errr","presenter");
         startLoading();
         if(preferens.getAuth()) {
             if (!preferens.getRegistrations()) {
@@ -232,7 +264,7 @@ public class PresenterBaseImpl implements PresenterBase {
                                         getSchedule(phoneMD5);
                                     }
                                 } else {
-                                    view.showMessage("Ошибка регистрации.");
+                                    view.showMessage(REGISTER_SCHEDULE_ERROR);
                                 }
                             }
                         });
@@ -244,7 +276,7 @@ public class PresenterBaseImpl implements PresenterBase {
                 }
             }
         }else {
-            view.showMessage("Для начала работы нужно авторизироваться.");
+            view.showMessage(SCHEDULE_NEED_AUTH);
         }
     }
 
@@ -259,14 +291,14 @@ public class PresenterBaseImpl implements PresenterBase {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showMessage("Ошибка. Нет соединения с интернетом или проблемы на сервере.");
+                        view.showMessage(SCHEDULE_ERROR);
                     }
 
                     @Override
                     public void onNext(List<Subject> list) {
                         subjectRealm.deleteAllFromDB();
                         subjectRealm.saveAllToDB(list);
-                        view.showMessage("Загрузка завершена.");
+                        view.showMessage(GET_SCHEDULE_COMPL);
                         EventBus.getDefault().post(new GetSubjectFromServer());
                         endLoading();
                     }
@@ -280,10 +312,10 @@ public class PresenterBaseImpl implements PresenterBase {
 
     @Override
     public void setTextTypeOfWeek() {
-        if(view.getTextTypeOfWeek().equals("Чисельник")) {
-            view.setTextTypeOfWeek("Знаменник");
+        if(view.getTextTypeOfWeek().equals(CHESLITEL)) {
+            view.setTextTypeOfWeek(ZNAMENATEL);
         }else{
-            view.setTextTypeOfWeek("Чисельник");
+            view.setTextTypeOfWeek(CHESLITEL);
         }
         changeTypeOfWeek();
     }
@@ -300,7 +332,6 @@ public class PresenterBaseImpl implements PresenterBase {
 
     @Override
     public String getTextTuypeOfWeek() {
-        Log.e("dff","3");
         return view.getTextTypeOfWeek();
     }
 }
