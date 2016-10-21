@@ -25,20 +25,20 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share_black_24px"
-                android:title="Поделится" />
+                android:title="@string/navigation_drawer_share" />
             <item
                 android:id="@+id/nav_review"
                 android:icon="@drawable/ic_rate_review_black_24px"
-                android:title="Оставить отзыв" />
+                android:title="@string/navigation_drawer_review" />
 
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_settings_black_24px"
-                android:title="Настройки" />
+                android:title="@string/navigation_drawer_setting" />
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/ic_exit_to_app_black_24px"
-                android:title="Закрыть" />
+                android:title="@string/navigation_drawer_exit" />
     </group>
 
 </menu>

@@ -105,7 +105,7 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        int color = generator.getColor(subjects.get(position).getNumberSubject());
+        int color = generator.getColor("abs" + subjects.get(position).getNumberSubject());
         TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
                 .textColor(Color.WHITE)

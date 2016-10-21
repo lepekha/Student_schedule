@@ -1,7 +1,11 @@
 package ruslep.student_schedule.architecture.presenter.Base;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.util.Log;
 
@@ -185,11 +189,13 @@ public class PresenterBaseImpl implements PresenterBase {
 
     @Override
     public void share() {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, SHARE_MESSAEG );
-        sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(Intent.createChooser(sharingIntent, SHARE_HEADER));
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, SHARE_MESSAEG);
+        Intent new_intent = Intent.createChooser(shareIntent, SHARE_HEADER);
+        new_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(new_intent);
     }
 
     @Override

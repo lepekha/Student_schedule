@@ -8,7 +8,7 @@
 
 
     <string-array name="setting_typeOfWeek">
-        <item>Чеслитель</item>
+        <item>Числитель</item>
         <item>Знаменатель</item>
     </string-array>
 
@@ -21,7 +21,7 @@
     <string name="baseActivity_dayOfWeek_saturday">Суббота</string>
     <string name="baseActivity_dayOfWeek_sunday">Воскресенье</string>
     <string name="baseActivity_auth_error">Авторизация прошла неудачно.</string>
-    <string name="baseActivity_typeOfWeek_Cheslitel">Чеслитель</string>
+    <string name="baseActivity_typeOfWeek_Cheslitel">Числитель</string>
     <string name="baseActivity_typeOfWeek_Znamenatel">Знаменатель</string>
     <string name="baseActivity_share_message">Здесь будет текст!!!!</string>
     <string name="baseActivity_share_header">Текст</string>
@@ -36,7 +36,7 @@
     <string name="dialogAdd_timeStart">Начало</string>
     <string name="dialogAdd_timeEnd">Конец</string>
     <string-array name="dialogAdd_typeOfWeek">
-        <item>Чеслитель</item>
+        <item>Числитель</item>
         <item>Знаменатель</item>
         <item>Каждая неделя</item>
     </string-array>
@@ -56,12 +56,25 @@
     <string name="fragmentSchedule_alertDialog_OK">OK</string>
     <string name="fragmentSchedule_alertDialog_Cancel">Отмена</string>
 
+    <!--Drawer menu-->
+    <string name="navigation_drawer_open">Открыть панель навигации</string>
+    <string name="navigation_drawer_close">Закрыть панель навигации</string>
+    <string name="navigation_drawer_log_in">Авторизироваться</string>
+    <string name="navigation_drawer_save">Сохранить на сервер</string>
+    <string name="navigation_drawer_load">Загрузить с сервера</string>
+    <string name="navigation_drawer_friends">Мои контакты</string>
+    <string name="navigation_drawer_share">Поделится</string>
+    <string name="navigation_drawer_review">Оставить отзыв</string>
+    <string name="navigation_drawer_setting">Настройки</string>
+    <string name="navigation_drawer_exit">Выйти</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="navigation_drawer_log_in">Log in</string>
-    <string name="navigation_drawer_save">Save to the server</string>
-    <string name="navigation_drawer_load">Download from the server</string>
-    <string name="navigation_drawer_friends">My friends</string>
+    <!--Popup menu-->
+    <string name="popup_menu_edit_subject">Изменить</string>
+    <string name="popup_menu_copy_subject">Копировать</string>
+    <string name="popup_menu_delete_subject">Удалить</string>
+
+    <!--Quick enter dialog-->
+    <string name="quick_enter_clear">ОЧИСТИТЬ</string>
+    <string name="quick_enter_cancel">ОТМЕНА</string>
 
 </resources>
