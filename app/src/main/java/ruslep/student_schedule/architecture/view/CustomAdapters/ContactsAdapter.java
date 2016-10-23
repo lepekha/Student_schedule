@@ -3,6 +3,7 @@ package ruslep.student_schedule.architecture.view.CustomAdapters;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        int color = generator.getColor(contactsList.get(0).getName());
+        int color = generator.getColor(contactsList.get(position).getName());
         TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
                 .textColor(Color.WHITE)
@@ -89,9 +90,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 .height(50) // height in px
                 .toUpperCase()
                 .endConfig()
-                .buildRoundRect(String.valueOf(contactsList.get(0).getName().charAt(0)),color,10);
+                .buildRoundRect(String.valueOf(contactsList.get(position).getName().charAt(0)),color,10);
         viewHolder.imgContactsName.setImageDrawable(drawable);
-        viewHolder.txtName.setText(contactsList.get(0).getName());
+        viewHolder.txtName.setText(contactsList.get(position).getName());
 
     }
 

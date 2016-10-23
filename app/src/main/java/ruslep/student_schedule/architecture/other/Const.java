@@ -1,5 +1,6 @@
 package ruslep.student_schedule.architecture.other;
 
+
 /**
  * Created by Ruslan on 12.08.2016.
  */
@@ -14,7 +15,4 @@ public interface Const {
     int ROOM_TYPE = 3;
     int TIME_TYPE = 4;
 
-    enum TYPE_OF_WEEK {
-        Чисельник, Знаменник;
-    }
 }

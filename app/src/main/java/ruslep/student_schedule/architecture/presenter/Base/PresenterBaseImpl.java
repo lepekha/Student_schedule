@@ -89,7 +89,6 @@ public class PresenterBaseImpl implements PresenterBase {
 
 
 
-
     public final int CREATED = 201;
     public final int OK = 200;
     public final int NOT_FOUND = 404;
@@ -120,25 +119,20 @@ public class PresenterBaseImpl implements PresenterBase {
         cal1.setFirstDayOfWeek(Calendar.MONDAY);
         int weekOfYear = cal1.get(Calendar.WEEK_OF_YEAR);
 
-        switch (Const.TYPE_OF_WEEK.valueOf(typeOfWeek)){
-            case Чисельник:
-                preferens.setTypeOfWeek(CHESLITEL);
-                if(weekOfYear % 2 == 0){
-                    preferens.setInvertTypeOfWeek(false);
-                }else{
-                    preferens.setInvertTypeOfWeek(true);
-                }
-                break;
-            case Знаменник:
-                preferens.setTypeOfWeek(ZNAMENATEL);
-                if(weekOfYear % 2 == 0){
-                    preferens.setInvertTypeOfWeek(true);
-                }else{
-                    preferens.setInvertTypeOfWeek(false);
-                }
-                break;
-            default:
-                break;
+        if(typeOfWeek.equals(CHESLITEL)){
+            preferens.setTypeOfWeek(CHESLITEL);
+            if(weekOfYear % 2 == 0){
+                preferens.setInvertTypeOfWeek(false);
+            }else{
+                preferens.setInvertTypeOfWeek(true);
+            }
+        }else{
+            preferens.setTypeOfWeek(ZNAMENATEL);
+            if(weekOfYear % 2 == 0){
+                preferens.setInvertTypeOfWeek(true);
+            }else{
+                preferens.setInvertTypeOfWeek(false);
+            }
         }
     }
 
@@ -219,8 +213,8 @@ public class PresenterBaseImpl implements PresenterBase {
 
                     @Override
                     public void onError(Throwable e) {
-                        endLoading();
                         view.showMessage(SCHEDULE_ERROR);
+                        endLoading();
                     }
 
                     @Override
@@ -257,6 +251,7 @@ public class PresenterBaseImpl implements PresenterBase {
 
                             @Override
                             public void onError(Throwable e) {
+                                endLoading();
                             }
 
                             @Override
@@ -283,6 +278,7 @@ public class PresenterBaseImpl implements PresenterBase {
             }
         }else {
             view.showMessage(SCHEDULE_NEED_AUTH);
+            endLoading();
         }
     }
 
@@ -298,6 +294,7 @@ public class PresenterBaseImpl implements PresenterBase {
                     @Override
                     public void onError(Throwable e) {
                         view.showMessage(SCHEDULE_ERROR);
+                        endLoading();
                     }
 
                     @Override

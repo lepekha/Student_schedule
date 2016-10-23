@@ -60,12 +60,12 @@ public class PresenterContactsImpl implements  PresenterContacts {
     @Override
     public List<Contacts> getPhoneContacts() {
         List<Contacts> contactsList = new ArrayList<>();
-        Contacts contacts = new Contacts();
-
+        Contacts contacts;
         Cursor phones = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
         while (phones.moveToNext())
         {
-            //contacts.setId(phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
+            contacts = new Contacts();
+            contacts.setId(phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
             contacts.setName(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));
             /**получаем номер с записной книжки, чистим его и берем мд5*/
             contacts.setPhone(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER))));
@@ -73,10 +73,8 @@ public class PresenterContactsImpl implements  PresenterContacts {
             contactsList.add(contacts);
         }
         phones.close();
-        Log.e("qaz","++++++"+contactsList.get(50).getPhone());
-        Log.e("qaz","++++++"+contactsList.get(60).getPhone());
-        Log.e("qaz","++++++"+contactsList.get(70).getPhone());
-        Log.e("qaz","++++++"+contactsList.get(80).getPhone());
+        Log.e("qaz","++++++"+contactsList.get(0).getName());
+        Log.e("qaz","++++++"+contactsList.get(1).getName());
         return contactsList;
     }
 
@@ -111,13 +109,11 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
     @Override
     public void getContacts(String contactsMD5) {
-        Log.e("qaz","++++++");
         model
                 .getContacts(contactsMD5)
                 .subscribe(new Observer<List<Contacts>>() {
                     @Override
                     public void onCompleted() {
-                        Log.e("qaz","------");
                     }
 
                     @Override
@@ -126,8 +122,6 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
                     @Override
                     public void onNext(List<Contacts> list) {
-                        Log.e("qaz","------");
-                        Log.e("qaz","------"+list.size());
                         conList = list;
                         contactsActivity.setAdapter(list);
                     }
