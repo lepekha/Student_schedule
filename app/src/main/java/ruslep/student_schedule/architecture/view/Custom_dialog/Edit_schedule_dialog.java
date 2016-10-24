@@ -22,6 +22,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.Calendar;
@@ -40,6 +41,10 @@ import ruslep.student_schedule.architecture.view.BaseActivityImpl;
 @EFragment
 public class Edit_schedule_dialog extends Add_schedule_dialog {
 
+    private static final int SP_POS_CHESLITEL = 0;
+    private static final int SP_POS_ZNAMENATEL = 1;
+    private static final int SP_POS_ALLWEEK = 2;
+
     @ViewById
     EditText edSubjectName,edTypeSubject,edSubjectTeacher,edSubjectRoom,edSubjectNumber;
 
@@ -57,6 +62,22 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
 
     @FragmentArg("id")
     int id;
+
+    @StringRes(R.string.dialogEdit_btn_Save)
+    String BTN_SAVE;
+
+    @StringRes(R.string.baseActivity_typeOfWeek_Cheslitel)
+    String CHESLITEL;
+
+    @StringRes(R.string.baseActivity_typeOfWeek_Znamenatel)
+    String ZNAMENATEL;
+
+    @StringRes(R.string.dialogTime_btn_Ok)
+    String TIME_DIALOG_OK;
+
+    @StringRes(R.string.dialogTime_btn_Cancel)
+    String TIME_DIALOG_CANCEL;
+
 
     @Bean
     PresenterFragmentScheduleImpl presenterFragmentSchedule;
@@ -79,7 +100,7 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
     @AfterViews
     public void afterView(){
         subject = presenterFragmentSchedule.getSubjectByID(id);
-        btnAdd.setText("ЗБЕРЕГТИ");
+        btnAdd.setText(BTN_SAVE);
         edSubjectName.setText(subject.getNameSubject());
         edSubjectNumber.setText(subject.getNumberSubject());
         edSubjectRoom.setText(subject.getRoomSubject());
@@ -87,16 +108,15 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
         edTypeSubject.setText(subject.getTypeSubject());
         btnTimeStart.setText(subject.getTimeStartSubject());
         btnTimeEnd.setText(subject.getTimeEndSubject());
-        switch (subject.getTypeWeek()){
-            case "Чисельник": spTypeOfWeek.setSelection(0);
-                break;
-            case "Знаменник": spTypeOfWeek.setSelection(1);
-                break;
-            case "Кожна неділя": spTypeOfWeek.setSelection(2);
-                break;
-            default:
-                break;
+
+        if(subject.getTypeWeek().equals(CHESLITEL)){
+            spTypeOfWeek.setSelection(SP_POS_CHESLITEL);
+        }else if (subject.getTypeWeek().equals(ZNAMENATEL)){
+            spTypeOfWeek.setSelection(SP_POS_ZNAMENATEL);
+        }else {
+            spTypeOfWeek.setSelection(SP_POS_ALLWEEK);
         }
+
 
     }
 
@@ -133,8 +153,8 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
                 now.get(Calendar.MINUTE),
                 true
         );
-        tpd.setOkText("OK");
-        tpd.setCancelText("Відміна");
+        tpd.setOkText(TIME_DIALOG_OK);
+        tpd.setCancelText(TIME_DIALOG_CANCEL);
         tpd.show(getActivity().getFragmentManager(),"TimeStartDialogPicked");
     }
 
@@ -153,8 +173,8 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
                 now.get(Calendar.MINUTE),
                 true
         );
-        tpd.setOkText("OK");
-        tpd.setCancelText("Відміна");
+        tpd.setOkText(TIME_DIALOG_OK);
+        tpd.setCancelText(TIME_DIALOG_CANCEL);
         tpd.show(getActivity().getFragmentManager(),"TimeEndDialogPicked");
     }
 

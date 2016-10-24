@@ -69,12 +69,9 @@ public class PresenterContactsImpl implements  PresenterContacts {
             contacts.setName(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));
             /**получаем номер с записной книжки, чистим его и берем мд5*/
             contacts.setPhone(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER))));
-            //contacts.setPhone(md5.getMD5(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)))));
             contactsList.add(contacts);
         }
         phones.close();
-        Log.e("qaz","++++++"+contactsList.get(0).getName());
-        Log.e("qaz","++++++"+contactsList.get(1).getName());
         return contactsList;
     }
 
@@ -93,7 +90,6 @@ public class PresenterContactsImpl implements  PresenterContacts {
             swissNumberProto = phoneUtil.parse(newPhone, countryCode);
         } catch (NumberParseException e) {
             System.err.println("NumberParseException was thrown: " + e.toString());
-            Log.e("qaz","+");
         }
 
        return phoneUtil.format(swissNumberProto, PhoneNumberUtil.PhoneNumberFormat.E164);

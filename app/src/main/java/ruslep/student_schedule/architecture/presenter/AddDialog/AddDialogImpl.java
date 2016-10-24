@@ -38,7 +38,6 @@ public class AddDialogImpl implements AddDialog {
     @Override
     public void saveSubject(Subject subject) {
         subjectRealm.saveToDB(subject);
-        Log.e("zzz",myPrefs.day().get()+"");
         //update list subject
         EventBus.getDefault().post(new AddSubject(subject));
     }

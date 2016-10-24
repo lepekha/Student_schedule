@@ -20,6 +20,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -60,6 +61,18 @@ public class Add_schedule_dialog extends DialogFragment {
 
     @Pref
     MyPrefs_ myPrefs;
+
+    @StringRes(R.string.dialogTime_btn_Ok)
+    String TIME_DIALOG_OK;
+
+    @StringRes(R.string.dialogTime_btn_Cancel)
+    String TIME_DIALOG_CANCEL;
+
+    @StringRes(R.string.dialogAdd_btn_OK)
+    String DIALOG_ADD_OK;
+
+    @StringRes(R.string.dialogAdd_check_error)
+    String DIALOG_ADD_CHECK_ERROR;
 
     @Override
     public void onStart() {
@@ -110,8 +123,8 @@ public class Add_schedule_dialog extends DialogFragment {
             /** диалог если не введены номер предмета и его название*/
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(getActivity());
-            builder.setMessage("Вы не ввели номер предмета или его название.");
-            builder.setPositiveButton("OK", null);
+            builder.setMessage(DIALOG_ADD_CHECK_ERROR);
+            builder.setPositiveButton(DIALOG_ADD_OK, null);
             builder.show();
         }
     }
@@ -136,8 +149,8 @@ public class Add_schedule_dialog extends DialogFragment {
                                  now.get(Calendar.MINUTE),
                                  true
                          );
-        tpd.setOkText("OK");
-        tpd.setCancelText("Відміна");
+        tpd.setOkText(TIME_DIALOG_OK);
+        tpd.setCancelText(TIME_DIALOG_CANCEL);
         tpd.show(getActivity().getFragmentManager(),"TimeStartDialogPicked");
     }
 
@@ -156,8 +169,8 @@ public class Add_schedule_dialog extends DialogFragment {
                 now.get(Calendar.MINUTE),
                 true
         );
-        tpd.setOkText("OK");
-        tpd.setCancelText("Відміна");
+        tpd.setOkText(TIME_DIALOG_OK);
+        tpd.setCancelText(TIME_DIALOG_CANCEL);
         tpd.show(getActivity().getFragmentManager(),"TimeEndDialogPicked");
     }
 

@@ -1,13 +1,17 @@
 package ruslep.student_schedule.architecture.model.DB.Subject;
 
+import android.util.Log;
+
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
@@ -31,6 +35,9 @@ public class SubjectRealmImpl implements SubjectRealm {
     @Bean(PresenterBaseImpl.class)
     PresenterBase presenterBase;
 
+    @StringRes(R.string.baseActivity_typeOfWeek_AllWeek)
+    String ALL_WEEK;
+
     public SubjectRealmImpl() {
 
     }
@@ -51,13 +58,13 @@ public class SubjectRealmImpl implements SubjectRealm {
     @Override
     public List<Subject> getFromDB(String typeOfWeek, int dayOfWeek) {
 
-
+        Log.e("qweqwe",typeOfWeek);
         RealmResults<Subject> result = realm.where(Subject.class)
                 .equalTo("dayOfWeek", dayOfWeek)
                 .beginGroup()
                 .equalTo("typeOfWeek", typeOfWeek)
                 .or()
-                .equalTo("typeOfWeek", "Каждая неделя")
+                .equalTo("typeOfWeek", ALL_WEEK)
                 .endGroup()
                 .findAll();
         return realm.copyFromRealm(result);
@@ -116,9 +123,6 @@ public class SubjectRealmImpl implements SubjectRealm {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-              /*  for (int i = 0; i >= subjectList.size(); i++){
-
-                }*/
                 for (Subject subject: subjectList) {
                     subject.setId(preferens.getID());
                     realm.copyToRealmOrUpdate(subject);

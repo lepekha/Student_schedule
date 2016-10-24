@@ -23,6 +23,7 @@
     <string name="baseActivity_auth_error">Авторизация прошла неудачно.</string>
     <string name="baseActivity_typeOfWeek_Cheslitel">Числитель</string>
     <string name="baseActivity_typeOfWeek_Znamenatel">Знаменатель</string>
+    <string name="baseActivity_typeOfWeek_AllWeek">Каждая неделя</string>
     <string name="baseActivity_share_message">Здесь будет текст!!!!</string>
     <string name="baseActivity_share_header">Текст</string>
     <string name="baseActivity_Schedule_error">Ошибка. Нет соединения с интернетом или проблемы на сервере.</string>
@@ -49,12 +50,19 @@
     <string name="dialogAdd_txtSubjectRoom">Аудитория:</string>
     <string name="dialogAdd_txtTime">Время:</string>
     <string name="dialogAdd_txtTypeOfWeek">Тип недели:</string>
+    <string name="dialogAdd_check_error">Вы не ввели номер предмета или его название.</string>
 
+    <!--Dialog edit-->
+    <string name="dialogEdit_btn_Save">СОХРАНИТЬ</string>
+
+    <!--Time dialog-->
+    <string name="dialogTime_btn_Ok">OK</string>
+    <string name="dialogTime_btn_Cancel">ОТМЕНА</string>
 
     <!--Fragment schedule-->
     <string name="fragmentSchedule_alertDialog_message">Вы действительно хотите удалить это занятие?</string>
     <string name="fragmentSchedule_alertDialog_OK">OK</string>
-    <string name="fragmentSchedule_alertDialog_Cancel">Отмена</string>
+    <string name="fragmentSchedule_alertDialog_Cancel">ОТМЕНА</string>
 
     <!--Drawer menu-->
     <string name="navigation_drawer_open">Открыть панель навигации</string>

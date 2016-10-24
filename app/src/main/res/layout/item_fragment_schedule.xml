@@ -177,8 +177,7 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
         android:id="@+id/btnItemMenu"
         android:tint="@color/secondary_text"
         android:layout_alignParentTop="true"
@@ -188,7 +187,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:layout_height="25dp" />
 
 
 </RelativeLayout>

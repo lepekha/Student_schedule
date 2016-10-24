@@ -141,7 +141,6 @@ public class PresenterBaseImpl implements PresenterBase {
         Calendar cal1 = Calendar.getInstance();
         cal1.setFirstDayOfWeek(Calendar.MONDAY);
         int weekOfYear = cal1.get(Calendar.WEEK_OF_YEAR);
-        Log.e("zzz",(weekOfYear % 2)+"");
         switch (weekOfYear % 2){
             case 0:
                 if(preferens.getInvertTypeOfWeek() == false){

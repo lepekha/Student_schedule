@@ -2,6 +2,7 @@ package ruslep.student_schedule.architecture.presenter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Bean;

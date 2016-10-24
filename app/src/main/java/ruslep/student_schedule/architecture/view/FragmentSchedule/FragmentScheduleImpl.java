@@ -144,6 +144,8 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
                 adapter.refresh();
+            }else{
+                setPlaceholder();
             }
         }
     }
