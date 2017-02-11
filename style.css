@@ -1,0 +1,87 @@
+@font-face {
+    font-family: "RobotoRegular";
+    src: url("fonts/RobotoRegular/RobotoRegular.eot");
+    src: url("fonts/RobotoRegular/RobotoRegular.eot?#iefix")format("embedded-opentype"),
+    url("fonts/RobotoRegular/RobotoRegular.woff") format("woff"),
+    url("fonts/RobotoRegular/RobotoRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "RobotoLight"; */
+@font-face {
+    font-family: "RobotoLight";
+    src: url("../fonts/RobotoLight/RobotoLight.eot");
+    src: url("../fonts/RobotoLight/RobotoLight.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/RobotoLight/RobotoLight.woff") format("woff"),
+    url("../fonts/RobotoLight/RobotoLight.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "RobotoMedium"; */
+@font-face {
+    font-family: "RobotoMedium";
+    src: url("../fonts/RobotoMedium/RobotoMedium.eot");
+    src: url("../fonts/RobotoMedium/RobotoMedium.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/RobotoMedium/RobotoMedium.woff") format("woff"),
+    url("../fonts/RobotoMedium/RobotoMedium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* font-family: "RobotoBold"; */
+@font-face {
+    font-family: "RobotoBold";
+    src: url("fonts/RobotoBold/RobotoBold.eot");
+    src: url("fonts/RobotoBold/RobotoBold.eot?#iefix")format("embedded-opentype"),
+    url("fonts/RobotoBold/RobotoBold.woff") format("woff"),
+    url("fonts/RobotoBold/RobotoBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+body{
+	background-color: #fff;
+}
+.name{
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	margin-top: 13%;
+	font-size: 100px;
+	color: #2979ff;
+	width: 410px;
+	height: 150px;
+	text-align: center;
+	font-family: "RobotoBold";
+}
+.col{
+	position: relative;
+	margin: 0 auto;
+	margin-top: 2%;
+	font-size: 35px;
+	color: #263238;
+	width: 480px;
+	height: 50px;
+	text-align: center;
+	font-family: "RobotoRegular";
+}
+.num{
+	position: relative;
+	margin: 0 auto;
+	margin-top: 0%;
+	font-size: 65px;
+	color: #dd2c00;
+	width: 200px;
+	height: 90px;
+	text-align: center;
+	font-family: "RobotoBold";
+}
+.google_play{
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	margin-top: 2%;
+	color: #00e676;
+	text-align: center;
+	width: 170px;
+	height: 100px;
+}
