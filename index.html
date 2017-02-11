@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=600">
+      <meta name="keywords" content="Расписание, студент, ВУЗ, универ, университет, предмет, занятие, институт, академия, экзамен, заметка" />
+      <meta name="description" content="Простое и удобное хранение студенческого расписания занятий, экзаменов и заметок." />
+      <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <title>AllUniver</title>
+    </head> 
+
+    <body>
+      <script type="text/javascript">
+            $(document).ready(function(){
+              $.get("http://www.alluniver.in.ua/rest/phone/getCounter", function(data){
+              $(".num").html(data);
+            });
+            });
+      </script>
+     <div class="name"><span style="color:#ff4081;">All</span>Univer</div>
+     <div class="col">Количество пользователей:</div>
+     <div class="num"></div>
+     <a class="google_play" href="https://play.google.com/store/apps/details?id=ruslep.student_schedule">
+        <img alt="Get it on Google Play"
+             src="https://developer.android.com/images/brand/ru_generic_rgb_wo_60.png" />
+      </a>
+    </body>
+  </html>
