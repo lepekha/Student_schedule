@@ -20,6 +20,7 @@ import ruslep.student_schedule.architecture.other.Event.DeleteSubject;
 import ruslep.student_schedule.architecture.other.Event.EditSubject;
 import ruslep.student_schedule.architecture.other.Event.PasteSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.view.BaseActivity;
 
 /**
@@ -41,7 +42,8 @@ public class PresenterFragmentScheduleImpl implements PresenterFragmentSchedule 
 
     private BaseActivity view;
 
-
+    @Bean
+    PresenterBaseImpl presenterBase;
 
     @Override
     public List<Subject> getSubject(String typeOfWeek, int dayOfWeek) {
@@ -68,6 +70,7 @@ public class PresenterFragmentScheduleImpl implements PresenterFragmentSchedule 
     public void popupPasteSubject() {
         if(isCopy()) {
             subject.setDayOfWeek(myPrefs.day().get());
+            subject.setTypeWeek(presenterBase.getTextTuypeOfWeek());
             EventBus.getDefault().post(new PasteSubject(subjectRealm.saveToDB(subject)));
         }
     }

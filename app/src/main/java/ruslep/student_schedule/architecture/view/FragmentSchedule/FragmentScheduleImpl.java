@@ -125,12 +125,13 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         list.setLayoutManager(listManager);
 
         subjects = presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(),currentPage);
+        Log.d("111",subjects.size()+"");
         setPlaceholder();
-        if (!subjects.isEmpty()) {
+        //if (!subjects.isEmpty()) {
             adapter = new CustomFragmentAdapter(subjects);
             adapter.SetOnItemMenuClick(this);
             list.setAdapter(adapter);
-        }
+       // }
         return view;
     }
 
@@ -196,6 +197,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 adapter = new CustomFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
+                Log.d("err",presenterBase.getTextTuypeOfWeek()+" * "+ myPrefs.day().get());
             } else {
                 subjects.clear();
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));

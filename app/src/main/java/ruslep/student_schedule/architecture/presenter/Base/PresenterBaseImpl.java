@@ -265,6 +265,7 @@ public class PresenterBaseImpl implements PresenterBase {
                                     }
                                 } else {
                                     view.showMessage(REGISTER_SCHEDULE_ERROR);
+                                    endLoading();
                                 }
                             }
                         });
@@ -335,5 +336,10 @@ public class PresenterBaseImpl implements PresenterBase {
     @Override
     public String getTextTuypeOfWeek() {
         return view.getTextTypeOfWeek();
+    }
+
+    @Override
+    public void setDrawerHeaderPhone() {
+        view.setDrawerHeaderPhoneNumber(preferens.getPhoneNumber());
     }
 }

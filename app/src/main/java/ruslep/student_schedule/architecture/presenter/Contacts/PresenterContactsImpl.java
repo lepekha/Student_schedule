@@ -1,8 +1,12 @@
 package ruslep.student_schedule.architecture.presenter.Contacts;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -16,6 +20,7 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.RootContext;
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,6 +28,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.REST.Model;
 import ruslep.student_schedule.architecture.model.REST.ModelImpl;
 import ruslep.student_schedule.architecture.model.entity.Contacts;
@@ -64,12 +70,14 @@ public class PresenterContactsImpl implements  PresenterContacts {
         Cursor phones = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
         while (phones.moveToNext())
         {
+            try {
             contacts = new Contacts();
             contacts.setId(phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
             contacts.setName(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));
             /**получаем номер с записной книжки, чистим его и берем мд5*/
             contacts.setPhone(clearPhoneNumber(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER))));
             contactsList.add(contacts);
+            } catch (Exception e) {}
         }
         phones.close();
         return contactsList;
@@ -147,4 +155,9 @@ public class PresenterContactsImpl implements  PresenterContacts {
     public void hideHolderView() {
         contactsActivity.hideHolderView();
     }
+
+
+
+
+
 }

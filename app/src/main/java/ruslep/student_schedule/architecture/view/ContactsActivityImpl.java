@@ -1,14 +1,24 @@
 package ruslep.student_schedule.architecture.view;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +35,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
@@ -33,11 +44,14 @@ import java.util.List;
 
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Contacts;
+import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.Contacts.PresenterContacts;
 import ruslep.student_schedule.architecture.presenter.Contacts.PresenterContactsImpl;
 import ruslep.student_schedule.architecture.view.CustomAdapters.ContactsAdapter;
+import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog;
+import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog_;
 import ruslep.student_schedule.architecture.view.FragmentSchedule.CustomFragmentAdapter;
 
 @EActivity
@@ -59,19 +73,18 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     @AfterInject
     public void afterView(){
         presenterContacts.setView(this);
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         list = (RecyclerView) findViewById(R.id.listView);
         listManager = new LinearLayoutManager(this);
         list.setLayoutManager(listManager);
         getData();
+
 
     }
 
@@ -92,10 +105,7 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
         presenterContacts.getContacts(presenterContacts.getJsonFromPhoneList(presenterContacts.getPhoneContacts()));
     }
 
-    @Override
-    public void onItemMenuClick(View view, Contacts contacts, int position) {
 
-    }
 
     @Override
     public void showHolderView() {
@@ -107,5 +117,13 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     public void hideHolderView() {
         list.setVisibility(View.VISIBLE);
         holderView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onItemMenuClick(View view, Contacts contacts, int position) {
+        Intent openUser = new Intent(this, UserActivityImpl_.class);
+        openUser.putExtra("name",contacts.getName());
+        openUser.putExtra("phone",contacts.getPhone());
+        startActivity(openUser);
     }
 }

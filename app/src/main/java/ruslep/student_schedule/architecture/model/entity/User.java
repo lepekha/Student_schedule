@@ -12,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by Ruslan on 11.08.2016.
  */
 @EBean
-public class Subject extends RealmObject implements Comparable<Subject>  {
+public class User extends RealmObject implements Comparable<User>  {
     @PrimaryKey
     private int id;
     private String numberSubject;
@@ -136,7 +136,7 @@ public class Subject extends RealmObject implements Comparable<Subject>  {
 
 
     public static Builder newBuilder() {
-        return new Subject().new Builder();
+        return new User().new Builder();
     }
 
 
@@ -147,75 +147,75 @@ public class Subject extends RealmObject implements Comparable<Subject>  {
         }
 
         public Builder setId(int id) {
-            Subject.this.id = id;
+            User.this.id = id;
             return this;
         }
 
         public Builder setSubjectNumber(String numberSubject) {
-            Subject.this.numberSubject = numberSubject;
+            User.this.numberSubject = numberSubject;
             return this;
         }
 
         public Builder setTypeSubject(String typeSubject) {
-            Subject.this.typeSubject = typeSubject;
+            User.this.typeSubject = typeSubject;
             return this;
         }
 
         public Builder setNameSubject(String nameSubject) {
-            Subject.this.nameSubject = nameSubject;
+            User.this.nameSubject = nameSubject;
             return this;
         }
 
         public Builder setTimeStartSubject(String timeStartSubject) {
-            Subject.this.timeStartSubject = timeStartSubject;
+            User.this.timeStartSubject = timeStartSubject;
             return this;
         }
         public Builder setTimeEndSubject(String timeEndSubject) {
-            Subject.this.timeEndSubject = timeEndSubject;
+            User.this.timeEndSubject = timeEndSubject;
             return this;
         }
 
         public Builder setRoomSubject(String roomSubject) {
-            Subject.this.roomSubject = roomSubject;
+            User.this.roomSubject = roomSubject;
             return this;
         }
 
         public Builder setTeacherSubject(String teacherSubject) {
-            Subject.this.teacherSubject = teacherSubject;
+            User.this.teacherSubject = teacherSubject;
             return this;
         }
 
         public Builder setOrderSubject(int orderSubject) {
-            Subject.this.orderSubject = orderSubject;
+            User.this.orderSubject = orderSubject;
             return this;
         }
 
         public Builder setDayOfWeek(int dayOfWeek) {
-            Subject.this.dayOfWeek = dayOfWeek;
+            User.this.dayOfWeek = dayOfWeek;
             return this;
         }
 
         public Builder setTypeOfWeek(String typeOfWeek) {
-            Subject.this.typeOfWeek = typeOfWeek;
+            User.this.typeOfWeek = typeOfWeek;
             return this;
         }
 
-        public Subject build() {
-            return Subject.this;
+        public User build() {
+            return User.this;
         }
 
     }
 
     @Override
-    public int compareTo(Subject subject) {
+    public int compareTo(User subject) {
         return Comparators.NUMBER.compare(this, subject);
     }
 
     public static class Comparators {
 
-        public static Comparator<Subject> NUMBER = new Comparator<Subject>() {
+        public static Comparator<User> NUMBER = new Comparator<User>() {
             @Override
-            public int compare(Subject o1, Subject o2) {
+            public int compare(User o1, User o2) {
                 return Integer.valueOf(o1.numberSubject).compareTo(Integer.valueOf(o2.numberSubject));
             }
         };

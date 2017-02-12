@@ -22,6 +22,7 @@ public interface PresenterContacts {
     ArrayList<String> getContactsName(List<Contacts> contactsList);
 
     void showHolderView();
+
     void hideHolderView();
 
 

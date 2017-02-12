@@ -34,9 +34,13 @@
             android:label="Настройки">
         </activity>
 
-        <activity android:name=".architecture.view.ContactsActivityImpl_"
-            android:label="Мои контакты"
+        <activity android:name=".architecture.view.UserActivityImpl_"
+            android:label="Пользователь"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".architecture.view.ContactsActivityImpl_"
+            android:label="Мои контакты">
         </activity>
 
         <meta-data

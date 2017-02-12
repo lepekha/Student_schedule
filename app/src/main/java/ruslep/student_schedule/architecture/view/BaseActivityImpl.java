@@ -1,21 +1,26 @@
 package ruslep.student_schedule.architecture.view;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -57,6 +62,9 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.fabric.sdk.android.Fabric;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Subject;
@@ -77,6 +85,10 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     private static final String TWITTER_SECRET = "vhrRcQZb9w4DvTrjLnxVkgLGFeGplGw6XcCRm6jCIUpiADAGai";
     private static final String ADD_DIALOG_TAG = "add_dialog_tag";
     private static final int TOTAL_PAGE = 7;
+    public static final int MULTIPLE_PERMISSIONS = 1; // code you want.
+
+
+    private static final String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS};
 
     private ViewPager mViewPager;
 
@@ -142,6 +154,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
             public void success(DigitsSession session, String phoneNumber) {
                 if(presenterBase.auth(phoneNumber)){
                     presenterBase.hideAuthBtn();
+                    presenterBase.setDrawerHeaderPhone();
                 }
             }
 
@@ -162,6 +175,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
+        /** устанавливаем номер телефона в хедер бокового меню */
+        presenterBase.setDrawerHeaderPhone();
 
 
         presenterBase.hideAuthBtn();
@@ -298,7 +313,9 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 presenterBase.registerUser(false,presenterBase.getMyPhone());
                 break;
             case R.id.nav_friends:
-                startActivity(new Intent(this, ContactsActivityImpl_.class));
+                if (checkPermissions()){
+                    startActivity(new Intent(this, ContactsActivityImpl_.class));
+                }
                 break;
             case R.id.nav_exit:
                 finish();
@@ -350,6 +367,42 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         progressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void setDrawerHeaderPhoneNumber(String phoneNumber) {
+        View hView =  navigationView.getHeaderView(0);
+        TextView txtPhoneNumber = (TextView)hView.findViewById(R.id.txtPhoneNumber);
+        txtPhoneNumber.setText(phoneNumber);
+    }
+    public boolean checkPermissions() {
+        int result;
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String p:PERMISSIONS) {
+            result = ContextCompat.checkSelfPermission(this,p);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p);
+            }
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MULTIPLE_PERMISSIONS );
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MULTIPLE_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(new Intent(this, ContactsActivityImpl_.class));
+                } else {
+                    // no permissions granted.
+                }
+                return;
+            }
+        }
+    }
 
 }
 

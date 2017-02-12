@@ -67,6 +67,5 @@ dependencies {
         transitive = true;
     }
     compile 'com.googlecode.libphonenumber:libphonenumber:7.7.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
     compile 'me.zhanghai.android.materialprogressbar:library:1.1.7'
 }

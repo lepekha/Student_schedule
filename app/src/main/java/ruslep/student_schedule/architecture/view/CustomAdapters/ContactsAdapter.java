@@ -38,6 +38,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         private TextView txtName;
         private ImageView imgContactsName;
+        private LinearLayout main_content;
 
 
 
@@ -46,6 +47,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
             txtName = (TextView) holderView.findViewById(R.id.txtContactName);
             imgContactsName = (ImageView) holderView.findViewById(R.id.imgContactsName);
+            main_content = (LinearLayout) holderView.findViewById(R.id.main_content);
+
+            main_content.setOnClickListener(this);
 
         }
 

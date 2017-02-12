@@ -102,8 +102,8 @@
                             android:id="@+id/edTypeSubject" />
 
                         <ImageButton
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:id="@+id/ibtnTypeSubject"
                             android:tag="2"
                             android:background="#00000000"
@@ -137,8 +137,8 @@
                             android:id="@+id/edSubjectTeacher" />
 
                         <ImageButton
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:id="@+id/ibtnSubjectTeacher"
                             android:tag="3"
                             android:background="#00000000"
@@ -172,8 +172,8 @@
                             android:id="@+id/edSubjectRoom" />
 
                         <ImageButton
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:id="@+id/ibtnSubjectRoom"
                             android:tag="4"
                             android:background="#00000000"
@@ -207,17 +207,17 @@
                             android:layout_height="wrap_content"
                             android:text="@string/dialogAdd_timeStart"
                             android:id="@+id/btnTimeStart"
-                            style="@style/Widget.AppCompat.Button" />
+                            style="@style/Widget.AppCompat.Button.Colored" />
 
                         <Button
-                            style="@style/Widget.AppCompat.Button"
+                            style="@style/Widget.AppCompat.Button.Colored"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/dialogAdd_timeEnd"
                             android:id="@+id/btnTimeEnd" />
 
                         <ImageButton
-                            android:layout_width="50dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/ibtnTime"
                             android:tag="5"

@@ -26,6 +26,8 @@ public interface PresenterBase {
     void startLoading();
     void endLoading();
 
+    void setDrawerHeaderPhone();
+
     String getTextTuypeOfWeek();
 
 }

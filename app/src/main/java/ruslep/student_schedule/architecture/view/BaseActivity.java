@@ -1,5 +1,6 @@
 package ruslep.student_schedule.architecture.view;
 
+import android.content.Context;
 import android.support.v4.view.ViewPager;
 
 import org.androidannotations.annotations.EBean;
@@ -13,5 +14,9 @@ public interface BaseActivity extends View {
     void setTextTypeOfWeek(String typeOfWeek);
     void showProgressBar();
     void hideProgressBar();
+    void setDrawerHeaderPhoneNumber(String phoneNumber);
     String getTextTypeOfWeek();
+    void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults);
+    boolean checkPermissions();
+
 }
