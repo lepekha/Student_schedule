@@ -8,19 +8,13 @@
       <meta name="viewport" content="width=600">
       <meta name="keywords" content="Расписание, студент, ВУЗ, универ, университет, предмет, занятие, институт, академия, экзамен, заметка" />
       <meta name="description" content="Простое и удобное хранение студенческого расписания занятий, экзаменов и заметок." />
-      <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
       <title>AllUniver</title>
     </head> 
 
     <body>
-      <script type="text/javascript">
-            $(document).ready(function(){
-              $.get("http://www.alluniver.in.ua/rest/phone/getCounter", function(data){
-              $(".num").html(data);
-            });
-            });
-      </script>
+      
      <div class="name"><span style="color:#ff4081;">All</span>Univer</div>
      <div class="col">Количество пользователей:</div>
      <div class="num"></div>
@@ -29,4 +23,21 @@
              src="https://developer.android.com/images/brand/ru_generic_rgb_wo_60.png" />
       </a>
     </body>
+    <script>
+           /* $(document).ready(function(){
+            
+            });*/
+        $(function()
+        {
+            $.ajax({
+              type: "POST",
+              url: "raspisanie-lruslan.rhcloud.com/rest/phone/getSchedule",
+              data: "phoneMD5=+380660200178",
+              success: function(msg){
+                alert( "Прибыли данные: " + msg );
+              }
+            });
+        });
+
+      </script>
   </html>
