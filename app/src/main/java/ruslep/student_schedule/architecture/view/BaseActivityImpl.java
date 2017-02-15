@@ -1,14 +1,8 @@
 package ruslep.student_schedule.architecture.view;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,48 +13,31 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.*;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.digits.sdk.android.AuthCallback;
-import com.digits.sdk.android.ContactsCallback;
-import com.digits.sdk.android.ContactsUploadService;
 import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
-import com.digits.sdk.android.models.Contacts;
-import com.digits.sdk.android.models.ContactsUploadResult;
-import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
 
 import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,13 +45,11 @@ import java.util.List;
 import io.fabric.sdk.android.Fabric;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Subject;
-import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
-import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog_;
-import ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl_;
+import ruslep.student_schedule.architecture.view.FragmentMySchedule.FragmentScheduleImpl_;
 
 @EActivity
 public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,NavigationView.OnNavigationItemSelectedListener {
@@ -197,6 +172,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
             public void onPageSelected(int position) {
                 myPrefs.day().put(mViewPager.getCurrentItem());
                 currentPage = position;
+
             }
 
             @Override

@@ -51,6 +51,7 @@
     <string name="dialogAdd_txtTime">Время:</string>
     <string name="dialogAdd_txtTypeOfWeek">Тип недели:</string>
     <string name="dialogAdd_check_error">Вы не ввели номер предмета или его название.</string>
+    <string name="dialogAdd_check_error_ok">OK</string>
 
     <!--Dialog edit-->
     <string name="dialogEdit_btn_Save">СОХРАНИТЬ</string>
@@ -84,5 +85,9 @@
     <!--Quick enter dialog-->
     <string name="quick_enter_clear">ОЧИСТИТЬ</string>
     <string name="quick_enter_cancel">ОТМЕНА</string>
+
+    <!--Contacts-->
+    <string name="contacts_last_update">Последнее обновление: </string>
+
 
 </resources>

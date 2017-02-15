@@ -1,6 +1,5 @@
 package ruslep.student_schedule.architecture.presenter.AddDialog;
 
-import android.util.Log;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -10,8 +9,8 @@ import ruslep.student_schedule.architecture.model.DB.Subject.SubjectRealmImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.Event.AddSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
-import ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl;
-import ruslep.student_schedule.architecture.view.FragmentSchedule.FragmentScheduleImpl_;
+import ruslep.student_schedule.architecture.view.FragmentMySchedule.FragmentScheduleImpl;
+import ruslep.student_schedule.architecture.view.FragmentMySchedule.FragmentScheduleImpl_;
 import ruslep.student_schedule.architecture.view.View;
 
 /**

@@ -40,4 +40,7 @@ public interface MyPrefs {
     @DefaultString("Вы не авторизированы")
     String MyPhoneNumber();
 
+    @DefaultString("Последнее обновление: ")
+    String ContactsLastUpdate();
+
 }

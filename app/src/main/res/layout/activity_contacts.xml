@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10.05.2016 15:00"
+                android:text="@string/contacts_last_update"
                 android:textColor="@color/secondary_text"
                 android:id="@+id/txtLastUpdate"
                 android:layout_marginLeft="20dp"

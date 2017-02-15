@@ -96,7 +96,10 @@ public class PresenterUserImpl implements PresenterUser {
         this.view = view;
     }
 
-
+    @Override
+    public void deletAllFromDB() {
+        userRealm.deleteAllFromDB();
+    }
 
     @Override
     public void changeTypeOfWeek() {
@@ -157,6 +160,7 @@ public class PresenterUserImpl implements PresenterUser {
 
     @Override
     public void getSchedule(String phoneMD5) {
+        startLoading();
         model
                 .getUserSchedule(phoneMD5)
                 .subscribe(new Observer<List<User>>() {
@@ -167,6 +171,7 @@ public class PresenterUserImpl implements PresenterUser {
                     @Override
                     public void onError(Throwable e) {
                         view.showMessage(SCHEDULE_ERROR);
+                        endLoading();
                     }
 
                     @Override
@@ -175,11 +180,11 @@ public class PresenterUserImpl implements PresenterUser {
                         userRealm.saveAllToDB(list);
 
                         view.showMessage(GET_SCHEDULE_COMPL);
+                        endLoading();
                         EventBus.getDefault().post(new GetUserFromServer());
                     }
                 });
     }
-
 
 
     @Override
@@ -201,5 +206,15 @@ public class PresenterUserImpl implements PresenterUser {
     @Override
     public String getMyPhone() {
         return preferens.getPhoneNumber();
+    }
+
+    @Override
+    public void startLoading() {
+        view.showProgressBar();
+    }
+
+    @Override
+    public void endLoading() {
+        view.hideProgressBar();
     }
 }

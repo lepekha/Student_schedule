@@ -21,11 +21,11 @@ public interface PresenterBase {
     void getSchedule(String phoneMD5);
 
     String getMyPhone();
-
+    void deletAllFromDB();
     void setTextTypeOfWeek();
     void startLoading();
     void endLoading();
-
+    void updateFragment();
     void setDrawerHeaderPhone();
 
     String getTextTuypeOfWeek();

@@ -15,5 +15,8 @@ public interface PresenterUser {
     void setTextTypeOfWeek();
     String getTextTuypeOfWeek();
     String getMyPhone();
+    void deletAllFromDB();
+    void startLoading();
+    void endLoading();
 
 }

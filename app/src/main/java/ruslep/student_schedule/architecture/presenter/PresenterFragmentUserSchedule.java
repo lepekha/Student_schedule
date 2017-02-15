@@ -12,5 +12,6 @@ public interface PresenterFragmentUserSchedule {
 
     List<User> getUser(String typeOfWeek, int dayOfWeek);
 
+
 }
 

@@ -22,13 +22,20 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.res.StringRes;
 import org.greenrobot.eventbus.EventBus;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.model.DB.Contacts.ContactsRealm;
+import ruslep.student_schedule.architecture.model.DB.Contacts.ContactsRealmImpl;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.REST.Model;
 import ruslep.student_schedule.architecture.model.REST.ModelImpl;
 import ruslep.student_schedule.architecture.model.entity.Contacts;
@@ -53,10 +60,19 @@ public class PresenterContactsImpl implements  PresenterContacts {
     @Bean(ModelImpl.class)
     Model model;
 
+    @Bean(ContactsRealmImpl.class)
+    ContactsRealm contactsRealm;
+
     @Bean
     MD5 md5;
 
-    private List<Contacts> conList;
+    @Bean(MyPreferensImpl.class)
+    MyPreferens preferens;
+
+    @StringRes(R.string.contacts_last_update)
+    String CONTACTS_LAST_UPDATE;
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd  kk:mm");
 
     @Override
     public void setView(ContactsActivity view) {
@@ -126,7 +142,8 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
                     @Override
                     public void onNext(List<Contacts> list) {
-                        conList = list;
+                        setContactList(list);
+                        preferens.setContactsLastUpdate(CONTACTS_LAST_UPDATE +" " + simpleDateFormat.format(new Date()));
                         contactsActivity.setAdapter(list);
                     }
                 });
@@ -142,8 +159,14 @@ public class PresenterContactsImpl implements  PresenterContacts {
     }
 
     @Override
-    public List<Contacts> getContactsList() {
-        return conList;
+    public boolean checkContacts() {
+        if(getContactList()!=null){
+            contactsActivity.setTimeAndDate(preferens.getContactsLastUpdate());
+            contactsActivity.setAdapter(getContactList());
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
@@ -156,7 +179,15 @@ public class PresenterContactsImpl implements  PresenterContacts {
         contactsActivity.hideHolderView();
     }
 
+    List<Contacts> getContactList(){
+        return contactsRealm.getAllContacts();
+    }
 
+    void setContactList(List<Contacts> conList){
+        contactsActivity.setTimeAndDate(preferens.getContactsLastUpdate());
+        contactsRealm.setAllContacts(conList);
+
+    }
 
 
 

@@ -73,4 +73,14 @@ public class MyPreferensImpl implements MyPreferens {
     public int getID() {
         return myPrefs.id().get();
     }
+
+    @Override
+    public void setContactsLastUpdate(String TimeAndDate) {
+        myPrefs.ContactsLastUpdate().put(TimeAndDate);
+    }
+
+    @Override
+    public String getContactsLastUpdate() {
+        return myPrefs.ContactsLastUpdate().get();
+    }
 }

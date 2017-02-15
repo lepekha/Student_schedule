@@ -16,10 +16,11 @@ public interface PresenterContacts {
     List<Contacts> getPhoneContacts();
     String clearPhoneNumber(String oldPhone);
     String getJsonFromPhoneList(List<Contacts> contactsList);
-    List<Contacts> getContactsList();
+
     void getContacts(String contactsMD5);
 
     ArrayList<String> getContactsName(List<Contacts> contactsList);
+    boolean checkContacts();
 
     void showHolderView();
 

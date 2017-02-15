@@ -3,6 +3,7 @@ package ruslep.student_schedule.architecture.view.Custom_dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,8 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
     @StringRes(R.string.dialogTime_btn_Cancel)
     String TIME_DIALOG_CANCEL;
 
+    @StringRes(R.string.dialogAdd_check_error_ok)
+    String DIALOG_ADD_CHECK_ERROR_OK;
 
     @Bean
     PresenterFragmentScheduleImpl presenterFragmentSchedule;
@@ -88,11 +91,14 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
 
     Subject subject;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup conteiner, Bundle save){
         View view = inflater.inflate(R.layout.dialog_add_schedule, conteiner);
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setBackgroundDrawable(null);
 
         return view;
     }
@@ -134,8 +140,18 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
                 .setTypeOfWeek(spTypeOfWeek.getSelectedItem().toString())
                 .setDayOfWeek(myPrefs.day().get())
                 .build();
-        presenterFragmentSchedule.editSubject(sb);
-        dismiss();
+
+        if(checkFields()){
+            presenterFragmentSchedule.editSubject(sb);
+            dismiss();
+        }else{
+            /** диалог если не введены номер предмета и его название*/
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(getActivity());
+            builder.setMessage(DIALOG_ADD_CHECK_ERROR);
+            builder.setPositiveButton(DIALOG_ADD_CHECK_ERROR_OK, null);
+            builder.show();
+        }
     }
 
     @Click(R.id.btnTimeStart)
@@ -177,5 +193,12 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
         tpd.setCancelText(TIME_DIALOG_CANCEL);
         tpd.show(getActivity().getFragmentManager(),"TimeEndDialogPicked");
     }
+    public boolean checkFields(){
+        if(edSubjectNumber.getText().toString().replaceAll("[\\s]+", "").length()!=0 && edSubjectName.getText().toString().replaceAll("[\\s]+", "").length()!=0){
+            return true;
+        }else{
+            return false;
+        }
 
+    }
 }

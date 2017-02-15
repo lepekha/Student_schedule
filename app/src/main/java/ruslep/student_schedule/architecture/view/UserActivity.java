@@ -7,5 +7,7 @@ public interface UserActivity extends View {
     void showMessage(String text);
     void setTextTypeOfWeek(String typeOfWeek);
     String getTextTypeOfWeek();
+    void showProgressBar();
+    void hideProgressBar();
 
 }

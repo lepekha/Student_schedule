@@ -21,4 +21,7 @@ public interface MyPreferens {
 
     void setID(int id);
     int getID();
+
+    void setContactsLastUpdate(String TimeAndDate);
+    String getContactsLastUpdate();
 }

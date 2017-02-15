@@ -1,8 +1,10 @@
 package ruslep.student_schedule.architecture.view.Custom_dialog;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,10 +76,14 @@ public class Add_schedule_dialog extends DialogFragment {
     @StringRes(R.string.dialogAdd_check_error)
     String DIALOG_ADD_CHECK_ERROR;
 
+    @StringRes(R.string.dialogAdd_check_error_ok)
+    String DIALOG_ADD_CHECK_ERROR_OK;
+
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -87,10 +93,17 @@ public class Add_schedule_dialog extends DialogFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup conteiner, Bundle save){
         View view = inflater.inflate(R.layout.dialog_add_schedule, conteiner);
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setBackgroundDrawable(null);
         return view;
     }
 
@@ -124,7 +137,7 @@ public class Add_schedule_dialog extends DialogFragment {
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(getActivity());
             builder.setMessage(DIALOG_ADD_CHECK_ERROR);
-            builder.setPositiveButton(DIALOG_ADD_OK, null);
+            builder.setPositiveButton(DIALOG_ADD_CHECK_ERROR_OK, null);
             builder.show();
         }
     }

@@ -36,6 +36,8 @@ import ruslep.student_schedule.architecture.other.Event.AddSubject;
 import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
 import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.presenter.PresenterFragmentSchedule;
+import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.BaseActivity;
 import ruslep.student_schedule.architecture.view.View;
 import rx.Observer;
@@ -86,6 +88,8 @@ public class PresenterBaseImpl implements PresenterBase {
     @StringRes(R.string.baseActivity_setSchedule_compl)
     String SET_SCHEDULE_COMPL;
 
+    @Bean(PresenterFragmentScheduleImpl.class)
+    PresenterFragmentSchedule presenterFragmentSchedule;
 
 
 
@@ -134,6 +138,11 @@ public class PresenterBaseImpl implements PresenterBase {
                 preferens.setInvertTypeOfWeek(false);
             }
         }
+    }
+
+    @Override
+    public void deletAllFromDB() {
+        subjectRealm.deleteAllFromDB();
     }
 
     @Override
@@ -341,5 +350,10 @@ public class PresenterBaseImpl implements PresenterBase {
     @Override
     public void setDrawerHeaderPhone() {
         view.setDrawerHeaderPhoneNumber(preferens.getPhoneNumber());
+    }
+
+    @Override
+    public void updateFragment() {
+        presenterFragmentSchedule
     }
 }

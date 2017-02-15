@@ -26,6 +26,5 @@ public interface PresenterFragmentSchedule {
 
     boolean isCopy();
 
-
 }
 

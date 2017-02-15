@@ -20,6 +20,8 @@ import ruslep.student_schedule.architecture.other.Event.DeleteSubject;
 import ruslep.student_schedule.architecture.other.Event.EditSubject;
 import ruslep.student_schedule.architecture.other.Event.PasteSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
+import ruslep.student_schedule.architecture.presenter.User.PresenterUserImpl;
 import ruslep.student_schedule.architecture.view.BaseActivity;
 import ruslep.student_schedule.architecture.view.UserActivity;
 
@@ -41,7 +43,8 @@ public class PresenterFragmentUserScheduleImpl implements PresenterFragmentUserS
 
     private UserActivity view;
 
-
+    @Bean
+    PresenterUserImpl presenterUser;
 
     @Override
     public List<User> getUser(String typeOfWeek, int dayOfWeek) {

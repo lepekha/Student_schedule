@@ -1,58 +1,29 @@
 package ruslep.student_schedule.architecture.view;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
-
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Contacts;
-import ruslep.student_schedule.architecture.model.entity.Subject;
-import ruslep.student_schedule.architecture.other.MyPrefs_;
-import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.Contacts.PresenterContacts;
 import ruslep.student_schedule.architecture.presenter.Contacts.PresenterContactsImpl;
 import ruslep.student_schedule.architecture.view.CustomAdapters.ContactsAdapter;
-import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog;
-import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog_;
-import ruslep.student_schedule.architecture.view.FragmentSchedule.CustomFragmentAdapter;
 
 @EActivity
 public class ContactsActivityImpl extends AppCompatActivity implements ContactsActivity,ContactsAdapter.OnItemMenuClickListener {
@@ -65,10 +36,13 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     @ViewById(R.id.holderView)
     RelativeLayout holderView;
 
+    @ViewById(R.id.txtLastUpdate)
+    TextView txtLastUpdate;
+
+
 
     @Bean(PresenterContactsImpl.class)
     PresenterContacts presenterContacts;
-
 
     @AfterInject
     public void afterView(){
@@ -84,10 +58,7 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
         listManager = new LinearLayoutManager(this);
         list.setLayoutManager(listManager);
         getData();
-
-
     }
-
 
     @Override
     public void setAdapter(List<Contacts> listContacts) {
@@ -99,13 +70,13 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
         }
     }
 
-    @Background
+
     public void getData() {
         presenterContacts.showHolderView();
-        presenterContacts.getContacts(presenterContacts.getJsonFromPhoneList(presenterContacts.getPhoneContacts()));
+        if(presenterContacts.checkContacts() == false) {
+            presenterContacts.getContacts(presenterContacts.getJsonFromPhoneList(presenterContacts.getPhoneContacts()));
+        }
     }
-
-
 
     @Override
     public void showHolderView() {
@@ -125,5 +96,34 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
         openUser.putExtra("name",contacts.getName());
         openUser.putExtra("phone",contacts.getPhone());
         startActivity(openUser);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_contacts, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.update_contacts:
+                presenterContacts.showHolderView();
+                presenterContacts.getContacts(presenterContacts.getJsonFromPhoneList(presenterContacts.getPhoneContacts()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void setTimeAndDate(String TimeAndDate) {
+        txtLastUpdate.setText(TimeAndDate);
     }
 }

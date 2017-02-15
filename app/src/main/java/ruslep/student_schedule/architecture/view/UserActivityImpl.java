@@ -10,8 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.*;
 import android.widget.TextView;
 import com.digits.sdk.android.AuthCallback;
 import org.androidannotations.annotations.AfterInject;
@@ -82,6 +81,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(getIntent().getStringExtra("name"));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         presenterUser.initTyteOfWeek();
         presenterUser.getSchedule(getIntent().getStringExtra("phone"));
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -132,11 +132,15 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
             case R.id.typeOfWeek:
                 presenterUser.setTextTypeOfWeek();
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     public int getFragmentPage() {
         return currentPage;
@@ -207,10 +211,22 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        presenterUser.deletAllFromDB();
+        finish();
+    }
 
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(android.view.View.VISIBLE);
+    }
 
-
-
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(android.view.View.GONE);
+    }
 }
 
 

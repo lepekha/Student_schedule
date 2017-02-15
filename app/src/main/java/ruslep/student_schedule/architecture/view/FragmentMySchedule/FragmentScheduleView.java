@@ -1,4 +1,4 @@
-package ruslep.student_schedule.architecture.view.FragmentSchedule;
+package ruslep.student_schedule.architecture.view.FragmentMySchedule;
 
 import ruslep.student_schedule.architecture.view.View;
 

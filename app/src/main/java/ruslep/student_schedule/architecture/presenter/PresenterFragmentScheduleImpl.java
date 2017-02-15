@@ -87,6 +87,8 @@ public class PresenterFragmentScheduleImpl implements PresenterFragmentSchedule 
         EventBus.getDefault().post(new EditSubject());
     }
 
+
+
     @Override
     public boolean isCopy() {
         if(subject != null) {

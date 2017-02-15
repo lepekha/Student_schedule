@@ -1,4 +1,4 @@
-package ruslep.student_schedule.architecture.view.FragmentUserSchedule;
+package ruslep.student_schedule.architecture.view.CustomAdapters;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,24 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Subject;
-import ruslep.student_schedule.architecture.model.entity.User;
 
 
-public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAdapter.ViewHolder>{
+public class CustomMyFragmentAdapter extends RecyclerView.Adapter<CustomMyFragmentAdapter.ViewHolder>{
 
     private static final int IMG_RADIUS = 10;
 
-    private List<User> user = new ArrayList<>();
+    private List<Subject> subjects = new ArrayList<>();
 
 
     private OnItemMenuClickListener onItemMenuClickListener;
@@ -62,13 +59,13 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
         @Override
         public void onClick(View view) {
-            onItemMenuClickListener.onItemMenuClick(view, user.get(getPosition()), getPosition());
+            onItemMenuClickListener.onItemMenuClick(view,subjects.get(getPosition()), getPosition());
         }
     }
 
 
     public interface  OnItemMenuClickListener{
-        public void onItemMenuClick(View view, User user, int position);
+        public void onItemMenuClick(View view, Subject subject, int position);
     }
 
     public void SetOnItemMenuClick(final OnItemMenuClickListener onItemMenuClickListener){
@@ -77,9 +74,9 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
 
 
-    public CustomFragmentAdapter(List<User> user) {
-        Collections.sort(user, User.Comparators.NUMBER);
-        this.user = user;
+    public CustomMyFragmentAdapter(List<Subject> subjects) {
+        Collections.sort(subjects, Subject.Comparators.NUMBER);
+        this.subjects = subjects;
     }
 
     @Override
@@ -91,19 +88,19 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
 
     public void refresh(){
-        Collections.sort(this.user, User.Comparators.NUMBER);
+        Collections.sort(this.subjects, Subject.Comparators.NUMBER);
         notifyDataSetChanged();
     }
 
-    public void add(User user){
-        this.user.add(user);
+    public void add(Subject subject){
+        this.subjects.add(subject);
         notifyDataSetChanged();
     }
 
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        int color = generator.getColor("abs" + user.get(position).getNumberSubject());
+        int color = generator.getColor("abs" + subjects.get(position).getNumberSubject());
         TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
                 .textColor(Color.WHITE)
@@ -112,33 +109,32 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
                 .height(50) // height in px
                 .toUpperCase()
                 .endConfig()
-                .buildRoundRect(user.get(position).getNumberSubject(), color,IMG_RADIUS);
+                .buildRoundRect(subjects.get(position).getNumberSubject(), color,IMG_RADIUS);
         viewHolder.imgSubjectNumber.setImageDrawable(drawable);
-        viewHolder.txtNazvanie.setText(user.get(position).getNameSubject());
-        viewHolder.btnItemMenu.setVisibility(View.INVISIBLE);
+        viewHolder.txtNazvanie.setText(subjects.get(position).getNameSubject());
 
         /**проверка на пустоту поля Аудитория*/
-        if(checkField(user.get(position).getRoomSubject())){
+        if(checkField(subjects.get(position).getRoomSubject())){
             viewHolder.lineTime.setVisibility(View.VISIBLE);
-            viewHolder.txtAud.setText(user.get(position).getRoomSubject());
+            viewHolder.txtAud.setText(subjects.get(position).getRoomSubject());
         }else{
             viewHolder.lineAud.setVisibility(View.GONE);
         }
 
-        viewHolder.txtType.setText(user.get(position).getTypeSubject());
+        viewHolder.txtType.setText(subjects.get(position).getTypeSubject());
 
         /**проверка на пустоту поля Время*/
-        if(!user.get(position).getTimeStartSubject().equals(R.string.dialogAdd_timeStart) || !user.get(position).getTimeEndSubject().equals(R.string.dialogAdd_timeEnd)){
+        if(!subjects.get(position).getTimeStartSubject().equals(R.string.dialogAdd_timeStart) || !subjects.get(position).getTimeEndSubject().equals(R.string.dialogAdd_timeEnd)){
             viewHolder.lineTime.setVisibility(View.VISIBLE);
-            viewHolder.txtTime.setText(user.get(position).getTimeStartSubject()+" - "+user.get(position).getTimeEndSubject());
+            viewHolder.txtTime.setText(subjects.get(position).getTimeStartSubject()+" - "+subjects.get(position).getTimeEndSubject());
         }else{
             viewHolder.lineTime.setVisibility(View.GONE);
         }
 
         /**проверка на пустоту поля Имя преподавателя*/
-        if(checkField(user.get(position).getTeacherSubject())){
+        if(checkField(subjects.get(position).getTeacherSubject())){
             viewHolder.lineName.setVisibility(View.VISIBLE);
-            viewHolder.txtName.setText(user.get(position).getTeacherSubject());
+            viewHolder.txtName.setText(subjects.get(position).getTeacherSubject());
         }else{
             viewHolder.lineName.setVisibility(View.GONE);
         }
@@ -147,7 +143,7 @@ public class CustomFragmentAdapter extends RecyclerView.Adapter<CustomFragmentAd
 
     @Override
     public int getItemCount() {
-        return user.size();
+        return subjects.size();
     }
 
     public boolean checkField(String text){

@@ -12,5 +12,6 @@ public interface ContactsActivity extends View {
     void setAdapter(List<Contacts> list);
     void showHolderView();
     void hideHolderView();
+    void setTimeAndDate(String TimeAndDate);
 
 }

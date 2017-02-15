@@ -26,20 +26,19 @@ import java.util.List;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.User;
 import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
-import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
 import ruslep.student_schedule.architecture.other.Event.GetUserFromServer;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
-import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentUserScheduleImpl;
 import ruslep.student_schedule.architecture.presenter.User.PresenterUser;
 import ruslep.student_schedule.architecture.presenter.User.PresenterUserImpl;
+import ruslep.student_schedule.architecture.view.CustomAdapters.CustomUserFragmentAdapter;
 
 @EFragment
 public class FragmentScheduleImpl extends Fragment implements FragmentScheduleView{
 
     private static final String EDIT_DIALOG_TAG = "edit_dialog_tag";
 
-    private CustomFragmentAdapter adapter;
+    private CustomUserFragmentAdapter adapter;
     private RecyclerView list;
     private RecyclerView.Adapter listAdapter;
     private RecyclerView.LayoutManager listManager;
@@ -113,14 +112,14 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
 
         setPlaceholder();
         //if (!subjects.isEmpty()) {
-            adapter = new CustomFragmentAdapter(user);
+            adapter = new CustomUserFragmentAdapter(user);
             list.setAdapter(adapter);
        // }
         return view;
     }
 
 
-   /* /** событие изменение типа недели*/
+    /** событие изменение типа недели*/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onChangeTypeOfWeek(ChangeTypeOfWeek event) {
         if(currentPage == myPrefs.day().get()) {
@@ -128,7 +127,8 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
             if (!presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
                 user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter.refresh();
+                adapter = new CustomUserFragmentAdapter(user);
+                list.setAdapter(adapter);
             }else{
                 setPlaceholder();
             }
@@ -150,7 +150,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 user.clear();
                 user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter = new CustomFragmentAdapter(user);
+                adapter = new CustomUserFragmentAdapter(user);
                 list.setAdapter(adapter);
                 Log.d("err",presenterUser.getTextTuypeOfWeek()+" * "+ myPrefs.day().get());
             } else {

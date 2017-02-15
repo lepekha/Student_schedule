@@ -1,4 +1,4 @@
-package ruslep.student_schedule.architecture.view.FragmentSchedule;
+package ruslep.student_schedule.architecture.view.FragmentMySchedule;
 
 
 import android.content.DialogInterface;
@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
@@ -45,15 +44,16 @@ import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
+import ruslep.student_schedule.architecture.view.CustomAdapters.CustomMyFragmentAdapter;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog_;
 
 @EFragment
-public class FragmentScheduleImpl extends Fragment implements FragmentScheduleView, CustomFragmentAdapter.OnItemMenuClickListener{
+public class FragmentScheduleImpl extends Fragment implements FragmentScheduleView, CustomMyFragmentAdapter.OnItemMenuClickListener{
 
     private static final String EDIT_DIALOG_TAG = "edit_dialog_tag";
 
-    private CustomFragmentAdapter adapter;
+    private CustomMyFragmentAdapter adapter;
     private RecyclerView list;
     private RecyclerView.Adapter listAdapter;
     private RecyclerView.LayoutManager listManager;
@@ -128,7 +128,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         Log.d("111",subjects.size()+"");
         setPlaceholder();
         //if (!subjects.isEmpty()) {
-            adapter = new CustomFragmentAdapter(subjects);
+            adapter = new CustomMyFragmentAdapter(subjects);
             adapter.SetOnItemMenuClick(this);
             list.setAdapter(adapter);
        // }
@@ -140,15 +140,36 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onChangeTypeOfWeek(ChangeTypeOfWeek event) {
         if(currentPage == myPrefs.day().get()) {
+            if (subjects.isEmpty()) {
+                subjects.clear();
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                setPlaceholder();
+                adapter = new CustomMyFragmentAdapter(subjects);
+                adapter.SetOnItemMenuClick(this);
+                list.setAdapter(adapter);
+                Log.d("err",presenterBase.getTextTuypeOfWeek()+" * "+ myPrefs.day().get());
+            } else {
+                subjects.clear();
+                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
+                adapter.refresh();
+            }
+        }
+
+
+
+
+       /* if(currentPage == myPrefs.day().get()) {
             subjects.clear();
             if (!presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter.refresh();
+                adapter = new CustomMyFragmentAdapter(subjects);
+                adapter.SetOnItemMenuClick(this);
+                list.setAdapter(adapter);
             }else{
                 setPlaceholder();
             }
-        }
+        }*/
     }
 
    /**  событие нажатие на меню в списке */
@@ -165,7 +186,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 subjects.clear();
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter = new CustomFragmentAdapter(subjects);
+                adapter = new CustomMyFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
             } else {
@@ -194,7 +215,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 subjects.clear();
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter = new CustomFragmentAdapter(subjects);
+                adapter = new CustomMyFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
                 Log.d("err",presenterBase.getTextTuypeOfWeek()+" * "+ myPrefs.day().get());
@@ -227,7 +248,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 subjects.clear();
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
                 setPlaceholder();
-                adapter = new CustomFragmentAdapter(subjects);
+                adapter = new CustomMyFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
             } else {
