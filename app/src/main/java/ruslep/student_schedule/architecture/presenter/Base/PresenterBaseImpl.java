@@ -354,6 +354,6 @@ public class PresenterBaseImpl implements PresenterBase {
 
     @Override
     public void updateFragment() {
-        presenterFragmentSchedule
+
     }
 }

@@ -95,9 +95,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     private int currentPage;
 
-    private Subject subject = new Subject();
 
-    private AuthCallback authCallback;
 
     @AfterInject
     public void afterView(){
@@ -153,7 +151,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         /** устанавливаем номер телефона в хедер бокового меню */
         presenterBase.setDrawerHeaderPhone();
 
-
         presenterBase.hideAuthBtn();
         presenterBase.initTyteOfWeek();
         myPrefs.day().put(0);
@@ -188,6 +185,17 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
             }
         });
+
+        View hView =  navigationView.getHeaderView(0);
+        FloatingActionButton btnQuite = (FloatingActionButton) hView.findViewById(R.id.btnQuite);
+        btnQuite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 
 
@@ -214,12 +222,17 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         switch (item.getItemId()){
             case R.id.typeOfWeek:
                 presenterBase.setTextTypeOfWeek();
+                mViewPager.setAdapter(mSectionsPagerAdapter);
+                tabLayout.setupWithViewPager(mViewPager);
+                mViewPager.setCurrentItem(currentPage);
                 break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     public int getFragmentPage() {
         return currentPage;
@@ -293,9 +306,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                     startActivity(new Intent(this, ContactsActivityImpl_.class));
                 }
                 break;
-            case R.id.nav_exit:
-                finish();
-                break;
             case R.id.nav_review:
                 presenterBase.review();
                 break;
@@ -349,6 +359,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         TextView txtPhoneNumber = (TextView)hView.findViewById(R.id.txtPhoneNumber);
         txtPhoneNumber.setText(phoneNumber);
     }
+
+
     public boolean checkPermissions() {
         int result;
         List<String> listPermissionsNeeded = new ArrayList<>();

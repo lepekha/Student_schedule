@@ -131,6 +131,9 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
         switch (item.getItemId()){
             case R.id.typeOfWeek:
                 presenterUser.setTextTypeOfWeek();
+                mViewPager.setAdapter(mSectionsPagerAdapter);
+                tabLayout.setupWithViewPager(mViewPager);
+                mViewPager.setCurrentItem(currentPage);
                 break;
             case android.R.id.home:
                 onBackPressed();

@@ -18,5 +18,4 @@ public interface BaseActivity extends View {
     String getTextTypeOfWeek();
     void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults);
     boolean checkPermissions();
-
 }
