@@ -28,6 +28,8 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
@@ -38,18 +40,20 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
     @ViewById
     Spinner spTypeOfWeek;
 
-    @Pref
-    MyPrefs_ myPrefs;
+    @Bean(MyPreferensImpl.class)
+    MyPreferens preferens;
 
     @Bean
     PresenterBaseImpl presenterBase;
 
+
+
     @AfterViews
     public void afterView(){
-        switch (myPrefs.typeOfWeek().get()){
-            case "Чисельник": spTypeOfWeek.setSelection(0);
+        switch (preferens.getTypeOfWeek()){
+            case "Числитель": spTypeOfWeek.setSelection(0);
                 break;
-            case "Знаменник": spTypeOfWeek.setSelection(1);
+            case "Знаменатель": spTypeOfWeek.setSelection(1);
                 break;
             default:
                 break;
@@ -61,15 +65,19 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spTypeOfWeek.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
-                    presenterBase.updateTypeOfWeek("Чисельник");
+                    presenterBase.updateTypeOfWeek("Числитель");
+                    preferens.setReCreateMainActivity(true);
                 } else {
-                    presenterBase.updateTypeOfWeek("Знаменник");
+                    presenterBase.updateTypeOfWeek("Знаменатель");
+                    preferens.setReCreateMainActivity(true);
                 }
             }
 

@@ -31,6 +31,7 @@ import ruslep.student_schedule.architecture.model.entity.User;
 import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
 import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
 import ruslep.student_schedule.architecture.other.Event.GetUserFromServer;
+import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.view.BaseActivity;
 import ruslep.student_schedule.architecture.view.UserActivity;
 import rx.Observer;
@@ -216,5 +217,28 @@ public class PresenterUserImpl implements PresenterUser {
     @Override
     public void endLoading() {
         view.hideProgressBar();
+    }
+
+    @Override
+    public int getDayOfWeek() {
+        Calendar c = Calendar.getInstance();
+        switch (c.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY:
+                return 0;
+            case Calendar.TUESDAY:
+                return 1;
+            case Calendar.WEDNESDAY:
+                return 2;
+            case Calendar.THURSDAY:
+                return 3;
+            case Calendar.FRIDAY:
+                return 4;
+            case Calendar.SATURDAY:
+                return 5;
+            case Calendar.SUNDAY:
+                return 6;
+            default:
+                return 1;
+        }
     }
 }

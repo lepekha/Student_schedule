@@ -83,4 +83,24 @@ public class MyPreferensImpl implements MyPreferens {
     public String getContactsLastUpdate() {
         return myPrefs.ContactsLastUpdate().get();
     }
+
+    @Override
+    public void setReCreateMainActivity(boolean reCreate) {
+        myPrefs.reCreate().put(reCreate);
+    }
+
+    @Override
+    public boolean getReCreateMainActivity() {
+        return myPrefs.reCreate().get();
+    }
+
+    @Override
+    public void setDay(int day) {
+        myPrefs.day().put(day);
+    }
+
+    @Override
+    public int getDay() {
+        return myPrefs.day().get();
+    }
 }

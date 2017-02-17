@@ -25,9 +25,8 @@ public interface PresenterBase {
     void setTextTypeOfWeek();
     void startLoading();
     void endLoading();
-    void updateFragment();
     void setDrawerHeaderPhone();
-
+    int getDayOfWeek();
     String getTextTuypeOfWeek();
 
 }

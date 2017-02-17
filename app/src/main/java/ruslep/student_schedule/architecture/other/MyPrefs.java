@@ -32,6 +32,9 @@ public interface MyPrefs {
     boolean invertWeek();
 
     @DefaultBoolean(false)
+    boolean reCreate();
+
+    @DefaultBoolean(false)
     boolean flagAuth();
 
     @DefaultBoolean(false)

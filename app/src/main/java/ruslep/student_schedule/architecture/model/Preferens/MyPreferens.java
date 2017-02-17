@@ -24,4 +24,10 @@ public interface MyPreferens {
 
     void setContactsLastUpdate(String TimeAndDate);
     String getContactsLastUpdate();
+
+    void setReCreateMainActivity(boolean reCreate);
+    boolean getReCreateMainActivity();
+
+    void setDay(int day);
+    int getDay();
 }

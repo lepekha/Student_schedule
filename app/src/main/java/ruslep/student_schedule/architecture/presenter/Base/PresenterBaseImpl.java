@@ -19,6 +19,7 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -353,7 +354,25 @@ public class PresenterBaseImpl implements PresenterBase {
     }
 
     @Override
-    public void updateFragment() {
-
+    public int getDayOfWeek() {
+        Calendar c = Calendar.getInstance();
+        switch (c.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY:
+                return 0;
+            case Calendar.TUESDAY:
+                return 1;
+            case Calendar.WEDNESDAY:
+                return 2;
+            case Calendar.THURSDAY:
+                return 3;
+            case Calendar.FRIDAY:
+                return 4;
+            case Calendar.SATURDAY:
+                return 5;
+            case Calendar.SUNDAY:
+                return 6;
+            default:
+                return 1;
+        }
     }
 }

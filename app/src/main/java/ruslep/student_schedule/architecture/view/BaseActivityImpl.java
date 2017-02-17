@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.*;
 import android.view.View;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
@@ -83,8 +86,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @ViewById(R.id.progressBar)
     me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
 
-    @Pref
-    MyPrefs_ myPrefs;
+    @Bean(MyPreferensImpl.class)
+    MyPreferens preferens;
 
     private DrawerLayout drawer;
 
@@ -107,12 +110,17 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @Override
     protected void onResume() {
         super.onResume();
-
+        /**Если настройки были изменены, пересоздаем активити*/
+        if(preferens.getReCreateMainActivity()){
+            preferens.setReCreateMainActivity(false);
+            recreate();
+        }
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //this.setTheme(R.style.AppTheme_Green);
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Digits.Builder digitsBuilder = new Digits.Builder().withTheme(android.R.style.Theme_Material);
@@ -122,6 +130,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         setSupportActionBar(toolbar);
         digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
         //digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
+        Log.e("eeerrr",presenterBase.getDayOfWeek()+"");
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
@@ -153,12 +162,14 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
         presenterBase.hideAuthBtn();
         presenterBase.initTyteOfWeek();
-        myPrefs.day().put(0);
+        preferens.setDay(0);
         mViewPager = (ViewPager) findViewById(R.id.container);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+        currentPage = presenterBase.getDayOfWeek();
+        mViewPager.setCurrentItem(presenterBase.getDayOfWeek());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -167,7 +178,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
             @Override
             public void onPageSelected(int position) {
-                myPrefs.day().put(mViewPager.getCurrentItem());
+               preferens.setDay(mViewPager.getCurrentItem());
                 currentPage = position;
 
             }

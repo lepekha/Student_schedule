@@ -18,5 +18,6 @@ public interface PresenterUser {
     void deletAllFromDB();
     void startLoading();
     void endLoading();
+    int getDayOfWeek();
 
 }

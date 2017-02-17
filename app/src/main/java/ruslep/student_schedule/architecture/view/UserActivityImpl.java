@@ -89,6 +89,8 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+        currentPage = presenterUser.getDayOfWeek();
+        mViewPager.setCurrentItem(presenterUser.getDayOfWeek());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

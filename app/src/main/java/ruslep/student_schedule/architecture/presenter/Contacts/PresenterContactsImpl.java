@@ -160,7 +160,7 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
     @Override
     public boolean checkContacts() {
-        if(getContactList()!=null){
+        if(getContactList().size()>0){
             contactsActivity.setTimeAndDate(preferens.getContactsLastUpdate());
             contactsActivity.setAdapter(getContactList());
             return true;
