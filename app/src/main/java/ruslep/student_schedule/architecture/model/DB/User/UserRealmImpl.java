@@ -75,6 +75,8 @@ public class UserRealmImpl implements UserRealm {
         return realm.copyFromRealm(realm.where(User.class).findAll());
     }
 
+
+
     @Override
     public void deleteAllFromDB() {
         final RealmResults<User> results = realm.where(User.class).findAll();
@@ -88,7 +90,7 @@ public class UserRealmImpl implements UserRealm {
     }
 
     @Override
-    public void saveAllToDB(List<User> userList) {
+    public boolean saveAllToDB(List<User> userList) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -99,5 +101,6 @@ public class UserRealmImpl implements UserRealm {
                 }
             }
         });
+        return true;
     }
 }

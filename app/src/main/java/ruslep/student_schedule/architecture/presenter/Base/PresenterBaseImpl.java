@@ -36,7 +36,6 @@ import ruslep.student_schedule.architecture.other.Const;
 import ruslep.student_schedule.architecture.other.Event.AddSubject;
 import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
 import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
-import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentSchedule;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.BaseActivity;

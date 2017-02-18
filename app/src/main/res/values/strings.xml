@@ -76,6 +76,7 @@
     <string name="navigation_drawer_review">Оставить отзыв</string>
     <string name="navigation_drawer_setting">Настройки</string>
     <string name="navigation_drawer_exit">Выйти</string>
+    <string name="navigation_drawer_myNumber">Ваш номер:</string>
 
     <!--Popup menu-->
     <string name="popup_menu_edit_subject">Изменить</string>
@@ -88,6 +89,20 @@
 
     <!--Contacts-->
     <string name="contacts_last_update">Последнее обновление: </string>
+
+    <!--User-->
+    <string name="user_dialog_download">Вы действительно хотите заменить свое расписание?</string>
+    <string name="user_dialog_OK">Заменить</string>
+    <string name="user_dialog_NO">Отмена</string>
+    <string name="user_dialog_sucefull">Теперь у вас такое же расписание.</string>
+
+    <!--Setting-->
+    <string name="setting_typeOfWeek">Тип недели:</string>
+    <string name="setting_cheslitel">Числитель</string>
+    <string name="setting_znamenatek">Знаменатель</string>
+    <string name="setting_mainColor">Выберите основной цвет программы:</string>
+    <string name="setting_politics">Политика конфиденциальности</string>
+    <string name="setting_shudow">Скрыть расписание от друзей</string>
 
 
 </resources>

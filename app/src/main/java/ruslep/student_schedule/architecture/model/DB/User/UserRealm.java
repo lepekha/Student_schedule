@@ -19,5 +19,5 @@ public interface UserRealm {
 
     void deleteAllFromDB();
 
-    void saveAllToDB(List<User> userList);
+    boolean saveAllToDB(List<User> userList);
 }

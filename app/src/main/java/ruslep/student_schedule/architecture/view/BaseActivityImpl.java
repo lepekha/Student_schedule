@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.*;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.digits.sdk.android.AuthCallback;
@@ -49,6 +50,8 @@ import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.other.Theme.UseTheme;
+import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog_;
@@ -98,7 +101,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     private int currentPage;
 
-
+    @Bean(UseThemeImpl.class)
+    UseTheme useTheme;
 
     @AfterInject
     public void afterView(){
@@ -120,7 +124,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //this.setTheme(R.style.AppTheme_Green);
+        this.setTheme(useTheme.getTheme());
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Digits.Builder digitsBuilder = new Digits.Builder().withTheme(android.R.style.Theme_Material);
@@ -170,6 +174,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         tabLayout.setupWithViewPager(mViewPager);
         currentPage = presenterBase.getDayOfWeek();
         mViewPager.setCurrentItem(presenterBase.getDayOfWeek());
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -199,14 +204,15 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
         View hView =  navigationView.getHeaderView(0);
         FloatingActionButton btnQuite = (FloatingActionButton) hView.findViewById(R.id.btnQuite);
+        RelativeLayout navigationBackground  = (RelativeLayout) hView.findViewById(R.id.navigationBackground);
+        navigationBackground.setBackgroundColor(getColor(useTheme.setNavigationBackground()));
         btnQuite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
+        restartArapter();
     }
 
 
@@ -233,9 +239,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         switch (item.getItemId()){
             case R.id.typeOfWeek:
                 presenterBase.setTextTypeOfWeek();
-                mViewPager.setAdapter(mSectionsPagerAdapter);
-                tabLayout.setupWithViewPager(mViewPager);
-                mViewPager.setCurrentItem(currentPage);
+                restartArapter();
                 break;
             default:
                 break;
@@ -401,6 +405,12 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 return;
             }
         }
+    }
+
+    public void restartArapter(){
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(currentPage);
     }
 
 }

@@ -46,4 +46,7 @@ public interface MyPrefs {
     @DefaultString("Последнее обновление: ")
     String ContactsLastUpdate();
 
+    @DefaultInt(0)
+    int currentTheme();
+
 }

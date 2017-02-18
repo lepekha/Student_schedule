@@ -15,6 +15,7 @@ import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
+import ruslep.student_schedule.architecture.model.entity.User;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
@@ -127,6 +128,32 @@ public class SubjectRealmImpl implements SubjectRealm {
                     subject.setId(preferens.getID());
                     realm.copyToRealmOrUpdate(subject);
                     preferens.setID(preferens.getID() + 1);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void saveAllFromUser(List<User> userList) {
+        realm.executeTransaction(new Realm.Transaction() {
+
+            @Override
+            public void execute(Realm realm) {
+
+                for (User user: userList) {
+                    Subject subject = new Subject();
+                    subject.setId(user.getId());
+                    subject.setTypeWeek(user.getTypeWeek());
+                    subject.setDayOfWeek(user.getDayOfWeek());
+                    subject.setNameSubject(user.getNameSubject());
+                    subject.setNumberSubject(user.getNumberSubject());
+                    subject.setOrderSubject(user.getOrderSubject());
+                    subject.setRoomSubject(user.getRoomSubject());
+                    subject.setTeacherSubject(user.getTeacherSubject());
+                    subject.setTimeEndSubject(user.getTimeEndSubject());
+                    subject.setTimeStartSubject(user.getTimeStartSubject());
+                    subject.setTypeSubject(user.getTypeSubject());
+                    realm.copyToRealm(subject);
                 }
             }
         });

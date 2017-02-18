@@ -30,4 +30,7 @@ public interface MyPreferens {
 
     void setDay(int day);
     int getDay();
+
+    void setCurrentTheme(int theme);
+    int getCurrentTheme();
 }

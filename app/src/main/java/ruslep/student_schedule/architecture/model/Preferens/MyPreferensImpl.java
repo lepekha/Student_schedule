@@ -103,4 +103,14 @@ public class MyPreferensImpl implements MyPreferens {
     public int getDay() {
         return myPrefs.day().get();
     }
+
+    @Override
+    public void setCurrentTheme(int theme) {
+        myPrefs.currentTheme().put(theme);
+    }
+
+    @Override
+    public int getCurrentTheme() {
+        return myPrefs.currentTheme().get();
+    }
 }

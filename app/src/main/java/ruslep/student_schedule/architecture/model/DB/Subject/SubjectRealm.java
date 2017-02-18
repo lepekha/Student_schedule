@@ -4,6 +4,7 @@ package ruslep.student_schedule.architecture.model.DB.Subject;
 import java.util.List;
 
 import ruslep.student_schedule.architecture.model.entity.Subject;
+import ruslep.student_schedule.architecture.model.entity.User;
 
 /**
  * Created by Ruslan on 21.08.2016.
@@ -25,4 +26,6 @@ public interface SubjectRealm {
     void deleteAllFromDB();
 
     void saveAllToDB(List<Subject> subjectList);
+
+    void saveAllFromUser(List <User> userList);
 }

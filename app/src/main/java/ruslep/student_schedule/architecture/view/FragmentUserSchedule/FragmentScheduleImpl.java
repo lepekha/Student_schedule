@@ -134,39 +134,4 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
             }
         }
     }
-
-
-
-
-
-
-
-    /**событие загрузки занятий с сервера*/
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetUserFromServer(GetUserFromServer event) {
-        Log.d("err","errrrr");
-        if(currentPage == myPrefs.day().get()) {
-            if (user.isEmpty()) {
-                user.clear();
-                user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()));
-                setPlaceholder();
-                adapter = new CustomUserFragmentAdapter(user);
-                list.setAdapter(adapter);
-                Log.d("err",presenterUser.getTextTuypeOfWeek()+" * "+ myPrefs.day().get());
-            } else {
-                user.clear();
-                user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()));
-                adapter.refresh();
-                Log.d("err",user.size()+"");
-            }
-        }
-    }
-
-
-
-
-
-
-
-
 }

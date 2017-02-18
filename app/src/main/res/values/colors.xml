@@ -10,4 +10,10 @@
     <color name="divider">#BDBDBD</color>
     <color name="background">#dcdcdc</color>
     <color name="background_item">#ffffff</color>
+
+    <color name="primary_red">#F44336</color>
+    <color name="primary_green">#4CAF50</color>
+    <color name="primary_purple">#673AB7</color>
+    <color name="primary_grey">#607D8B</color>
+    <color name="primary_amber">#FFC107</color>
 </resources>

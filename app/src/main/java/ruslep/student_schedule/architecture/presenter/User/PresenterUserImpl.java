@@ -15,6 +15,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.Calendar;
 import java.util.List;
 
+import io.realm.RealmObject;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import ruslep.student_schedule.R;
@@ -51,6 +52,9 @@ public class PresenterUserImpl implements PresenterUser {
 
     @Bean(MyPreferensImpl.class)
     MyPreferens preferens;
+
+    @Bean(SubjectRealmImpl.class)
+    SubjectRealm subjectRealm;
 
     @Bean(UserRealmImpl.class)
     UserRealm userRealm;
@@ -178,11 +182,11 @@ public class PresenterUserImpl implements PresenterUser {
                     @Override
                     public void onNext(List<User> list) {
                         userRealm.deleteAllFromDB();
-                        userRealm.saveAllToDB(list);
-
-                        view.showMessage(GET_SCHEDULE_COMPL);
-                        endLoading();
-                        EventBus.getDefault().post(new GetUserFromServer());
+                        if(userRealm.saveAllToDB(list)){
+                            view.showMessage(GET_SCHEDULE_COMPL);
+                            endLoading();
+                            EventBus.getDefault().post(new GetUserFromServer());
+                        }
                     }
                 });
     }
@@ -240,5 +244,11 @@ public class PresenterUserImpl implements PresenterUser {
             default:
                 return 1;
         }
+    }
+
+    @Override
+    public void saveToMe() {
+        subjectRealm.deleteAllFromDB();
+        subjectRealm.saveAllFromUser(userRealm.getAllFromDB());
     }
 }

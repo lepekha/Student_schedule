@@ -19,5 +19,7 @@ public interface PresenterUser {
     void startLoading();
     void endLoading();
     int getDayOfWeek();
+    void saveToMe();
+
 
 }

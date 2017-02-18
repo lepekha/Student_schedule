@@ -1,5 +1,6 @@
 package ruslep.student_schedule.architecture.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -8,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 import com.digits.sdk.android.AuthCallback;
@@ -17,11 +20,19 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.other.Event.GetUserFromServer;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.other.Theme.UseTheme;
+import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.User.PresenterUserImpl;
+import ruslep.student_schedule.architecture.view.CustomAdapters.CustomUserFragmentAdapter;
 import ruslep.student_schedule.architecture.view.FragmentUserSchedule.FragmentScheduleImpl_;
 
 @EActivity
@@ -51,10 +62,23 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     @Pref
     MyPrefs_ myPrefs;
 
-
+    @Bean(UseThemeImpl.class)
+    UseTheme useTheme;
 
     @Bean
     PresenterUserImpl presenterUser;
+
+    @StringRes(R.string.user_dialog_download)
+    String USER_DIALOG_DOWNLOAD;
+
+    @StringRes(R.string.user_dialog_OK)
+    String USER_DIALOG_OK;
+
+    @StringRes(R.string.user_dialog_NO)
+    String USER_DIALOG_NO;
+
+    @StringRes(R.string.user_dialog_sucefull)
+    String USER_DIALOG_SUCEFULL;
 
     private int currentPage;
 
@@ -76,6 +100,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTheme(useTheme.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -114,6 +139,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
 
             }
         });
+        restartAdapter();
     }
 
 
@@ -122,8 +148,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_base, menu);
-        menu.findItem(R.id.paste_subject).setVisible(false);
+        getMenuInflater().inflate(R.menu.menu_user, menu);
         return true;
 
     }
@@ -140,6 +165,21 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.download_subject:
+                /** диалог подтверждения замены своего расписания*/
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(this);
+                builder.setMessage(USER_DIALOG_DOWNLOAD);
+                builder.setPositiveButton(USER_DIALOG_OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenterUser.saveToMe();
+                        showMessage(USER_DIALOG_SUCEFULL);
+                    }
+                });
+                builder.setNegativeButton(USER_DIALOG_NO, null);
+                builder.show();
+                break;
             default:
                 break;
         }
@@ -231,6 +271,19 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(android.view.View.GONE);
+    }
+
+
+    /**событие загрузки занятий с сервера*/
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetUserFromServer(GetUserFromServer event) {
+        restartAdapter();
+    }
+
+    public void restartAdapter(){
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(currentPage);
     }
 }
 

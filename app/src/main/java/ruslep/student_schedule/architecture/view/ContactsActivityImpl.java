@@ -22,6 +22,8 @@ import java.util.List;
 
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.entity.Contacts;
+import ruslep.student_schedule.architecture.other.Theme.UseTheme;
+import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Contacts.PresenterContacts;
 import ruslep.student_schedule.architecture.presenter.Contacts.PresenterContactsImpl;
 import ruslep.student_schedule.architecture.view.CustomAdapters.ContactsAdapter;
@@ -40,7 +42,8 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     @ViewById(R.id.txtLastUpdate)
     TextView txtLastUpdate;
 
-
+    @Bean(UseThemeImpl.class)
+    UseTheme useTheme;
 
     @Bean(PresenterContactsImpl.class)
     PresenterContacts presenterContacts;
@@ -52,6 +55,7 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTheme(useTheme.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
