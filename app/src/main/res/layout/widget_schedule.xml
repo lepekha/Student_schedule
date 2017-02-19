@@ -58,9 +58,8 @@
             android:layout_height="match_parent"
             android:divider="@null"
             android:scrollbars="none"
-        android:layout_below="@+id/linearLayout8"
-        android:layout_marginTop="14dp"
-        android:paddingBottom="2dp">
+        android:paddingBottom="2dp"
+        android:layout_below="@+id/linearLayout8">
     </ListView>
 
 </RelativeLayout>

@@ -28,6 +28,9 @@ public interface MyPrefs {
     @DefaultInt(0)
     int day();
 
+    @DefaultInt(0)
+    int userDay();
+
     @DefaultBoolean(false)
     boolean invertWeek();
 

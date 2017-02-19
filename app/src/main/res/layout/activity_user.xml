@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Чисельник"
+                android:text="@string/baseActivity_typeOfWeek_Cheslitel"
                 android:textColor="@color/secondary_text"
                 android:id="@+id/txtTypeOfWeek"
                 android:layout_marginLeft="20dp"

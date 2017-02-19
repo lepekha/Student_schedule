@@ -1,8 +1,10 @@
 package ruslep.student_schedule.architecture.model.Preferens;
 
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
+import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 
 /**
@@ -10,6 +12,9 @@ import ruslep.student_schedule.architecture.other.MyPrefs_;
  */
 @EBean(scope = EBean.Scope.Singleton)
 public class MyPreferensImpl implements MyPreferens {
+
+    @StringRes(R.string.navigation_drawer_not_auth)
+    String DRAWER_NOT_AUTH;
 
     @Pref
     MyPrefs_ myPrefs;
@@ -31,7 +36,7 @@ public class MyPreferensImpl implements MyPreferens {
 
     @Override
     public String getPhoneNumber() {
-        return myPrefs.MyPhoneNumber().get();
+        return myPrefs.MyPhoneNumber().getOr(DRAWER_NOT_AUTH);
     }
 
     @Override
@@ -112,5 +117,15 @@ public class MyPreferensImpl implements MyPreferens {
     @Override
     public int getCurrentTheme() {
         return myPrefs.currentTheme().get();
+    }
+
+    @Override
+    public void setUserDay(int day) {
+        myPrefs.userDay().put(day);
+    }
+
+    @Override
+    public int getUserDay() {
+        return myPrefs.userDay().get();
     }
 }

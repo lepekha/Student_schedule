@@ -24,13 +24,17 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.entity.User;
 import ruslep.student_schedule.architecture.other.Event.ChangeTypeOfWeek;
+import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
 import ruslep.student_schedule.architecture.other.Event.GetUserFromServer;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentUserScheduleImpl;
 import ruslep.student_schedule.architecture.presenter.User.PresenterUser;
 import ruslep.student_schedule.architecture.presenter.User.PresenterUserImpl;
+import ruslep.student_schedule.architecture.view.CustomAdapters.CustomMyFragmentAdapter;
 import ruslep.student_schedule.architecture.view.CustomAdapters.CustomUserFragmentAdapter;
 
 @EFragment
@@ -61,8 +65,8 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     CoordinatorLayout coordinatorLayout;
 
 
-    @Pref
-    MyPrefs_ myPrefs;
+    @Bean(MyPreferensImpl.class)
+    MyPreferens preferens;
 
     public FragmentScheduleImpl() {
     }
@@ -122,15 +126,33 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     /** событие изменение типа недели*/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onChangeTypeOfWeek(ChangeTypeOfWeek event) {
-        if(currentPage == myPrefs.day().get()) {
+        if(currentPage == preferens.getUserDay()) {
             user.clear();
-            if (!presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
-                user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), myPrefs.day().get()));
+            if (!presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), preferens.getUserDay()).isEmpty()) {
+                user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), preferens.getUserDay()));
                 setPlaceholder();
                 adapter = new CustomUserFragmentAdapter(user);
                 list.setAdapter(adapter);
             }else{
                 setPlaceholder();
+            }
+        }
+    }
+
+    /**событие загрузки занятий с сервера*/
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetUserFromServer(GetUserFromServer event) {
+        if(currentPage == preferens.getUserDay()) {
+            if (user.isEmpty()) {
+                user.clear();
+                user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), preferens.getUserDay()));
+                setPlaceholder();
+                adapter = new CustomUserFragmentAdapter(user);
+                list.setAdapter(adapter);
+            } else {
+                user.clear();
+                user.addAll(presenterFragmentUserSchedule.getUser(presenterUser.getTextTuypeOfWeek(), preferens.getUserDay()));
+                adapter.refresh();
             }
         }
     }

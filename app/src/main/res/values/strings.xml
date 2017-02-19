@@ -77,6 +77,7 @@
     <string name="navigation_drawer_setting">Настройки</string>
     <string name="navigation_drawer_exit">Выйти</string>
     <string name="navigation_drawer_myNumber">Ваш номер:</string>
+    <string name="navigation_drawer_not_auth">Нужна авторизация</string>
 
     <!--Popup menu-->
     <string name="popup_menu_edit_subject">Изменить</string>

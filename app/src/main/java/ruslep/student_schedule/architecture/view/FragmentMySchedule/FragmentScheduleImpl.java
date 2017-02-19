@@ -219,7 +219,6 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 adapter = new CustomMyFragmentAdapter(subjects);
                 adapter.SetOnItemMenuClick(this);
                 list.setAdapter(adapter);
-                Log.d("err",presenterBase.getTextTuypeOfWeek()+" * "+ myPrefs.day().get());
             } else {
                 subjects.clear();
                 subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));

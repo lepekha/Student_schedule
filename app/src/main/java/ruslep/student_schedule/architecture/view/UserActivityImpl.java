@@ -26,6 +26,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.other.Event.GetUserFromServer;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.other.Theme.UseTheme;
@@ -59,8 +61,8 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     @ViewById(R.id.progressBar)
     me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
 
-    @Pref
-    MyPrefs_ myPrefs;
+    @Bean(MyPreferensImpl.class)
+    MyPreferens preferens;
 
     @Bean(UseThemeImpl.class)
     UseTheme useTheme;
@@ -115,6 +117,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         currentPage = presenterUser.getDayOfWeek();
+        preferens.setUserDay(mViewPager.getCurrentItem());
         mViewPager.setCurrentItem(presenterUser.getDayOfWeek());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
@@ -124,7 +127,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
 
             @Override
             public void onPageSelected(int position) {
-                myPrefs.day().put(mViewPager.getCurrentItem());
+                preferens.setUserDay(mViewPager.getCurrentItem());
                 currentPage = position;
             }
 
@@ -158,9 +161,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
         switch (item.getItemId()){
             case R.id.typeOfWeek:
                 presenterUser.setTextTypeOfWeek();
-                mViewPager.setAdapter(mSectionsPagerAdapter);
-                tabLayout.setupWithViewPager(mViewPager);
-                mViewPager.setCurrentItem(currentPage);
+                restartAdapter();
                 break;
             case android.R.id.home:
                 onBackPressed();
@@ -174,6 +175,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         presenterUser.saveToMe();
+                        preferens.setReCreateMainActivity(true);
                         showMessage(USER_DIALOG_SUCEFULL);
                     }
                 });
@@ -274,11 +276,6 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     }
 
 
-    /**событие загрузки занятий с сервера*/
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetUserFromServer(GetUserFromServer event) {
-        restartAdapter();
-    }
 
     public void restartAdapter(){
         mViewPager.setAdapter(mSectionsPagerAdapter);

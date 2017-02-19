@@ -41,7 +41,10 @@
             android:value="739887b5512ab51da275ee3958469e677b4a8fcd" />
 
 
-
+        <service
+            android:name=".architecture.widget.MyService"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
+        </service>
         <receiver android:name=".architecture.widget.MySchedule">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

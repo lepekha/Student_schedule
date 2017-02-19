@@ -88,26 +88,7 @@ public class PresenterBaseImpl implements PresenterBase {
     @StringRes(R.string.baseActivity_setSchedule_compl)
     String SET_SCHEDULE_COMPL;
 
-    @StringRes(R.string.baseActivity_dayOfWeek_monday)
-    String MONDAY;
 
-    @StringRes(R.string.baseActivity_dayOfWeek_tuesday)
-    String TUESDAY;
-
-    @StringRes(R.string.baseActivity_dayOfWeek_wednesday)
-    String WEDNESDAY;
-
-    @StringRes(R.string.baseActivity_dayOfWeek_thursday)
-    String THURSDAY;
-
-    @StringRes(R.string.baseActivity_dayOfWeek_friday)
-    String FRIDAY;
-
-    @StringRes(R.string.baseActivity_dayOfWeek_saturday)
-    String SATURDAY;
-
-    @StringRes(R.string.baseActivity_dayOfWeek_sunday)
-    String SUNDAY;
 
     @Bean(PresenterFragmentScheduleImpl.class)
     PresenterFragmentSchedule presenterFragmentSchedule;
@@ -397,24 +378,25 @@ public class PresenterBaseImpl implements PresenterBase {
     }
 
     @Override
-    public String getWeekName(int DayOfWeek) {
+    public int getWeekName(int DayOfWeek) {
 
-        /*switch (DayOfWeek) {
+        switch (DayOfWeek) {
             case 0:
-                return MONDAY;
+                return R.string.baseActivity_dayOfWeek_monday;
             case 1:
-                return TUESDAY;
+                return R.string.baseActivity_dayOfWeek_tuesday;
             case 2:
-                return WEDNESDAY;
+                return R.string.baseActivity_dayOfWeek_wednesday;
             case 3:
-                return THURSDAY;
+                return R.string.baseActivity_dayOfWeek_thursday;
             case 4:
-                return FRIDAY;
+                return R.string.baseActivity_dayOfWeek_friday;
             case 5:
-                return SATURDAY;
+                return R.string.baseActivity_dayOfWeek_saturday;
             case 6:
-                return SUNDAY;
-        }*/
-        return "sdg";
+                return R.string.baseActivity_dayOfWeek_sunday;
+            default:
+                return R.string.baseActivity_dayOfWeek_monday;
+        }
     }
 }
