@@ -88,6 +88,27 @@ public class PresenterBaseImpl implements PresenterBase {
     @StringRes(R.string.baseActivity_setSchedule_compl)
     String SET_SCHEDULE_COMPL;
 
+    @StringRes(R.string.baseActivity_dayOfWeek_monday)
+    String MONDAY;
+
+    @StringRes(R.string.baseActivity_dayOfWeek_tuesday)
+    String TUESDAY;
+
+    @StringRes(R.string.baseActivity_dayOfWeek_wednesday)
+    String WEDNESDAY;
+
+    @StringRes(R.string.baseActivity_dayOfWeek_thursday)
+    String THURSDAY;
+
+    @StringRes(R.string.baseActivity_dayOfWeek_friday)
+    String FRIDAY;
+
+    @StringRes(R.string.baseActivity_dayOfWeek_saturday)
+    String SATURDAY;
+
+    @StringRes(R.string.baseActivity_dayOfWeek_sunday)
+    String SUNDAY;
+
     @Bean(PresenterFragmentScheduleImpl.class)
     PresenterFragmentSchedule presenterFragmentSchedule;
 
@@ -373,5 +394,27 @@ public class PresenterBaseImpl implements PresenterBase {
             default:
                 return 1;
         }
+    }
+
+    @Override
+    public String getWeekName(int DayOfWeek) {
+
+        /*switch (DayOfWeek) {
+            case 0:
+                return MONDAY;
+            case 1:
+                return TUESDAY;
+            case 2:
+                return WEDNESDAY;
+            case 3:
+                return THURSDAY;
+            case 4:
+                return FRIDAY;
+            case 5:
+                return SATURDAY;
+            case 6:
+                return SUNDAY;
+        }*/
+        return "sdg";
     }
 }

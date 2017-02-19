@@ -45,6 +45,7 @@ import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
 import ruslep.student_schedule.architecture.view.CustomAdapters.CustomMyFragmentAdapter;
+import ruslep.student_schedule.architecture.view.CustomAdapters.CustomUserFragmentAdapter;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Edit_schedule_dialog_;
 
@@ -269,6 +270,10 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
         }
         return ls;
     }
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

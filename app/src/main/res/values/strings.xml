@@ -104,5 +104,10 @@
     <string name="setting_politics">Политика конфиденциальности</string>
     <string name="setting_shudow">Скрыть расписание от друзей</string>
 
+    <!--Widget-->
+    <string name="widget_item_room">Аудитория:</string>
+    <string name="widget_item_time">Время:</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

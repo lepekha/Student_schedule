@@ -173,8 +173,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         currentPage = presenterBase.getDayOfWeek();
+        preferens.setDay(currentPage);
         mViewPager.setCurrentItem(presenterBase.getDayOfWeek());
-
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -212,7 +212,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 finish();
             }
         });
-        restartArapter();
+
+        //restartArapter();
     }
 
 
