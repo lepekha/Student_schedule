@@ -9,17 +9,25 @@ package ruslep.student_schedule.architecture.widget;
  */
 
 import android.appwidget.AppWidgetManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
-import ruslep.student_schedule.R;
 
-public class MyFactory implements RemoteViewsFactory {
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EBean;
+
+import ruslep.student_schedule.R;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
+
+
+public class MyFactory extends BroadcastReceiver implements RemoteViewsFactory {
 
     Context context;
     int widgetID;
+
 
 
     MyFactory(Context ctx, Intent intent) {
@@ -93,4 +101,8 @@ public class MyFactory implements RemoteViewsFactory {
 
     }
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+    }
 }

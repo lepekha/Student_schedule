@@ -15,39 +15,52 @@ import android.widget.RemoteViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.EProvider;
+import org.androidannotations.annotations.EView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
+import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl_;
+import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
+import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
+import ruslep.student_schedule.architecture.presenter.PresenterWidgetImpl;
+import ruslep.student_schedule.architecture.view.BaseActivityImpl;
 
 /**
  * Implementation of App Widget functionality.
  */
-@EBean(scope = EBean.Scope.Singleton)
+
 public class MySchedule extends AppWidgetProvider {
 
     PresenterBaseImpl presenterBase = new PresenterBaseImpl();
-    int move = 0;
+    SharedPreferences sPref;
+
+    ArrayList<Subject> subjects;
+
+
 
     final static String ACTION_CHANGE_LEFT = "ruslep.student_schedule.widget.left";
     final static String ACTION_CHANGE_RIGHT = "ruslep.student_schedule.widget.right";
+    final static String ACTION_CHANGE_DATA = "ruslep.student_schedule.widget.getData";
+
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                          int appWidgetId) {
 
        // CharSequence widgetText = presenterBase.getWeekName(0);
         // Construct the RemoteViews object
-
+        sPref = context.getSharedPreferences("Preferens", 0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_schedule);
-        views.setTextViewText(R.id.txtWeekName,context.getString(presenterBase.getWeekName(presenterBase.getDayOfWeek() + move)));
-
-
+       // preferens.setWidgetWeek(presenterBase.getDayOfWeek());
+        views.setTextViewText(R.id.txtWeekName,context.getString(presenterBase.getWeekName(sPref.getInt("weekDay",0))));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
-            Log.d("TAG", "TAG1");
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,R.layout.widget_schedule);
             setList(views, context, appWidgetId);
 
@@ -67,6 +80,8 @@ public class MySchedule extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
+        sPref = context.getSharedPreferences("Preferens", 0);
+        sPref.edit().putInt("weekDay",presenterBase.getDayOfWeek()).commit();
         // Enter relevant functionality for when the first widget is created
     }
 
@@ -78,18 +93,26 @@ public class MySchedule extends AppWidgetProvider {
     void setUpdateTV(RemoteViews rv, Context context, int appWidgetId) {
 
         // нажатие left
-        Intent countIntentLeft = new Intent(context, MySchedule.class);
+        Intent countIntentLeft = new Intent(context, MyWidgetService_.class);
         countIntentLeft.setAction(ACTION_CHANGE_LEFT);
-        countIntentLeft.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        PendingIntent pIntentLeft  = PendingIntent.getBroadcast(context, appWidgetId, countIntentLeft, 0);
+        countIntentLeft.putExtra("id", appWidgetId);
+        PendingIntent pIntentLeft  = PendingIntent.getService(context, 0, countIntentLeft, 0);
         rv.setOnClickPendingIntent(R.id.btnLeft, pIntentLeft);
 
         // нажатие right
-        Intent countIntentRight = new Intent(context, MySchedule.class);
+        Intent countIntentRight = new Intent(context, MyWidgetService_.class);
         countIntentRight.setAction(ACTION_CHANGE_RIGHT);
-        countIntentRight.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        PendingIntent pIntentRight  = PendingIntent.getBroadcast(context, appWidgetId, countIntentRight, 0);
+        countIntentRight.putExtra("id", appWidgetId);
+        PendingIntent pIntentRight  = PendingIntent.getService(context, 0, countIntentRight, 0);
         rv.setOnClickPendingIntent(R.id.btnRight, pIntentRight);
+
+        // нажатие right
+        Intent countIntentData = new Intent(context, MyWidgetService_.class);
+        countIntentRight.setAction(ACTION_CHANGE_DATA);
+        countIntentRight.putExtra("id", appWidgetId);
+        PendingIntent pIntentData  = PendingIntent.getService(context, 0, countIntentData, 0);
+        rv.setOnClickPendingIntent(R.id.btnRight, pIntentData);
+
     }
 
     void setList(RemoteViews rv, Context context, int appWidgetId) {
@@ -108,48 +131,44 @@ public class MySchedule extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-
+        sPref = context.getSharedPreferences("Preferens", 0);
         ///left click
         if (intent.getAction().equalsIgnoreCase(ACTION_CHANGE_LEFT)) {
 
-            // извлекаем ID экземпляра
-            int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                mAppWidgetId = extras.getInt(
-                        AppWidgetManager.EXTRA_APPWIDGET_ID,
-                        AppWidgetManager.INVALID_APPWIDGET_ID);
-
+                sPref.edit().putInt("weekDay",sPref.getInt("weekDay",0) - 1).commit();
+                if(sPref.getInt("weekDay",0) < 0){
+                    sPref.edit().putInt("weekDay",6).commit();
+                }
+            updateAppWidget(context, AppWidgetManager.getInstance(context),
+                    intent.getIntExtra("idd",0));
             }
-            if (mAppWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
 
-               move--;
-                // Обновляем виджет
-                updateAppWidget(context, AppWidgetManager.getInstance(context),
-                        mAppWidgetId);
-            }
-        }
 
         ///right click
         if (intent.getAction().equalsIgnoreCase(ACTION_CHANGE_RIGHT)) {
 
-            // извлекаем ID экземпляра
-            int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                mAppWidgetId = extras.getInt(
-                        AppWidgetManager.EXTRA_APPWIDGET_ID,
-                        AppWidgetManager.INVALID_APPWIDGET_ID);
 
+            sPref.edit().putInt("weekDay",sPref.getInt("weekDay",0) + 1).commit();
+            if(sPref.getInt("weekDay",0) > 6){
+                sPref.edit().putInt("weekDay",0).commit();
             }
-            if (mAppWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
-
-                move++;
+            Log.e("intentService","RIGHT"+intent.getIntExtra("idd",0));
                 // Обновляем виджет
                 updateAppWidget(context, AppWidgetManager.getInstance(context),
-                        mAppWidgetId);
+                        intent.getIntExtra("idd",0));
             }
+
+
+        if (intent.getAction().equalsIgnoreCase(ACTION_CHANGE_DATA)) {
+
+
+
+            Log.e("intentService","RIGHT"+intent.getSerializableExtra("data"));
+            // Обновляем виджет
+            updateAppWidget(context, AppWidgetManager.getInstance(context),
+                    intent.getIntExtra("idd",0));
         }
+
     }
 
 }

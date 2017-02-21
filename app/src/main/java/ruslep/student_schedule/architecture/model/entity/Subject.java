@@ -3,6 +3,7 @@ package ruslep.student_schedule.architecture.model.entity;
 
 import org.androidannotations.annotations.EBean;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import io.realm.RealmObject;
@@ -12,7 +13,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by Ruslan on 11.08.2016.
  */
 @EBean
-public class Subject extends RealmObject implements Comparable<Subject>  {
+public class Subject extends RealmObject implements Comparable<Subject>, Serializable {
     @PrimaryKey
     private int id;
     private String numberSubject;

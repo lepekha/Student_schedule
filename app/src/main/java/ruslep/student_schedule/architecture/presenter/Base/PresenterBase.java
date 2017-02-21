@@ -29,5 +29,6 @@ public interface PresenterBase {
     int getDayOfWeek();
     int getWeekName(int DayOfWeek);
     String getTextTuypeOfWeek();
-
+    void setWidgetDay(int day);
+    int getWidgetDay();
 }

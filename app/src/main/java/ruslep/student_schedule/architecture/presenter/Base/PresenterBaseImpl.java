@@ -399,4 +399,14 @@ public class PresenterBaseImpl implements PresenterBase {
                 return R.string.baseActivity_dayOfWeek_monday;
         }
     }
+
+    @Override
+    public void setWidgetDay(int day) {
+        preferens.setWidgetWeek(day);
+    }
+
+    @Override
+    public int getWidgetDay() {
+        return preferens.getWidgetWeek();
+    }
 }

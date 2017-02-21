@@ -52,4 +52,7 @@ public interface MyPrefs {
     @DefaultInt(0)
     int currentTheme();
 
+    @DefaultInt(0)
+    int widgetWeek();
+
 }

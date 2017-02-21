@@ -56,6 +56,8 @@ import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog_;
 import ruslep.student_schedule.architecture.view.FragmentMySchedule.FragmentScheduleImpl_;
+import ruslep.student_schedule.architecture.widget.MyWidgetService;
+import ruslep.student_schedule.architecture.widget.MyWidgetService_;
 
 @EActivity
 public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,NavigationView.OnNavigationItemSelectedListener {
@@ -209,7 +211,9 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         btnQuite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //finish();
+                Intent intent = new Intent(BaseActivityImpl.this, MyWidgetService_.class);
+                startService(intent);
             }
         });
 

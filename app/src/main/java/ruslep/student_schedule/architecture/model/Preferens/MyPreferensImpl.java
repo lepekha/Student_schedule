@@ -128,4 +128,14 @@ public class MyPreferensImpl implements MyPreferens {
     public int getUserDay() {
         return myPrefs.userDay().get();
     }
+
+    @Override
+    public void setWidgetWeek(int day) {
+        myPrefs.widgetWeek().put(day);
+    }
+
+    @Override
+    public int getWidgetWeek() {
+        return myPrefs.widgetWeek().get();
+    }
 }

@@ -36,4 +36,7 @@ public interface MyPreferens {
 
     void setCurrentTheme(int theme);
     int getCurrentTheme();
+
+    void setWidgetWeek(int day);
+    int getWidgetWeek();
 }
