@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import org.androidannotations.annotations.EBean;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
 import io.realm.RealmObject;
@@ -15,9 +14,9 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Ruslan on 11.08.2016.
  */
-@EBean
-public class Subject extends RealmObject implements Comparable<Subject> {
-    @PrimaryKey
+
+public class SubjectParcelable implements Comparable<SubjectParcelable>,Parcelable {
+
     private int id;
     private String numberSubject;
     private String typeSubject;
@@ -141,7 +140,7 @@ public class Subject extends RealmObject implements Comparable<Subject> {
 
 
     public static Builder newBuilder() {
-        return new Subject().new Builder();
+        return new SubjectParcelable().new Builder();
     }
 
 
@@ -152,81 +151,129 @@ public class Subject extends RealmObject implements Comparable<Subject> {
         }
 
         public Builder setId(int id) {
-            Subject.this.id = id;
+            SubjectParcelable.this.id = id;
             return this;
         }
 
         public Builder setSubjectNumber(String numberSubject) {
-            Subject.this.numberSubject = numberSubject;
+            SubjectParcelable.this.numberSubject = numberSubject;
             return this;
         }
 
         public Builder setTypeSubject(String typeSubject) {
-            Subject.this.typeSubject = typeSubject;
+            SubjectParcelable.this.typeSubject = typeSubject;
             return this;
         }
 
         public Builder setNameSubject(String nameSubject) {
-            Subject.this.nameSubject = nameSubject;
+            SubjectParcelable.this.nameSubject = nameSubject;
             return this;
         }
 
         public Builder setTimeStartSubject(String timeStartSubject) {
-            Subject.this.timeStartSubject = timeStartSubject;
+            SubjectParcelable.this.timeStartSubject = timeStartSubject;
             return this;
         }
         public Builder setTimeEndSubject(String timeEndSubject) {
-            Subject.this.timeEndSubject = timeEndSubject;
+            SubjectParcelable.this.timeEndSubject = timeEndSubject;
             return this;
         }
 
         public Builder setRoomSubject(String roomSubject) {
-            Subject.this.roomSubject = roomSubject;
+            SubjectParcelable.this.roomSubject = roomSubject;
             return this;
         }
 
         public Builder setTeacherSubject(String teacherSubject) {
-            Subject.this.teacherSubject = teacherSubject;
+            SubjectParcelable.this.teacherSubject = teacherSubject;
             return this;
         }
 
         public Builder setOrderSubject(int orderSubject) {
-            Subject.this.orderSubject = orderSubject;
+            SubjectParcelable.this.orderSubject = orderSubject;
             return this;
         }
 
         public Builder setDayOfWeek(int dayOfWeek) {
-            Subject.this.dayOfWeek = dayOfWeek;
+            SubjectParcelable.this.dayOfWeek = dayOfWeek;
             return this;
         }
 
         public Builder setTypeOfWeek(String typeOfWeek) {
-            Subject.this.typeOfWeek = typeOfWeek;
+            SubjectParcelable.this.typeOfWeek = typeOfWeek;
             return this;
         }
 
-        public Subject build() {
-            return Subject.this;
+        public SubjectParcelable build() {
+            return SubjectParcelable.this;
         }
 
     }
 
     @Override
-    public int compareTo(Subject subject) {
+    public int compareTo(SubjectParcelable subject) {
         return Comparators.NUMBER.compare(this, subject);
     }
 
     public static class Comparators {
 
-        public static Comparator<Subject> NUMBER = new Comparator<Subject>() {
+        public static Comparator<SubjectParcelable> NUMBER = new Comparator<SubjectParcelable>() {
             @Override
-            public int compare(Subject o1, Subject o2) {
+            public int compare(SubjectParcelable o1, SubjectParcelable o2) {
                 return Integer.valueOf(o1.numberSubject).compareTo(Integer.valueOf(o2.numberSubject));
             }
         };
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.numberSubject);
+        dest.writeString(this.typeSubject);
+        dest.writeString(this.nameSubject);
+        dest.writeString(this.timeStartSubject);
+        dest.writeString(this.timeEndSubject);
+        dest.writeString(this.roomSubject);
+        dest.writeString(this.teacherSubject);
+        dest.writeInt(this.orderSubject);
+        dest.writeInt(this.dayOfWeek);
+        dest.writeString(this.typeOfWeek);
+    }
+
+    public SubjectParcelable() {
+    }
+
+    protected SubjectParcelable(Parcel in) {
+        this.id = in.readInt();
+        this.numberSubject = in.readString();
+        this.typeSubject = in.readString();
+        this.nameSubject = in.readString();
+        this.timeStartSubject = in.readString();
+        this.timeEndSubject = in.readString();
+        this.roomSubject = in.readString();
+        this.teacherSubject = in.readString();
+        this.orderSubject = in.readInt();
+        this.dayOfWeek = in.readInt();
+        this.typeOfWeek = in.readString();
+    }
+
+    public static final Parcelable.Creator<SubjectParcelable> CREATOR = new Parcelable.Creator<SubjectParcelable>() {
+        @Override
+        public SubjectParcelable createFromParcel(Parcel source) {
+            return new SubjectParcelable(source);
+        }
+
+        @Override
+        public SubjectParcelable[] newArray(int size) {
+            return new SubjectParcelable[size];
+        }
+    };
 }
 
 
