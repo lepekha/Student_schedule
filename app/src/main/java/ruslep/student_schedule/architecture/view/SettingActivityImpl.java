@@ -1,5 +1,6 @@
 package ruslep.student_schedule.architecture.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,6 +31,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import ruslep.student_schedule.R;
@@ -73,11 +76,41 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
     @ViewById
     Button btnGreen;
 
+    @ViewById
+    Button btnExit;
+
+    @ViewById
+    Button btnDelete;
+
     @Bean
     PresenterBaseImpl presenterBase;
 
     @Bean(UseThemeImpl.class)
     UseTheme useTheme;
+
+    @StringRes(R.string.setting_dialog_exit)
+    String SETTING_DIALOG_EXIT;
+
+    @StringRes(R.string.setting_dialog_delete)
+    String SETTING_DIALOG_DELETE;
+
+    @StringRes(R.string.setting_dialog_OK)
+    String SETTING_DIALOG_OK;
+
+    @StringRes(R.string.setting_dialog_delete_ok)
+    String SETTING_DIALOG_DELETE_OK;
+
+    @StringRes(R.string.setting_dialog_NO)
+    String SETTING_DIALOG_NO;
+
+    @StringRes(R.string.setting_dialog_enter)
+    String SETTING_DIALOG_ENTER;
+
+    @StringRes(R.string.setting_auth)
+    String SETTING_AUTH;
+
+
+
 
     private static final int BLUE = 0;
     private static final int RED = 1;
@@ -129,6 +162,8 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
         btnGrey.setOnClickListener(this);
         btnPurple.setOnClickListener(this);
         btnBlue.setOnClickListener(this);
+        btnExit.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
 
     }
 
@@ -142,6 +177,7 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     @Override
     public void onClick(View view) {
@@ -175,6 +211,38 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                 preferens.setReCreateMainActivity(true);
                 useTheme.setTheme(PURPLE);
                 recreate();
+                break;
+            case R.id.btnExit:
+                /** диалог подтверждения выхода с аккаунта*/
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(this);
+                builder.setMessage(SETTING_DIALOG_EXIT);
+                builder.setPositiveButton(SETTING_DIALOG_OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        preferens.setAuth(false);
+                        preferens.setRegistrations(false);
+                        preferens.setPhoneNumber(SETTING_AUTH);
+                        preferens.setReCreateMainActivity(true);
+                    }
+                });
+                builder.setNegativeButton(SETTING_DIALOG_NO, null);
+                builder.show();
+                break;
+            case R.id.btnDelete:
+                /** диалог подтверждения удаления всех данных*/
+                AlertDialog.Builder builder2 =
+                        new AlertDialog.Builder(this);
+                builder2.setMessage(SETTING_DIALOG_DELETE);
+                builder2.setPositiveButton(SETTING_DIALOG_DELETE_OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenterBase.deletAllFromDB();
+                        preferens.setReCreateMainActivity(true);
+                    }
+                });
+                builder2.setNegativeButton(SETTING_DIALOG_NO, null);
+                builder2.show();
                 break;
             default:
                 break;

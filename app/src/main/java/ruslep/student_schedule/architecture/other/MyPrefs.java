@@ -3,6 +3,7 @@ package ruslep.student_schedule.architecture.other;
 import org.androidannotations.annotations.sharedpreferences.DefaultBoolean;
 import org.androidannotations.annotations.sharedpreferences.DefaultInt;
 import org.androidannotations.annotations.sharedpreferences.DefaultLong;
+import org.androidannotations.annotations.sharedpreferences.DefaultRes;
 import org.androidannotations.annotations.sharedpreferences.DefaultString;
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
@@ -22,7 +23,7 @@ public interface MyPrefs {
     int idQuickEnter();
 
 
-    @DefaultString("Чисельник")
+    @DefaultRes(R.string.baseActivity_typeOfWeek_Cheslitel)
     String typeOfWeek();
 
     @DefaultInt(0)
@@ -43,10 +44,10 @@ public interface MyPrefs {
     @DefaultBoolean(false)
     boolean flagRegistration();
 
-    @DefaultString("Вы не авторизированы")
+    @DefaultRes(R.string.setting_auth)
     String MyPhoneNumber();
 
-    @DefaultString("Последнее обновление: ")
+    @DefaultRes(R.string.contacts_last_update)
     String ContactsLastUpdate();
 
     @DefaultInt(0)

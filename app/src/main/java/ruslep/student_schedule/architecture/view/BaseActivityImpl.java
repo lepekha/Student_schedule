@@ -31,6 +31,7 @@ import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+import com.squareup.leakcanary.LeakCanary;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 
@@ -39,6 +40,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.ArrayList;
@@ -88,6 +90,9 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @ViewById(R.id.txtTypeOfWeek)
     TextView txtTypeOfWeek;
 
+    @StringRes(R.string.baseActivity_Schedule_needAuth)
+    String SCHEDULE_NEED_AUTH;
+
     @ViewById(R.id.progressBar)
     me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
 
@@ -136,7 +141,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         setSupportActionBar(toolbar);
         digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
         //digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
-        Log.e("eeerrr",presenterBase.getDayOfWeek()+"");
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
@@ -151,6 +155,9 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 showMessage(getString(R.string.baseActivity_auth_error));
             }
         });
+
+
+
 
 
 
@@ -211,13 +218,10 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         btnQuite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //finish();
-                Intent intent = new Intent(BaseActivityImpl.this, MyWidgetService_.class);
-                startService(intent);
+                finish();
             }
         });
 
-        //restartArapter();
     }
 
 
@@ -227,6 +231,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         Add_schedule_dialog add_schedule_dialog = Add_schedule_dialog_.builder()
                 .build();
         add_schedule_dialog.show(getSupportFragmentManager(), ADD_DIALOG_TAG);
+
     }
 
 
@@ -322,8 +327,13 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 presenterBase.registerUser(false,presenterBase.getMyPhone());
                 break;
             case R.id.nav_friends:
-                if (checkPermissions()){
-                    startActivity(new Intent(this, ContactsActivityImpl_.class));
+                if(preferens.getAuth())
+                {
+                    if (checkPermissions()){
+                        startActivity(new Intent(this, ContactsActivityImpl_.class));
+                    }
+                }else{
+                    showMessage(SCHEDULE_NEED_AUTH);
                 }
                 break;
             case R.id.nav_review:
@@ -375,11 +385,10 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     @Override
     public void setDrawerHeaderPhoneNumber(String phoneNumber) {
-        View hView =  navigationView.getHeaderView(0);
-        TextView txtPhoneNumber = (TextView)hView.findViewById(R.id.txtPhoneNumber);
+        View hView = navigationView.getHeaderView(0);
+        TextView txtPhoneNumber = (TextView) hView.findViewById(R.id.txtPhoneNumber);
         txtPhoneNumber.setText(phoneNumber);
     }
-
 
     public boolean checkPermissions() {
         int result;

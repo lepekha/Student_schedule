@@ -83,7 +83,7 @@ public class Add_schedule_dialog extends DialogFragment {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
@@ -94,8 +94,9 @@ public class Add_schedule_dialog extends DialogFragment {
 
     @Override
     public void onResume() {
-        super.onResume();
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        super.onResume();
+
     }
 
     @Override
@@ -104,6 +105,7 @@ public class Add_schedule_dialog extends DialogFragment {
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(null);
+
         return view;
     }
 

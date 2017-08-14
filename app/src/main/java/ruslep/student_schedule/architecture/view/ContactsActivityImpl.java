@@ -89,6 +89,7 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     public void showHolderView() {
         list.setVisibility(View.GONE);
         holderView.setVisibility(View.VISIBLE);
+
     }
 
     @Override

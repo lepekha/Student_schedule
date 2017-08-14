@@ -14,6 +14,9 @@
 
     </style>
 
+
+
+
     <style name="AppTheme_Red" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#F44336</item>

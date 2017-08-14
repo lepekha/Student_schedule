@@ -33,6 +33,7 @@
     <string name="baseActivity_registerSchedule_error">Ошибка регистрации.</string>
 
 
+
     <!--Dialog add-->
     <string name="dialogAdd_timeStart">Начало</string>
     <string name="dialogAdd_timeEnd">Конец</string>
@@ -64,6 +65,7 @@
     <string name="fragmentSchedule_alertDialog_message">Вы действительно хотите удалить это занятие?</string>
     <string name="fragmentSchedule_alertDialog_OK">OK</string>
     <string name="fragmentSchedule_alertDialog_Cancel">ОТМЕНА</string>
+    <string name="fragmentSchedule_no_lessons">Нет\nзанятий</string>
 
     <!--Drawer menu-->
     <string name="navigation_drawer_open">Открыть панель навигации</string>
@@ -90,6 +92,7 @@
 
     <!--Contacts-->
     <string name="contacts_last_update">Последнее обновление: </string>
+    <string name="contacts_enter">Открыть</string>
 
     <!--User-->
     <string name="user_dialog_download">Вы действительно хотите заменить свое расписание?</string>
@@ -104,6 +107,15 @@
     <string name="setting_mainColor">Выберите основной цвет программы:</string>
     <string name="setting_politics">Политика конфиденциальности</string>
     <string name="setting_shudow">Скрыть расписание от друзей</string>
+    <string name="setting_button_exit">Выйти</string>
+    <string name="setting_button_delete">Удалить все расписание</string>
+    <string name="setting_dialog_exit">Вы действительно хотите выйти со своего аккаунта?</string>
+    <string name="setting_dialog_delete">Вы действительно хотите удалить все расписание?</string>
+    <string name="setting_dialog_enter">Вы вышли с аккаунта.</string>
+    <string name="setting_dialog_OK">Выйти</string>
+    <string name="setting_dialog_delete_ok">Удалить</string>
+    <string name="setting_dialog_NO">Отмена</string>
+    <string name="setting_auth">Нужна авторизация</string>
 
     <!--Widget-->
     <string name="widget_item_room">Аудитория:</string>

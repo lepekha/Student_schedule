@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         private TextView txtName;
         private ImageView imgContactsName;
         private LinearLayout main_content;
+        private Button btnEnter;
 
 
 
@@ -48,8 +50,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             txtName = (TextView) holderView.findViewById(R.id.txtContactName);
             imgContactsName = (ImageView) holderView.findViewById(R.id.imgContactsName);
             main_content = (LinearLayout) holderView.findViewById(R.id.main_content);
+            btnEnter = (Button) holderView.findViewById(R.id.btnEnter);
 
             main_content.setOnClickListener(this);
+            btnEnter.setOnClickListener(this);
 
         }
 
