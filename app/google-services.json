@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "568958957178",
+    "firebase_url": "https://alluniver-a7c4a.firebaseio.com",
+    "project_id": "alluniver-a7c4a",
+    "storage_bucket": "alluniver-a7c4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568958957178:android:0a4fb9e8a6015692",
+        "android_client_info": {
+          "package_name": "ruslep.student_schedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568958957178-duumu1bp1qhqibfpknbjpbulo197nnls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ruslep.student_schedule",
+            "certificate_hash": "5cace8355a4e37b9b7140196de3737129029dd54"
+          }
+        },
+        {
+          "client_id": "568958957178-8fmbo3c2r4jpj7bgeu07b8h9gvrn2pg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFyxp4P_hT8VHntvD3rXMAYRtjRN2PQ8A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568958957178-8fmbo3c2r4jpj7bgeu07b8h9gvrn2pg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -271,11 +271,11 @@
                         android:gravity="center">
 
                         <Spinner
+                            android:id="@+id/spTypeOfWeek"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:entries="@array/dialogAdd_typeOfWeek"
-                            android:id="@+id/spTypeOfWeek"
-                            android:spinnerMode="dropdown" />
+                            android:spinnerMode="dialog" />
                     </LinearLayout>
 
                 </LinearLayout>

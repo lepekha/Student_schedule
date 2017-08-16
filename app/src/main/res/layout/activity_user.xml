@@ -85,11 +85,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="@color/background" />
 
-    <com.digits.sdk.android.DigitsAuthButton
-        android:id="@+id/auth_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+
 
 </android.support.design.widget.CoordinatorLayout>
 <android.support.design.widget.NavigationView

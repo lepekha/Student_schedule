@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -26,14 +27,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.digits.sdk.android.AuthCallback;
-import com.digits.sdk.android.Digits;
-import com.digits.sdk.android.DigitsAuthButton;
-import com.digits.sdk.android.DigitsException;
-import com.digits.sdk.android.DigitsSession;
-import com.squareup.leakcanary.LeakCanary;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterCore;
+
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.ResultCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Bean;
@@ -44,9 +46,9 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import io.fabric.sdk.android.Fabric;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
@@ -79,7 +81,8 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     private TabLayout tabLayout;
 
-    private DigitsAuthButton digitsButton;
+    private static final int RC_SIGN_IN = 123;
+
 
     @ViewById(R.id.fab)
     FloatingActionButton floatingActionButton;
@@ -108,6 +111,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
     private int currentPage;
 
+
     @Bean(UseThemeImpl.class)
     UseTheme useTheme;
 
@@ -133,20 +137,27 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     protected void onCreate(Bundle savedInstanceState) {
         this.setTheme(useTheme.getTheme());
         super.onCreate(savedInstanceState);
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Digits.Builder digitsBuilder = new Digits.Builder().withTheme(android.R.style.Theme_Material);
-        Fabric.with(this, new TwitterCore(authConfig), digitsBuilder.build());
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
-        //digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
+        FirebaseApp.initializeApp(this);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            // already signed in
+        } else {
+            // not signed in
+        }
+        /**twiter digits*/
+       /* //digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
                 if(presenterBase.auth(phoneNumber)){
                     presenterBase.hideAuthBtn();
                     presenterBase.setDrawerHeaderPhone();
+                    Digits.clearActiveSession();
                 }
             }
 
@@ -155,8 +166,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 showMessage(getString(R.string.baseActivity_auth_error));
             }
         });
-
-
+*/
 
 
 
@@ -309,6 +319,50 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         }
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+
+            // Successfully signed in
+            if (resultCode == ResultCodes.OK) {
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(presenterBase.auth(response.getPhoneNumber())){
+                                    presenterBase.hideAuthBtn();
+                                    presenterBase.setDrawerHeaderPhone();
+                                    showMessage("Вы зарегистрировались");
+                                }
+
+                            }
+                        });
+                return;
+            } else {
+                // Sign in failed
+                if (response == null) {
+                    // User pressed back button
+                    showMessage("Регистрация отменена");
+                    return;
+                }
+
+                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    showMessage("Ошибка соединения с интернетом");
+                    return;
+                }
+
+                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                    showMessage(getString(R.string.baseActivity_auth_error));
+                    return;
+                }
+            }
+
+            showMessage("хз что это");
+        }
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -318,7 +372,17 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
 
         switch (item.getItemId()){
             case R.id.nav_enter:
-                digitsButton.callOnClick();
+               // digitsButton.callOnClick();
+
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setTheme(useTheme.getTheme())
+                                .setAvailableProviders(
+                                        Arrays.asList(
+                                                new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()))
+                                .build(),
+                        RC_SIGN_IN);
                 break;
             case R.id.nav_save:
                 presenterBase.registerUser(true,presenterBase.getMyPhone());
@@ -426,6 +490,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(currentPage);
     }
+
 
 }
 

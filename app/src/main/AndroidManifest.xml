@@ -36,31 +36,31 @@
             android:name=".architecture.view.ContactsActivityImpl_"
             android:label="Мои контакты" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="739887b5512ab51da275ee3958469e677b4a8fcd" />
-<!--
-        <service
-            android:name=".architecture.widget.MyService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"></service>
+        <!-- <meta-data
+             android:name="io.fabric.ApiKey"
+             android:value="739887b5512ab51da275ee3958469e677b4a8fcd" />-->
+ <!--
+         <service
+             android:name=".architecture.widget.MyService"
+             android:permission="android.permission.BIND_REMOTEVIEWS"></service>
 
 
-        <receiver android:name=".architecture.widget.MySchedule">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="ruslep.student_schedule.widget.right" />
-                <action android:name="ruslep.student_schedule.widget.left" />
-                <action android:name="ruslep.student_schedule.widget.getData" />
-            </intent-filter>
+         <receiver android:name=".architecture.widget.MySchedule">
+             <intent-filter>
+                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                 <action android:name="ruslep.student_schedule.widget.right" />
+                 <action android:name="ruslep.student_schedule.widget.left" />
+                 <action android:name="ruslep.student_schedule.widget.getData" />
+             </intent-filter>
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/my_schedule_info" />
-        </receiver>
+             <meta-data
+                 android:name="android.appwidget.provider"
+                 android:resource="@xml/my_schedule_info" />
+         </receiver>
 
-        <service
-            android:name=".architecture.widget.MyWidgetService_"
-            android:exported="false"></service>-->
+         <service
+             android:name=".architecture.widget.MyWidgetService_"
+             android:exported="false"></service>-->
     </application>
 
 </manifest>
