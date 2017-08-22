@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+
+    android:orientation="vertical"
+    android:id="@+id/main_conten"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
@@ -28,8 +34,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:layout_gravity="right"
             android:gravity="right">
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-                style="@style/Widget.MaterialProgressBar.ProgressBar"
+            <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBar"
@@ -103,15 +108,15 @@
         android:layout_height="wrap_content">
 
         <Switch
-            android:text="@string/setting_shudow"
+            android:id="@+id/schHideSchedule"
             android:layout_width="match_parent"
-            android:textSize="18sp"
             android:layout_height="wrap_content"
-            android:id="@+id/switch3"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:paddingLeft="19dp"
             android:paddingRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:text="@string/setting_shudow"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
@@ -235,7 +240,7 @@
             android:text="@string/setting_politics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/btnPrivate"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textStyle="normal|bold" />
@@ -259,6 +264,23 @@
             android:layout_alignParentEnd="true"
             android:textStyle="normal|bold" />
     </RelativeLayout>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal|center">
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:text="@string/setting_button_deleteAuth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDeleteAuth"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textStyle="normal|bold" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -277,3 +299,4 @@
             android:textStyle="normal|bold" />
     </RelativeLayout>
 </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

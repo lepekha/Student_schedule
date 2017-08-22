@@ -76,7 +76,7 @@
                             android:layout_weight="85"
                             android:tint="@color/accent"
                             android:background="#00000000"
-                            android:src="@drawable/ic_live_help_black_24px" />
+                            android:src="@drawable/ic_content_paste_white_24px" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -112,7 +112,7 @@
                             android:tag="2"
                             android:layout_weight="85"
                             android:background="#00000000"
-                            android:src="@drawable/ic_live_help_black_24px"
+                            android:src="@drawable/ic_content_paste_white_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>
@@ -150,7 +150,7 @@
                             android:tag="3"
                             android:layout_weight="85"
                             android:background="#00000000"
-                            android:src="@drawable/ic_live_help_black_24px"
+                            android:src="@drawable/ic_content_paste_white_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>
@@ -188,7 +188,7 @@
                             android:tag="4"
                             android:layout_weight="85"
                             android:background="#00000000"
-                            android:src="@drawable/ic_live_help_black_24px"
+                            android:src="@drawable/ic_content_paste_white_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent" />
                     </LinearLayout>
@@ -243,7 +243,7 @@
                             android:id="@+id/ibtnTime"
                             android:tag="5"
                             android:background="#00000000"
-                            android:src="@drawable/ic_live_help_black_24px"
+                            android:src="@drawable/ic_content_paste_white_24px"
                             style="@style/Widget.AppCompat.Button"
                             android:tint="@color/accent"
                             android:layout_weight="85"/>
@@ -253,29 +253,32 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="@string/dialogAdd_txtTypeOfWeek"
-                        android:id="@+id/txtTypeOfWeek" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="7dp">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center">
+                        android:gravity="left"
+                        android:orientation="horizontal"
+                        android:paddingTop="7dp">
+
+                        <TextView
+                            android:id="@+id/txtTypeOfWeek"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dialogAdd_txtTypeOfWeek"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <Spinner
                             android:id="@+id/spTypeOfWeek"
-                            android:layout_width="wrap_content"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
-                            android:entries="@array/dialogAdd_typeOfWeek"
-                            android:spinnerMode="dialog" />
+                            android:layout_marginLeft="20dp"
+                            android:entries="@array/dialogAdd_typeOfWeek" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -293,27 +296,29 @@
         android:layout_alignParentStart="true">
 
         <Button
+            android:id="@+id/btnCancel"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialogAdd_btn_Cancel"
-            android:id="@+id/btnCancel"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/dialogAdd_btn_Cancel"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/btnAdd"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialogAdd_btn_OK"
-            android:id="@+id/btnAdd"
             android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/dialogAdd_btn_OK"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginRight="8dp" />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

@@ -17,6 +17,7 @@ public interface PresenterBase {
     void hideAuthBtn();
 
     void setSchedule(String phoneMD5);
+    void delete(String phoneMD5);
     void registerUser(boolean whereReturn,String phoneMD5);
     void getSchedule(String phoneMD5);
 

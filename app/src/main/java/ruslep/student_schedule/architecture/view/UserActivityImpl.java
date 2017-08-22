@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.*;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Bean;
@@ -58,7 +59,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
     TextView txtTypeOfWeek;
 
     @ViewById(R.id.progressBar)
-    me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
+    ProgressBar progressBar;
 
     @Bean(MyPreferensImpl.class)
     MyPreferens preferens;
@@ -168,7 +169,7 @@ public class UserActivityImpl extends AppCompatActivity implements UserActivity 
             case R.id.download_subject:
                 /** диалог подтверждения замены своего расписания*/
                 AlertDialog.Builder builder =
-                        new AlertDialog.Builder(this);
+                        new AlertDialog.Builder(this, useTheme.getDialogStyle());
                 builder.setMessage(USER_DIALOG_DOWNLOAD);
                 builder.setPositiveButton(USER_DIALOG_OK, new DialogInterface.OnClickListener() {
                     @Override

@@ -215,7 +215,7 @@ public class PresenterBaseImpl implements PresenterBase {
     public void setSchedule(String phoneMD5) {
         Gson gson = new Gson();
         model
-                .setSchedule(phoneMD5, gson.toJson(subjectRealm.getAllFromDB()))
+                .setSchedule(phoneMD5, gson.toJson(subjectRealm.getAllFromDB()),preferens.getHideSchedule())
                 .subscribe(new Observer<Response<ResponseBody>>() {
                     @Override
                     public void onCompleted() {
@@ -225,6 +225,39 @@ public class PresenterBaseImpl implements PresenterBase {
                     public void onError(Throwable e) {
                         view.showMessage(SCHEDULE_ERROR);
                         endLoading();
+                    }
+
+                    @Override
+                    public void onNext(Response<ResponseBody> responseBodyResponse) {
+                        switch (responseBodyResponse.code()){
+                            case OK:
+                                view.showMessage(SET_SCHEDULE_COMPL);
+                                break;
+                            case NOT_FOUND:
+                                preferens.setRegistrations(false);
+                                registerUser(true,phoneMD5);
+                                break;
+                            default:
+                                view.showMessage(SCHEDULE_ERROR);
+                                break;
+                        }
+                        endLoading();
+                    }
+                });
+    }
+
+    @Override
+    public void delete(String phoneMD5) {
+        Gson gson = new Gson();
+        model
+                .delete(phoneMD5)
+                .subscribe(new Observer<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                     }
 
                     @Override
@@ -296,7 +329,7 @@ public class PresenterBaseImpl implements PresenterBase {
     @Override
     public void getSchedule(String phoneMD5) {
         model
-                .getSchedule(preferens.getPhoneNumber())
+                .getSchedule(preferens.getPhoneNumber(),true)
                 .subscribe(new Observer<List<Subject>>() {
                     @Override
                     public void onCompleted() {

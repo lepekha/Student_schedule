@@ -29,17 +29,22 @@ public interface API {
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
     @FormUrlEncoded
     @POST("rest/phone/setSchedule")
-    Observable<Response<ResponseBody>>  setSchedule(@Field("phoneMD5") String phoneMD5, @Field("schedule") String schedule);
+    Observable<Response<ResponseBody>>  setSchedule(@Field("phoneMD5") String phoneMD5, @Field("schedule") String schedule, @Field("security") boolean hide);
+
+    @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
+    @FormUrlEncoded
+    @POST("rest/phone/setSchedule")
+    Observable<Response<ResponseBody>>  delete(@Field("phoneMD5") String phoneMD5);
 
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
     @FormUrlEncoded
     @POST("rest/phone/getSchedule")
-    Observable<List<Subject>> getSchedule(@Field("phoneMD5") String phoneMD5);
+    Observable<List<Subject>> getSchedule(@Field("phoneMD5") String phoneMD5, @Field("mySchedule") boolean mySchedule);
 
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
     @FormUrlEncoded
     @POST("rest/phone/getSchedule")
-    Observable<List<User>> getUserSchedule(@Field("phoneMD5") String phoneMD5);
+    Observable<List<User>> getUserSchedule(@Field("phoneMD5") String phoneMD5, @Field("mySchedule") boolean mySchedule);
 
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=utf-8")
     @FormUrlEncoded

@@ -13,5 +13,5 @@ public interface ContactsActivity extends View {
     void showHolderView();
     void hideHolderView();
     void setTimeAndDate(String TimeAndDate);
-
+    void showMessage(String text);
 }

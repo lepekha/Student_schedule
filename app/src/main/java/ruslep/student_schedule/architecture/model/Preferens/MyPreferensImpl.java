@@ -138,4 +138,14 @@ public class MyPreferensImpl implements MyPreferens {
     public int getWidgetWeek() {
         return myPrefs.widgetWeek().get();
     }
+
+    @Override
+    public void setHideSchedule(boolean flag) {
+        myPrefs.hideSchedule().put(flag);
+    }
+
+    @Override
+    public boolean getHideSchedule() {
+        return myPrefs.hideSchedule().get();
+    }
 }

@@ -1,9 +1,13 @@
 package ruslep.student_schedule.architecture.view.Custom_dialog;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -35,6 +40,8 @@ import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.other.Const;
 import ruslep.student_schedule.architecture.other.Event.PasteDataToEdit;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.other.Theme.UseTheme;
+import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.AddDialog.AddDialog;
 import ruslep.student_schedule.architecture.presenter.AddDialog.AddDialogImpl;
 import ruslep.student_schedule.architecture.presenter.QuickEnter.PresenterQuickEnter;
@@ -52,8 +59,11 @@ public class Add_schedule_dialog extends DialogFragment {
     @ViewById
     Button btnTimeStart, btnTimeEnd;
 
+
     @ViewById
     Spinner spTypeOfWeek;
+
+
 
     @Bean(AddDialogImpl.class)
     AddDialog addDialog;
@@ -78,6 +88,9 @@ public class Add_schedule_dialog extends DialogFragment {
 
     @StringRes(R.string.dialogAdd_check_error_ok)
     String DIALOG_ADD_CHECK_ERROR_OK;
+
+    @Bean(UseThemeImpl.class)
+    UseTheme useTheme;
 
     @Override
     public void onStart() {
@@ -106,8 +119,24 @@ public class Add_schedule_dialog extends DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(null);
 
+        ImageButton ibtnSubjectName = (ImageButton)view.findViewById(R.id.ibtnSubjectName);
+        DrawableCompat.setTint(ibtnSubjectName.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnTypeSubject = (ImageButton)view.findViewById(R.id.ibtnTypeSubject);
+        DrawableCompat.setTint(ibtnTypeSubject.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnSubjectTeacher = (ImageButton)view.findViewById(R.id.ibtnSubjectTeacher);
+        DrawableCompat.setTint(ibtnSubjectTeacher.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnSubjectRoom = (ImageButton)view.findViewById(R.id.ibtnSubjectRoom);
+        DrawableCompat.setTint(ibtnSubjectRoom.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnTime = (ImageButton)view.findViewById(R.id.ibtnTime);
+        DrawableCompat.setTint(ibtnTime.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
         return view;
     }
+
 
     @Override
     public void onDismiss(final DialogInterface dialog) {

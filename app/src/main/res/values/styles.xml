@@ -11,6 +11,8 @@
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+
 
     </style>
 
@@ -27,6 +29,7 @@
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
     </style>
 
     <style name="AppTheme_Green" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -39,6 +42,7 @@
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
     </style>
 
     <style name="AppTheme_Gray" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -51,6 +55,7 @@
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
     </style>
 
     <style name="AppTheme_Amber" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -63,6 +68,7 @@
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
     </style>
 
     <style name="AppTheme_Purple" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -75,6 +81,7 @@
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -90,5 +97,65 @@
         <item name="colorAccent">@color/accent</item>
         <item name="android:textColorPrimary">@color/primary_text</item>
     </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Material.DropDownItem.Spinner">
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/accent</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!-- Used for the background -->
+        <item name="android:background">#fff</item>
+    </style>
+
+    <style name="MyAlertDialogStyleRed" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/accent_red</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!-- Used for the background -->
+        <item name="android:background">#fff</item>
+    </style>
+
+    <style name="MyAlertDialogStyleGreen" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/accent_green</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!-- Used for the background -->
+        <item name="android:background">#fff</item>
+    </style>
+
+    <style name="MyAlertDialogStyleGray" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/accent_grey</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!-- Used for the background -->
+        <item name="android:background">#fff</item>
+    </style>
+
+    <style name="MyAlertDialogStyleAmber" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/accent_amber</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!-- Used for the background -->
+        <item name="android:background">#fff</item>
+    </style>
+
+    <style name="MyAlertDialogStylePurple" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/accent_purple</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <!-- Used for the background -->
+        <item name="android:background">#fff</item>
+    </style>
+
 
 </resources>

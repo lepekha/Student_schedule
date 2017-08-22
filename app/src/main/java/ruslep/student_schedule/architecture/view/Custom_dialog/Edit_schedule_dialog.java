@@ -3,6 +3,8 @@ package ruslep.student_schedule.architecture.view.Custom_dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -99,6 +102,21 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(null);
+
+        ImageButton ibtnSubjectName = (ImageButton)view.findViewById(R.id.ibtnSubjectName);
+        DrawableCompat.setTint(ibtnSubjectName.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnTypeSubject = (ImageButton)view.findViewById(R.id.ibtnTypeSubject);
+        DrawableCompat.setTint(ibtnTypeSubject.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnSubjectTeacher = (ImageButton)view.findViewById(R.id.ibtnSubjectTeacher);
+        DrawableCompat.setTint(ibtnSubjectTeacher.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnSubjectRoom = (ImageButton)view.findViewById(R.id.ibtnSubjectRoom);
+        DrawableCompat.setTint(ibtnSubjectRoom.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
+
+        ImageButton ibtnTime = (ImageButton)view.findViewById(R.id.ibtnTime);
+        DrawableCompat.setTint(ibtnTime.getDrawable(), ContextCompat.getColor(getContext(), useTheme.getAccentColor()));
 
         return view;
     }

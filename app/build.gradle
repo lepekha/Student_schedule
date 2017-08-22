@@ -86,12 +86,12 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.googlecode.libphonenumber:libphonenumber:7.7.0'
-    compile 'me.zhanghai.android.materialprogressbar:library:1.1.7'
     compile 'com.google.firebase:firebase-auth:11.0.4'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile "com.google.android.gms:play-services-auth:11.0.4"
+    compile 'com.android.support:multidex:1.0.0'
 }
 
 //apply plugin: 'com.google.gms.google-services'

@@ -6,61 +6,70 @@
 
     <RelativeLayout
         android:layout_width="250dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="3dp">
 
         <ListView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:id="@+id/listView"
-            android:layout_below="@+id/empty"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/empty"
+            android:divider="@color/secondary_text"
+            android:dividerHeight="2px"
+
             android:headerDividersEnabled="false" />
 
         <TextView
             android:id="@+id/empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/secondary_text"
-            android:visibility="gone"
+            android:gravity="center_vertical|center_horizontal"
             android:text="No Lessons"
+            android:textColor="@color/secondary_text"
             android:textSize="30dp"
-            android:gravity="center_vertical|center_horizontal" />
+            android:visibility="gone" />
 
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="right|bottom"
-            android:id="@+id/linearLayout4"
-            android:layout_below="@+id/listView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/listView"
+            android:layout_gravity="right|bottom"
+            android:gravity="right"
+            android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnCancel"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/quick_enter_cancel"
-                android:id="@+id/btnCancel"
-                android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/quick_enter_cancel"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/btnClear"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/quick_enter_clear"
-                android:id="@+id/btnClear"
                 android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/quick_enter_clear"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginRight="8dp" />
+                android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 

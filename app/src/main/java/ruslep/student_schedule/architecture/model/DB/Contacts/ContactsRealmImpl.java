@@ -19,6 +19,7 @@ public class ContactsRealmImpl implements ContactsRealm {
 
     @Override
     public void setAllContacts(List<Contacts> contactsList) {
+
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

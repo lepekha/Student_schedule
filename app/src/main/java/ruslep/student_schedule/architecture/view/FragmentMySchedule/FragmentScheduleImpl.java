@@ -41,6 +41,8 @@ import ruslep.student_schedule.architecture.other.Event.GetSubjectFromServer;
 import ruslep.student_schedule.architecture.other.Event.ItemMenuClick;
 import ruslep.student_schedule.architecture.other.Event.PasteSubject;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
+import ruslep.student_schedule.architecture.other.Theme.UseTheme;
+import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.presenter.PresenterFragmentScheduleImpl;
@@ -76,6 +78,9 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
 
     @ViewById(R.id.main_content)
     CoordinatorLayout coordinatorLayout;
+
+    @Bean(UseThemeImpl.class)
+    UseTheme useTheme;
 
 
     @Pref
@@ -300,7 +305,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
     public void onItemMenuClick(View view, Subject subject, int position) {
         try {
             //создание попут меня при нажатии на елемент списка
-            PopupMenu popupMenu = new PopupMenu(getActivity(), view, Gravity.CENTER_HORIZONTAL);
+            PopupMenu popupMenu = new PopupMenu(getActivity(), view, Gravity.RIGHT);
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
@@ -308,7 +313,7 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                         case R.id.delete_subject:
                             /** диалог подтверждения удаления сообщения*/
                             AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity());
+                                    new AlertDialog.Builder(getActivity(),useTheme.getDialogStyle());
                             builder.setMessage(getString(R.string.fragmentSchedule_alertDialog_message));
                             builder.setPositiveButton(getString(R.string.fragmentSchedule_alertDialog_OK), new DialogInterface.OnClickListener() {
                                 @Override

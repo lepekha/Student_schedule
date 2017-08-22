@@ -2,6 +2,8 @@ package ruslep.student_schedule.architecture.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,8 +39,12 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     private RecyclerView.Adapter listAdapter;
     private RecyclerView.LayoutManager listManager;
 
-    @ViewById(R.id.holderView)
-    RelativeLayout holderView;
+
+    @ViewById(R.id.main_content)
+    CoordinatorLayout coordinatorLayout;
+
+    @ViewById(R.id.progressBar)
+    ProgressBar progressBar;
 
     @ViewById(R.id.txtLastUpdate)
     TextView txtLastUpdate;
@@ -88,14 +95,14 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     @Override
     public void showHolderView() {
         list.setVisibility(View.GONE);
-        holderView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void hideHolderView() {
         list.setVisibility(View.VISIBLE);
-        holderView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -133,5 +140,10 @@ public class ContactsActivityImpl extends AppCompatActivity implements ContactsA
     @Override
     public void setTimeAndDate(String TimeAndDate) {
         txtLastUpdate.setText(TimeAndDate);
+    }
+
+    @Override
+    public void showMessage(String text){
+        Snackbar.make(coordinatorLayout,text, Snackbar.LENGTH_SHORT).show();
     }
 }

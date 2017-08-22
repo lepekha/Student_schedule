@@ -70,4 +70,44 @@ public class UseThemeImpl implements UseTheme {
                 return R.color.primary;
         }
     }
+
+    @Override
+    public int getAccentColor() {
+        switch (preferens.getCurrentTheme()){
+            case BLUE:
+                return R.color.accent;
+            case RED:
+                return R.color.accent_red;
+            case GREEN:
+                return R.color.accent_green;
+            case AMBER:
+                return R.color.accent_amber;
+            case PURPLE:
+                return R.color.accent_purple;
+            case GREY:
+                return R.color.accent_grey;
+            default:
+                return R.color.accent;
+        }
+    }
+
+    @Override
+    public int getDialogStyle() {
+        switch (preferens.getCurrentTheme()){
+            case BLUE:
+                return R.style.MyAlertDialogStyle;
+            case RED:
+                return R.style.MyAlertDialogStyleRed;
+            case GREEN:
+                return R.style.MyAlertDialogStyleGreen;
+            case AMBER:
+                return R.style.MyAlertDialogStyleAmber;
+            case PURPLE:
+                return R.style.MyAlertDialogStylePurple;
+            case GREY:
+                return R.style.MyAlertDialogStyleGray;
+            default:
+                return R.style.MyAlertDialogStyle;
+        }
+    }
 }

@@ -6,7 +6,7 @@
     <item
         android:id="@+id/paste_subject"
         android:title="Вставить"
-        android:icon="@drawable/ic_content_paste_white_24dp"
+        android:icon="@drawable/ic_content_paste_white_24px"
         app:showAsAction="always"/>
     <item
         android:id="@+id/typeOfWeek"

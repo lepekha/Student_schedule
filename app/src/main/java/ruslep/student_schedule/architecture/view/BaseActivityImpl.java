@@ -21,9 +21,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.*;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,7 +35,6 @@ import com.firebase.ui.auth.ResultCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Bean;
@@ -43,7 +42,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,24 +50,18 @@ import java.util.List;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
-import ruslep.student_schedule.architecture.model.entity.Subject;
-import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.other.Theme.UseTheme;
 import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog;
 import ruslep.student_schedule.architecture.view.Custom_dialog.Add_schedule_dialog_;
 import ruslep.student_schedule.architecture.view.FragmentMySchedule.FragmentScheduleImpl_;
-import ruslep.student_schedule.architecture.widget.MyWidgetService;
-import ruslep.student_schedule.architecture.widget.MyWidgetService_;
 
 @EActivity
 public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,NavigationView.OnNavigationItemSelectedListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    private static final String TWITTER_KEY = "5nyNFNF2jq8p4FaKV0t9tr3Cy";
-    private static final String TWITTER_SECRET = "vhrRcQZb9w4DvTrjLnxVkgLGFeGplGw6XcCRm6jCIUpiADAGai";
     private static final String ADD_DIALOG_TAG = "add_dialog_tag";
     private static final int TOTAL_PAGE = 7;
     public static final int MULTIPLE_PERMISSIONS = 1; // code you want.
@@ -96,8 +88,20 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @StringRes(R.string.baseActivity_Schedule_needAuth)
     String SCHEDULE_NEED_AUTH;
 
+    @StringRes(R.string.baseActivity_registerSchedule_cancel)
+    String SCHEDULE_REGISTER_CANCEL;
+
+    @StringRes(R.string.baseActivity_registerSchedule_inetError)
+    String SCHEDULE_REGISTER_INETERROR;
+
+    @StringRes(R.string.baseActivity_registerSchedule_succefful)
+    String SCHEDULE_REGISTER_SUCCEFFUL;
+
+    @StringRes(R.string.baseActivity_registerSchedule_error)
+    String SCHEDULE_REGISTER_ERROR;
+
     @ViewById(R.id.progressBar)
-    me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
+    ProgressBar progressBar;
 
     @Bean(MyPreferensImpl.class)
     MyPreferens preferens;
@@ -118,7 +122,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @AfterInject
     public void afterView(){
         presenterBase.setView(this);
-
     }
 
 
@@ -143,32 +146,6 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FirebaseApp.initializeApp(this);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
-            // already signed in
-        } else {
-            // not signed in
-        }
-        /**twiter digits*/
-       /* //digitsButton.setAuthTheme(R.style.CustomDigitsTheme);
-        digitsButton.setCallback(new AuthCallback() {
-            @Override
-            public void success(DigitsSession session, String phoneNumber) {
-                if(presenterBase.auth(phoneNumber)){
-                    presenterBase.hideAuthBtn();
-                    presenterBase.setDrawerHeaderPhone();
-                    Digits.clearActiveSession();
-                }
-            }
-
-            @Override
-            public void failure(DigitsException exception) {
-                showMessage(getString(R.string.baseActivity_auth_error));
-            }
-        });
-*/
-
-
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -224,7 +201,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
         View hView =  navigationView.getHeaderView(0);
         FloatingActionButton btnQuite = (FloatingActionButton) hView.findViewById(R.id.btnQuite);
         RelativeLayout navigationBackground  = (RelativeLayout) hView.findViewById(R.id.navigationBackground);
-        navigationBackground.setBackgroundColor(getColor(useTheme.setNavigationBackground()));
+        navigationBackground.setBackgroundColor(ContextCompat.getColor(this,useTheme.setNavigationBackground()));
         btnQuite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -335,7 +312,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                                 if(presenterBase.auth(response.getPhoneNumber())){
                                     presenterBase.hideAuthBtn();
                                     presenterBase.setDrawerHeaderPhone();
-                                    showMessage("Вы зарегистрировались");
+                                    showMessage(SCHEDULE_REGISTER_SUCCEFFUL);
                                 }
 
                             }
@@ -345,12 +322,12 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
-                    showMessage("Регистрация отменена");
+                    showMessage(SCHEDULE_REGISTER_CANCEL);
                     return;
                 }
 
                 if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    showMessage("Ошибка соединения с интернетом");
+                    showMessage(SCHEDULE_REGISTER_INETERROR);
                     return;
                 }
 
@@ -360,7 +337,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                 }
             }
 
-            showMessage("хз что это");
+            showMessage(SCHEDULE_REGISTER_ERROR);
         }
     }
 
@@ -430,6 +407,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
     @Override
     public void setTextTypeOfWeek(String typeOfWeek) {
         txtTypeOfWeek.setText(typeOfWeek);
+        showMessage(typeOfWeek);
     }
 
     @Override

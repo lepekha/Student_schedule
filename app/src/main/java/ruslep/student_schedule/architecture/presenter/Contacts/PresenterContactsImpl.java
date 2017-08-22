@@ -69,6 +69,9 @@ public class PresenterContactsImpl implements  PresenterContacts {
     @Bean(MyPreferensImpl.class)
     MyPreferens preferens;
 
+    @StringRes(R.string.baseActivity_Schedule_error)
+    String SCHEDULE_ERROR;
+
     @StringRes(R.string.contacts_last_update)
     String CONTACTS_LAST_UPDATE;
 
@@ -138,6 +141,8 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
                     @Override
                     public void onError(Throwable e) {
+                        contactsActivity.showMessage(SCHEDULE_ERROR);
+                        contactsActivity.hideHolderView();
                     }
 
                     @Override
@@ -185,6 +190,7 @@ public class PresenterContactsImpl implements  PresenterContacts {
 
     void setContactList(List<Contacts> conList){
         contactsActivity.setTimeAndDate(preferens.getContactsLastUpdate());
+        contactsRealm.deleteAllContacts();
         contactsRealm.setAllContacts(conList);
 
     }

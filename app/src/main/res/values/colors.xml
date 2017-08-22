@@ -16,5 +16,14 @@
     <color name="primary_purple">#673AB7</color>
     <color name="primary_grey">#607D8B</color>
     <color name="primary_amber">#FFC107</color>
+
+    <color name="accent_red">#009688</color>
+    <color name="accent_green">#FF5722</color>
+    <color name="accent_purple">#FF5252</color>
+    <color name="accent_grey">#448AFF</color>
+    <color name="accent_amber">#009688</color>
+
     <color name="dgts__text_dark">#FFC107</color>
+
+
 </resources>

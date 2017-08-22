@@ -56,4 +56,7 @@ public interface MyPrefs {
     @DefaultInt(0)
     int widgetWeek();
 
+    @DefaultBoolean(false)
+    boolean hideSchedule();
+
 }

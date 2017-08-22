@@ -39,4 +39,7 @@ public interface MyPreferens {
 
     void setWidgetWeek(int day);
     int getWidgetWeek();
+
+    void setHideSchedule(boolean flag);
+    boolean getHideSchedule();
 }

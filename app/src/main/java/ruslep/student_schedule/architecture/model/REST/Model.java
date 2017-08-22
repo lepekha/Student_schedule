@@ -15,12 +15,14 @@ import rx.Observable;
 public interface Model {
 
 
-    Observable<Response<ResponseBody>> setSchedule(String phoneMD5, String schedule);
+    Observable<Response<ResponseBody>> setSchedule(String phoneMD5, String schedule, boolean hide);
+
+    Observable<Response<ResponseBody>> delete(String phoneMD5);
 
     Observable<Response<ResponseBody>> registerUser(String phoneMD5);
 
-    Observable<List<Subject>> getSchedule(String phoneMD5);
-    Observable<List<User>> getUserSchedule(String phoneMD5);
+    Observable<List<Subject>> getSchedule(String phoneMD5, boolean mySchedule);
+    Observable<List<User>> getUserSchedule(String phoneMD5, boolean mySchedule);
 
     Observable<List<Contacts>> getContacts(String contactsMD5);
 

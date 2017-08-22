@@ -43,16 +43,23 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public Observable<List<Subject>> getSchedule(String phoneMD5) {
+    public Observable<List<Subject>> getSchedule(String phoneMD5, boolean mySchedule) {
         return service
-                .getSchedule(phoneMD5)
+                .getSchedule(phoneMD5, mySchedule)
                 .compose(RxUtil.applyIOToMainThreadSchedulers());
     }
 
     @Override
-    public Observable<Response<ResponseBody>> setSchedule(String phoneMD5, String schedule) {
+    public Observable<Response<ResponseBody>> setSchedule(String phoneMD5, String schedule, boolean hide) {
         return service
-                .setSchedule(phoneMD5,schedule)
+                .setSchedule(phoneMD5,schedule, hide)
+                .compose(RxUtil.applyIOToMainThreadSchedulers());
+    }
+
+    @Override
+    public Observable<Response<ResponseBody>> delete(String phoneMD5) {
+        return service
+                .delete(phoneMD5)
                 .compose(RxUtil.applyIOToMainThreadSchedulers());
     }
 
@@ -64,9 +71,9 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public Observable<List<User>> getUserSchedule(String phoneMD5) {
+    public Observable<List<User>> getUserSchedule(String phoneMD5, boolean mySchedule) {
         return service
-                .getUserSchedule(phoneMD5)
+                .getUserSchedule(phoneMD5, mySchedule)
                 .compose(RxUtil.applyIOToMainThreadSchedulers());
     }
 }

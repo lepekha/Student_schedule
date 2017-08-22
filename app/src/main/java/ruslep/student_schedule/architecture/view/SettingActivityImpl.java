@@ -1,50 +1,48 @@
 package ruslep.student_schedule.architecture.view;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.*;
 import android.view.View;
-import android.view.animation.GridLayoutAnimationController;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
+import android.widget.Switch;
+
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.ResultCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
+
+import java.util.Arrays;
 
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
-import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.other.Theme.UseTheme;
 import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
-import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
 
 @EActivity
 public class SettingActivityImpl extends AppCompatActivity implements SettingActivity, View.OnClickListener {
+
 
     @ViewById
     RadioButton rbCheslitel;
@@ -59,28 +57,13 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
     MyPreferens preferens;
 
     @ViewById
-    Button btnBlue;
+    Switch schHideSchedule;
 
     @ViewById
-    Button btnRed;
+    Button btnBlue, btnRed, btnGrey, btnAmber, btnPurple, btnGreen, btnExit, btnPrivate, btnDelete, btnDeleteAuth;
 
-    @ViewById
-    Button btnGrey;
-
-    @ViewById
-    Button btnAmber;
-
-    @ViewById
-    Button btnPurple;
-
-    @ViewById
-    Button btnGreen;
-
-    @ViewById
-    Button btnExit;
-
-    @ViewById
-    Button btnDelete;
+    @ViewById(R.id.main_content)
+    CoordinatorLayout coordinatorLayout;
 
     @Bean
     PresenterBaseImpl presenterBase;
@@ -93,6 +76,9 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
 
     @StringRes(R.string.setting_dialog_delete)
     String SETTING_DIALOG_DELETE;
+
+    @StringRes(R.string.setting_dialog_deleteAuth)
+    String SETTING_DIALOG_DELETE_AUTH;
 
     @StringRes(R.string.setting_dialog_OK)
     String SETTING_DIALOG_OK;
@@ -109,9 +95,22 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
     @StringRes(R.string.setting_auth)
     String SETTING_AUTH;
 
+    @StringRes(R.string.setting_dialog_hideSchedule)
+    String SETTING_DIALOG_HIDESCHEDULE;
 
+    @StringRes(R.string.setting_dialog_hideSchedule_ok)
+    String SETTING_DIALOG_HIDESCHEDULE_OK;
 
+    @StringRes(R.string.setting_dialog_enterSchedule)
+    String SETTING_DIALOG_ENTER_SCHEDULE;
 
+    @StringRes(R.string.setting_dialog_errorAuth)
+    String SETTING_DIALOG_ERRORAUTH;
+
+    @StringRes(R.string.setting_dialog_succesAuth)
+    String SETTING_DIALOG_SUCCESAUTH;
+
+    private static final int RC_SIGN_IN = 123;
     private static final int BLUE = 0;
     private static final int RED = 1;
     private static final int GREEN = 2;
@@ -132,6 +131,17 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                 break;
         }
 
+        if(!preferens.getAuth()){
+            schHideSchedule.setEnabled(false);
+            schHideSchedule.setClickable(false);
+            btnDeleteAuth.setEnabled(false);
+            btnDeleteAuth.setClickable(false);
+            btnExit.setEnabled(false);
+            btnExit.setClickable(false);
+        }
+
+        schHideSchedule.setChecked(preferens.getHideSchedule());
+
     }
 
     @Override
@@ -143,6 +153,19 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
+        schHideSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** диалог предупреждающий о смене настройки скрывать рассписание*/
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(SettingActivityImpl.this, useTheme.getDialogStyle());
+                builder.setMessage(SETTING_DIALOG_HIDESCHEDULE);
+                builder.setPositiveButton(SETTING_DIALOG_HIDESCHEDULE_OK,null);
+                builder.show();
+            }
+        });
         rgTypeofWeek.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -164,6 +187,8 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
         btnBlue.setOnClickListener(this);
         btnExit.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+        btnPrivate.setOnClickListener(this);
+        btnDeleteAuth.setOnClickListener(this);
 
     }
 
@@ -212,10 +237,15 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                 useTheme.setTheme(PURPLE);
                 recreate();
                 break;
+            case R.id.btnPrivate:
+                String url="http://raspisanie-lruslan.rhcloud.com/";
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+                break;
             case R.id.btnExit:
                 /** диалог подтверждения выхода с аккаунта*/
                 AlertDialog.Builder builder =
-                        new AlertDialog.Builder(this);
+                        new AlertDialog.Builder(this, useTheme.getDialogStyle());
                 builder.setMessage(SETTING_DIALOG_EXIT);
                 builder.setPositiveButton(SETTING_DIALOG_OK, new DialogInterface.OnClickListener() {
                     @Override
@@ -224,6 +254,7 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                         preferens.setRegistrations(false);
                         preferens.setPhoneNumber(SETTING_AUTH);
                         preferens.setReCreateMainActivity(true);
+                        showMessage(SETTING_DIALOG_ENTER);
                     }
                 });
                 builder.setNegativeButton(SETTING_DIALOG_NO, null);
@@ -232,21 +263,89 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
             case R.id.btnDelete:
                 /** диалог подтверждения удаления всех данных*/
                 AlertDialog.Builder builder2 =
-                        new AlertDialog.Builder(this);
+                        new AlertDialog.Builder(this, useTheme.getDialogStyle());
                 builder2.setMessage(SETTING_DIALOG_DELETE);
                 builder2.setPositiveButton(SETTING_DIALOG_DELETE_OK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         presenterBase.deletAllFromDB();
                         preferens.setReCreateMainActivity(true);
+                        showMessage(SETTING_DIALOG_ENTER_SCHEDULE);
                     }
                 });
                 builder2.setNegativeButton(SETTING_DIALOG_NO, null);
                 builder2.show();
+                break;
+            case R.id.btnDeleteAuth:
+                             /** диалог подтверждения удаления аккаунта*/
+                             AlertDialog.Builder builder3 =
+                                     new AlertDialog.Builder(this, useTheme.getDialogStyle());
+                             builder3.setMessage(SETTING_DIALOG_DELETE_AUTH);
+                             builder3.setPositiveButton(SETTING_DIALOG_DELETE_OK, new DialogInterface.OnClickListener() {
+                                 @Override
+                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                     startActivityForResult(
+                                             AuthUI.getInstance()
+                                                     .createSignInIntentBuilder()
+                                                     .setTheme(useTheme.getTheme())
+                                                     .setAvailableProviders(
+                                                             Arrays.asList(
+                                                                     new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()))
+                                                     .setPrivacyPolicyUrl("http://raspisanie-lruslan.rhcloud.com")
+                                                     .build(),
+                                             RC_SIGN_IN);
+                                 }
+                             });
+                             builder3.setNegativeButton(SETTING_DIALOG_NO, null);
+                             builder3.show();
                 break;
             default:
                 break;
         }
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // RC_SIGN_IN is the request code you passed into startActivityForResult(...) when starting the sign in flow.
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+            // Successfully signed in
+            if (resultCode == ResultCodes.OK) {
+                                //удаление аккаунта
+                                AuthUI.getInstance()
+                                        .delete(SettingActivityImpl.this)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    presenterBase.delete(preferens.getPhoneNumber());
+                                                    preferens.setAuth(false);
+                                                    preferens.setRegistrations(false);
+                                                    preferens.setPhoneNumber(SETTING_AUTH);
+                                                    preferens.setReCreateMainActivity(true);
+                                                    showMessage(SETTING_DIALOG_SUCCESAUTH);
+                                                } else {
+                                                    showMessage(SETTING_DIALOG_ERRORAUTH);
+                                                }
+                                            }
+                                        });
+
+                return;
+            } else {
+                showMessage(SETTING_DIALOG_ERRORAUTH);
+            }
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        preferens.setHideSchedule(schHideSchedule.isChecked());
+    }
+
+    @Override
+    public void showMessage(String text) {
+        Snackbar.make(coordinatorLayout,text, Snackbar.LENGTH_SHORT).show();
+    }
 }

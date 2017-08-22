@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AllUniver</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="setting_typeOfWeek">
+        <item>Чисельник</item>
+        <item>Знаменник</item>
+    </string-array>
+
+    <!--BaseActivity-->
+    <string name="baseActivity_dayOfWeek_monday">Понеділок</string>
+    <string name="baseActivity_dayOfWeek_tuesday">Вівторок</string>
+    <string name="baseActivity_dayOfWeek_wednesday">Середа</string>
+    <string name="baseActivity_dayOfWeek_thursday">Четверг</string>
+    <string name="baseActivity_dayOfWeek_friday">П\'ятниця</string>
+    <string name="baseActivity_dayOfWeek_saturday">Субота</string>
+    <string name="baseActivity_dayOfWeek_sunday">Неділя</string>
+    <string name="baseActivity_auth_error">Авторизація пройшла невдало.</string>
+    <string name="baseActivity_typeOfWeek_Cheslitel">Чисельник</string>
+    <string name="baseActivity_typeOfWeek_Znamenatel">Знаменник</string>
+    <string name="baseActivity_typeOfWeek_AllWeek">Кожен тиждень</string>
+    <string name="baseActivity_share_message">Здесь будет текст!!!!</string>///////////////////////////////////////////////////////////////////////////
+    <string name="baseActivity_share_header">Текст</string>
+    <string name="baseActivity_Schedule_error">Помилка. Немає з\'єднання з інтернетом або проблеми на сервері.</string>
+    <string name="baseActivity_Schedule_needAuth">Для початку роботи потрібно авторизуватися.</string>
+    <string name="baseActivity_getSchedule_compl">Завантаження завершено.</string>
+    <string name="baseActivity_setSchedule_compl">Збереження завершено.</string>
+    <string name="baseActivity_registerSchedule_error">Помилка реєстрації.</string>
+    <string name="baseActivity_registerSchedule_cancel">Реєстрація скасована.</string>
+    <string name="baseActivity_registerSchedule_succefful">Ви успішно зареєструвалися.</string>
+    <string name="baseActivity_registerSchedule_inetError">Помилка з\'єднання з інтернетом.</string>
+
+
+
+
+    <!--Dialog add-->
+    <string name="dialogAdd_timeStart">Початок</string>
+    <string name="dialogAdd_timeEnd">Кінець</string>
+    <string-array name="dialogAdd_typeOfWeek">
+        <item>Чисельник</item>
+        <item>Знаменник</item>
+        <item>Кожен тиждень</item>
+    </string-array>
+    <string name="dialogAdd_btn_OK">ДОДАТИ</string>
+    <string name="dialogAdd_btn_Cancel">СКАСУВАТИ</string>
+    <string name="dialogAdd_txtSubjectNumber">№ заняття:</string>
+    <string name="dialogAdd_txtSubjectName">Назва предмета:</string>
+    <string name="dialogAdd_txtTypeSubject">Тип заняття:</string>
+    <string name="dialogAdd_txtSubjectTeacher">Ім\'я викладача:</string>
+    <string name="dialogAdd_txtSubjectRoom">Аудиторія:</string>
+    <string name="dialogAdd_txtTime">Час:</string>
+    <string name="dialogAdd_txtTypeOfWeek">Тип тижня:</string>
+    <string name="dialogAdd_check_error">Ви не ввели номер предмета або його назву.</string>
+    <string name="dialogAdd_check_error_ok">OK</string>
+
+    <!--Dialog edit-->
+    <string name="dialogEdit_btn_Save">ЗБЕРЕГТИ</string>
+
+    <!--Time dialog-->
+    <string name="dialogTime_btn_Ok">OK</string>
+    <string name="dialogTime_btn_Cancel">СКАСУВАТИ</string>
+
+    <!--Fragment schedule-->
+    <string name="fragmentSchedule_alertDialog_message">Ви дійсно хочете видалити це заняття?</string>
+    <string name="fragmentSchedule_alertDialog_OK">OK</string>
+    <string name="fragmentSchedule_alertDialog_Cancel">СКАСУВАТИ</string>
+    <string name="fragmentSchedule_no_lessons"> Нема\nзанять</string>
+
+    <!--Drawer menu-->
+    <string name="navigation_drawer_open">Відкрити панель навігації</string>
+    <string name="navigation_drawer_close">Закрити панель навігації</string>
+    <string name="navigation_drawer_log_in">Авторизація</string>
+    <string name="navigation_drawer_save">Зберегти на сервер</string>
+    <string name="navigation_drawer_load">Завантажити з сервера</string>
+    <string name="navigation_drawer_friends">Мої контакти</string>
+    <string name="navigation_drawer_share">Поділитись</string>
+    <string name="navigation_drawer_review">Залишити відгук</string>
+    <string name="navigation_drawer_setting">Налаштування</string>
+    <string name="navigation_drawer_exit">Вийти</string>
+    <string name="navigation_drawer_myNumber">Ваш номер:</string>
+    <string name="navigation_drawer_not_auth">Потрібна авторизація</string>
+
+    <!--Popup menu-->
+    <string name="popup_menu_edit_subject">Змінити</string>
+    <string name="popup_menu_copy_subject">Копіювати</string>
+    <string name="popup_menu_delete_subject">Видалити</string>
+
+    <!--Quick enter dialog-->
+    <string name="quick_enter_clear">ОЧИСТИТИ</string>
+    <string name="quick_enter_cancel">СКАСУВАТИ</string>
+
+    <!--Contacts-->
+    <string name="contacts_last_update">Останнє оновлення: </string>
+    <string name="contacts_enter">Відкрити</string>
+
+    <!--User-->
+    <string name="user_dialog_download">Ви дійсно хочете замінити свій розклад?</string>
+    <string name="user_dialog_OK">Замінити</string>
+    <string name="user_dialog_NO">Скасувати</string>
+    <string name="user_dialog_sucefull">Тепер у вас такий ж розклад.</string>
+    <string name="user_message_error">Розклад захищено налаштуваннями приватності або проблеми з мережею.</string>
+
+    <!--Setting-->
+    <string name="setting_typeOfWeek">Тип тижня:</string>
+    <string name="setting_cheslitel">Чисельник</string>
+    <string name="setting_znamenatek">Знаменник</string>
+    <string name="setting_mainColor">Виберіть основний колір додатку:</string>
+    <string name="setting_politics">Політика конфіденційності</string>
+    <string name="setting_shudow">Приховати розклад від друзів</string>
+    <string name="setting_button_exit">Вийти</string>
+    <string name="setting_button_delete">Видалити весь розклад</string>
+    <string name="setting_dialog_exit">Ви дійсно хочете вийти зі свого облікового запису?</string>
+    <string name="setting_dialog_deleteAuth">Ви дійсно бажаєте видалити свій обліковий запис?</string>
+    <string name="setting_dialog_delete">Ви дійсно хочете видалити весь розклад?</string>
+    <string name="setting_dialog_hideSchedule">Для того щоб налаштування приватності почали діяти, потрібно повторно зберегти розклад.</string>
+    <string name="setting_dialog_hideSchedule_ok">OK</string>
+    <string name="setting_dialog_enter">Ви вийшли з облікового запису.</string>
+    <string name="setting_dialog_OK">Вийти</string>
+    <string name="setting_dialog_delete_ok">Видалити</string>
+    <string name="setting_dialog_NO">Скасувати </string>
+    <string name="setting_auth">Потрібна авторизація</string>
+    <string name="setting_button_deleteAuth">"Видалити обліковий запис"</string>
+    <string name="setting_dialog_enterSchedule">Ви успішно видалили весь розклад з телефону.</string>
+    <string name="setting_dialog_errorAuth">Помилка видалення облікового запису.</string>
+    <string name="setting_dialog_succesAuth">Ви успішно видалили обліковий запис.</string>
+
+</resources>

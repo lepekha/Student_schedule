@@ -86,6 +86,8 @@ public class PresenterUserImpl implements PresenterUser {
     @StringRes(R.string.baseActivity_setSchedule_compl)
     String SET_SCHEDULE_COMPL;
 
+    @StringRes(R.string.user_message_error)
+    String USER_MESSAGE_ERROR;
 
 
 
@@ -167,7 +169,7 @@ public class PresenterUserImpl implements PresenterUser {
     public void getSchedule(String phoneMD5) {
         startLoading();
         model
-                .getUserSchedule(phoneMD5)
+                .getUserSchedule(phoneMD5,false)
                 .subscribe(new Observer<List<User>>() {
                     @Override
                     public void onCompleted() {
@@ -175,18 +177,18 @@ public class PresenterUserImpl implements PresenterUser {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showMessage(SCHEDULE_ERROR);
+                        view.showMessage(USER_MESSAGE_ERROR);
                         endLoading();
                     }
 
                     @Override
                     public void onNext(List<User> list) {
-                        userRealm.deleteAllFromDB();
-                        if(userRealm.saveAllToDB(list)){
-                            view.showMessage(GET_SCHEDULE_COMPL);
-                            endLoading();
-                            EventBus.getDefault().post(new GetUserFromServer());
-                        }
+                            userRealm.deleteAllFromDB();
+                            if (userRealm.saveAllToDB(list)) {
+                                view.showMessage(GET_SCHEDULE_COMPL);
+                                endLoading();
+                                EventBus.getDefault().post(new GetUserFromServer());
+                            }
                     }
                 });
     }
