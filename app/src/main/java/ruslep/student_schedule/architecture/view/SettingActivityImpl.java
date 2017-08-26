@@ -36,6 +36,7 @@ import java.util.Arrays;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
+import ruslep.student_schedule.architecture.other.Const;
 import ruslep.student_schedule.architecture.other.Theme.UseTheme;
 import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
@@ -291,7 +292,7 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                                                      .setAvailableProviders(
                                                              Arrays.asList(
                                                                      new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()))
-                                                     .setPrivacyPolicyUrl("http://raspisanie-lruslan.rhcloud.com")
+                                                     .setPrivacyPolicyUrl(Const.POLITICS_LINK)
                                                      .build(),
                                              RC_SIGN_IN);
                                  }
@@ -323,6 +324,7 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                                                     preferens.setRegistrations(false);
                                                     preferens.setPhoneNumber(SETTING_AUTH);
                                                     preferens.setReCreateMainActivity(true);
+                                                    recreate();
                                                     showMessage(SETTING_DIALOG_SUCCESAUTH);
                                                 } else {
                                                     showMessage(SETTING_DIALOG_ERRORAUTH);

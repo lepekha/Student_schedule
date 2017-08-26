@@ -59,7 +59,6 @@ public class SubjectRealmImpl implements SubjectRealm {
     @Override
     public List<Subject> getFromDB(String typeOfWeek, int dayOfWeek) {
 
-        Log.e("qweqwe",typeOfWeek);
         RealmResults<Subject> result = realm.where(Subject.class)
                 .equalTo("dayOfWeek", dayOfWeek)
                 .beginGroup()

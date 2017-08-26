@@ -3,6 +3,7 @@ package ruslep.student_schedule.architecture.view.CustomAdapters;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,11 +125,11 @@ public class CustomMyFragmentAdapter extends RecyclerView.Adapter<CustomMyFragme
         viewHolder.txtType.setText(subjects.get(position).getTypeSubject());
 
         /**проверка на пустоту поля Время*/
-        if(!subjects.get(position).getTimeStartSubject().equals(R.string.dialogAdd_timeStart) || !subjects.get(position).getTimeEndSubject().equals(R.string.dialogAdd_timeEnd)){
+        if(!subjects.get(position).getTimeStartSubject().contains(":") || !subjects.get(position).getTimeEndSubject().contains(":")){
+            viewHolder.lineTime.setVisibility(View.GONE);
+        }else{
             viewHolder.lineTime.setVisibility(View.VISIBLE);
             viewHolder.txtTime.setText(subjects.get(position).getTimeStartSubject()+" - "+subjects.get(position).getTimeEndSubject());
-        }else{
-            viewHolder.lineTime.setVisibility(View.GONE);
         }
 
         /**проверка на пустоту поля Имя преподавателя*/

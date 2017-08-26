@@ -6,6 +6,7 @@ package ruslep.student_schedule.architecture.other;
  */
 public interface Const {
     String BASE_URL = "http://raspisanie-lruslan.rhcloud.com/";
+    String POLITICS_LINK = "http://raspisanie-lruslan.rhcloud.com/privatepolitics.html";
 
     /** type quickEnter*/
 

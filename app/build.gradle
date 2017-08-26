@@ -51,7 +51,7 @@ android {
 
         }
         release {
-            minifyEnabled true
+            //minifyEnabled true
             signingConfig signingConfigs.debug
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -91,7 +91,6 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile "com.google.android.gms:play-services-auth:11.0.4"
-    compile 'com.android.support:multidex:1.0.0'
 }
 
 //apply plugin: 'com.google.gms.google-services'

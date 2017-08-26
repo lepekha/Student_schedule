@@ -160,22 +160,6 @@ public class FragmentScheduleImpl extends Fragment implements FragmentScheduleVi
                 adapter.refresh();
             }
         }
-
-
-
-
-       /* if(currentPage == myPrefs.day().get()) {
-            subjects.clear();
-            if (!presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()).isEmpty()) {
-                subjects.addAll(presenterFragmentSchedule.getSubject(presenterBase.getTextTuypeOfWeek(), myPrefs.day().get()));
-                setPlaceholder();
-                adapter = new CustomMyFragmentAdapter(subjects);
-                adapter.SetOnItemMenuClick(this);
-                list.setAdapter(adapter);
-            }else{
-                setPlaceholder();
-            }
-        }*/
     }
 
    /**  событие нажатие на меню в списке */

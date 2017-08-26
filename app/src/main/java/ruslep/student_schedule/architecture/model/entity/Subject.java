@@ -29,6 +29,7 @@ public class Subject extends RealmObject implements Comparable<Subject> {
     private int orderSubject;
     private int dayOfWeek;
     private String typeOfWeek;
+    private int realTypeOfWeek;
 
 
 
@@ -138,6 +139,14 @@ public class Subject extends RealmObject implements Comparable<Subject> {
         this.typeOfWeek = typeWeek;
     }
 
+    public int getRealTypeWeek() {
+        return realTypeOfWeek;
+    }
+
+    public void setRealTypeWeek(int realTypeWeek) {
+        this.realTypeOfWeek = realTypeWeek;
+    }
+
 
 
     public static Builder newBuilder() {
@@ -202,6 +211,11 @@ public class Subject extends RealmObject implements Comparable<Subject> {
 
         public Builder setTypeOfWeek(String typeOfWeek) {
             Subject.this.typeOfWeek = typeOfWeek;
+            return this;
+        }
+
+        public Builder setRealTypeOfWeek(int realTypeOfWeek) {
+            Subject.this.realTypeOfWeek = realTypeOfWeek;
             return this;
         }
 

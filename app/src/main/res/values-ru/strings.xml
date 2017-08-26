@@ -69,7 +69,7 @@
     <string name="fragmentSchedule_alertDialog_message">Вы действительно хотите удалить это занятие?</string>
     <string name="fragmentSchedule_alertDialog_OK">OK</string>
     <string name="fragmentSchedule_alertDialog_Cancel">ОТМЕНА</string>
-    <string name="fragmentSchedule_no_lessons">Нету\nзанятий</string>
+    <string name="fragmentSchedule_no_lessons">Нет\nзанятий</string>
 
     <!--Drawer menu-->
     <string name="navigation_drawer_open">Открыть панель навигации</string>
