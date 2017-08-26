@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,6 +147,7 @@ public class Add_schedule_dialog extends DialogFragment {
 
     @Click(R.id.btnAdd)
     public void btnAddClick(){
+
         Subject subject = new Subject().newBuilder()
                 .setSubjectNumber(edSubjectNumber.getText().toString())
                 .setNameSubject(edSubjectName.getText().toString())
@@ -156,6 +158,7 @@ public class Add_schedule_dialog extends DialogFragment {
                 .setTimeEndSubject(btnTimeEnd.getText().toString())
                 .setTypeOfWeek(spTypeOfWeek.getSelectedItem().toString())
                 .setDayOfWeek(myPrefs.day().get())
+                .setRealTypeOfWeek(spTypeOfWeek.getSelectedItemPosition())
                 .build();
 
         if(checkFields()){

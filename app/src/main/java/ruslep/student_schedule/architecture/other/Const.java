@@ -10,6 +10,10 @@ public interface Const {
 
     /** type quickEnter*/
 
+    int CHESLITEL = 0;
+    int ZNAMENATEL = 1;
+    int ALLWEEK = 2;
+
     int NAME_TYPE = 0;
     int TYPE_TYPE = 1;
     int TEACHER_TYPE = 2;

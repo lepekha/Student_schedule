@@ -25,6 +25,7 @@ public class User extends RealmObject implements Comparable<User>  {
     private int orderSubject;
     private int dayOfWeek;
     private String typeOfWeek;
+    private int realTypeOfWeek;
 
 
     @Override
@@ -133,6 +134,14 @@ public class User extends RealmObject implements Comparable<User>  {
         this.typeOfWeek = typeWeek;
     }
 
+    public int getRealTypeWeek() {
+        return realTypeOfWeek;
+    }
+
+    public void setRealTypeWeek(int realTypeWeek) {
+        this.realTypeOfWeek = realTypeWeek;
+    }
+
 
 
     public static Builder newBuilder() {
@@ -197,6 +206,11 @@ public class User extends RealmObject implements Comparable<User>  {
 
         public Builder setTypeOfWeek(String typeOfWeek) {
             User.this.typeOfWeek = typeOfWeek;
+            return this;
+        }
+
+        public Builder setRealTypeOfWeek(int realTypeOfWeek) {
+            User.this.realTypeOfWeek = realTypeOfWeek;
             return this;
         }
 

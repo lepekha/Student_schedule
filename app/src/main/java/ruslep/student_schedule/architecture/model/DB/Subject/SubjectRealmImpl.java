@@ -16,6 +16,7 @@ import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
 import ruslep.student_schedule.architecture.model.entity.Subject;
 import ruslep.student_schedule.architecture.model.entity.User;
+import ruslep.student_schedule.architecture.other.Const;
 import ruslep.student_schedule.architecture.other.MyPrefs_;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBase;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
@@ -36,8 +37,13 @@ public class SubjectRealmImpl implements SubjectRealm {
     @Bean(PresenterBaseImpl.class)
     PresenterBase presenterBase;
 
-    @StringRes(R.string.baseActivity_typeOfWeek_AllWeek)
-    String ALL_WEEK;
+    @StringRes(R.string.baseActivity_typeOfWeek_Cheslitel)
+    String CHESLITEL;
+
+    @StringRes(R.string.baseActivity_typeOfWeek_Znamenatel)
+    String ZNAMENATEL;
+
+
 
     public SubjectRealmImpl() {
 
@@ -58,13 +64,19 @@ public class SubjectRealmImpl implements SubjectRealm {
 
     @Override
     public List<Subject> getFromDB(String typeOfWeek, int dayOfWeek) {
+        int realTypeOfWeek = 2;
+        if(typeOfWeek.equals(CHESLITEL)){
+            realTypeOfWeek = 0;
+        }else{
+            realTypeOfWeek = 1;
+        }
 
         RealmResults<Subject> result = realm.where(Subject.class)
                 .equalTo("dayOfWeek", dayOfWeek)
                 .beginGroup()
-                .equalTo("typeOfWeek", typeOfWeek)
+                .equalTo("realTypeOfWeek", realTypeOfWeek)
                 .or()
-                .equalTo("typeOfWeek", ALL_WEEK)
+                .equalTo("realTypeOfWeek", Const.ALLWEEK)
                 .endGroup()
                 .findAll();
         return realm.copyFromRealm(result);

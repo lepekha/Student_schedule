@@ -133,9 +133,9 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
         btnTimeStart.setText(subject.getTimeStartSubject());
         btnTimeEnd.setText(subject.getTimeEndSubject());
 
-        if(subject.getTypeWeek().equals(CHESLITEL)){
+        if(subject.getRealTypeWeek() == 0){
             spTypeOfWeek.setSelection(SP_POS_CHESLITEL);
-        }else if (subject.getTypeWeek().equals(ZNAMENATEL)){
+        }else if (subject.getRealTypeWeek() == 1){
             spTypeOfWeek.setSelection(SP_POS_ZNAMENATEL);
         }else {
             spTypeOfWeek.setSelection(SP_POS_ALLWEEK);
@@ -157,6 +157,7 @@ public class Edit_schedule_dialog extends Add_schedule_dialog {
                 .setTimeEndSubject(btnTimeEnd.getText().toString())
                 .setTypeOfWeek(spTypeOfWeek.getSelectedItem().toString())
                 .setDayOfWeek(myPrefs.day().get())
+                .setRealTypeOfWeek(spTypeOfWeek.getSelectedItemPosition())
                 .build();
 
         if(checkFields()){
