@@ -111,6 +111,12 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
     @StringRes(R.string.setting_dialog_succesAuth)
     String SETTING_DIALOG_SUCCESAUTH;
 
+    @StringRes(R.string.baseActivity_typeOfWeek_Cheslitel)
+    String CHESLITEL;
+
+    @StringRes(R.string.baseActivity_typeOfWeek_Znamenatel)
+    String ZNAMENATEL;
+
     private static final int RC_SIGN_IN = 123;
     private static final int BLUE = 0;
     private static final int RED = 1;
@@ -123,13 +129,11 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
 
     @AfterViews
     public void afterView(){
-        switch (preferens.getTypeOfWeek()){
-            case "Числитель": rbCheslitel.setChecked(true);
-                break;
-            case "Знаменатель": rbZnamenatel.setChecked(true);
-                break;
-            default:
-                break;
+
+        if(preferens.getTypeOfWeek().equals(CHESLITEL)){
+            rbCheslitel.setChecked(true);
+        }else if(preferens.getTypeOfWeek().equals(ZNAMENATEL)){
+            rbZnamenatel.setChecked(true);
         }
 
         if(!preferens.getAuth()){

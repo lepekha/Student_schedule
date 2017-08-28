@@ -27,14 +27,14 @@
         </activity>
         <activity
             android:name=".architecture.view.SettingActivityImpl_"
-            android:label="Настройки" />
+            android:label="@string/setting" />
         <activity
             android:name=".architecture.view.UserActivityImpl_"
             android:label="Пользователь"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".architecture.view.ContactsActivityImpl_"
-            android:label="Мои контакты" />
+            android:label="@string/contacts" />
     </application>
 
 </manifest>

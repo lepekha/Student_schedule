@@ -2,7 +2,6 @@
 <resources>
     <color name="primary">#3F51B5</color>
     <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
     <color name="accent">#ff5252</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
@@ -22,8 +21,4 @@
     <color name="accent_purple">#FF5252</color>
     <color name="accent_grey">#448AFF</color>
     <color name="accent_amber">#009688</color>
-
-    <color name="dgts__text_dark">#FFC107</color>
-
-
 </resources>

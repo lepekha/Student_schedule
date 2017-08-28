@@ -95,6 +95,7 @@
     <string name="quick_enter_cancel">ОТМЕНА</string>
 
     <!--Contacts-->
+    <string name="contacts">Мои контакты</string>
     <string name="contacts_last_update">Последнее обновление: </string>
     <string name="contacts_enter">Открыть</string>
 
@@ -106,6 +107,7 @@
     <string name="user_message_error">Расписание защищено настройками приватности или проблемы с сетью.</string>
 
     <!--Setting-->
+    <string name="setting">Настройки</string>
     <string name="setting_typeOfWeek">Тип недели:</string>
     <string name="setting_cheslitel">Числитель</string>
     <string name="setting_znamenatek">Знаменатель</string>
