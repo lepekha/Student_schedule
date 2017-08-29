@@ -8,295 +8,308 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
 
-    android:orientation="vertical"
-    android:id="@+id/main_conten"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp"
-        android:gravity="right">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
+
+            android:id="@+id/main_conten"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:layout_gravity="right"
-            android:gravity="right">
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:visibility="gone"
-                android:layout_gravity="right"
-                android:layout_weight="1" />
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioGroup
-            android:id="@+id/rgTypeofWeek"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:orientation="vertical"
-            android:layout_marginRight="31dp"
-            android:layout_marginEnd="31dp"
-            android:layout_marginTop="5dp">
+            android:weightSum="1">
 
-            <RadioButton
-                android:text="@string/setting_cheslitel"
-                android:layout_width="wrap_content"
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:id="@+id/rbCheslitel" />
+                android:gravity="right"
+                android:paddingTop="@dimen/appbar_padding_top"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:elevation="0dp">
 
-            <RadioButton
-                android:text="@string/setting_znamenatek"
-                android:layout_width="wrap_content"
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="right"
+                    android:background="?attr/colorPrimary"
+                    android:gravity="right"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:visibility="gone" />
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:id="@+id/rbZnamenatel"
-                android:layout_weight="1" />
-        </RadioGroup>
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/setting_typeOfWeek"
-            android:id="@+id/txtTime"
-            android:textSize="18sp"
-            android:textColor="@color/primary_text"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="19dp"
-            android:layout_marginStart="19dp" />
-    </RelativeLayout>
+                <RadioGroup
+                    android:id="@+id/rgTypeofWeek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="31dp"
+                    android:layout_marginRight="31dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/view"
-        android:layout_below="@+id/lineTime"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+                    <RadioButton
+                        android:id="@+id/rbCheslitel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_cheslitel"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbZnamenatel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/setting_znamenatek"
+                        android:textSize="18sp" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginStart="19dp"
+                    android:text="@string/setting_typeOfWeek"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/lineTime"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Switch
+                    android:id="@+id/schHideSchedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="19dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/setting_shudow"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/lineTime"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.08"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="19dp"
+                    android:text="@string/setting_mainColor"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnBlue"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView3"
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/primary" />
+
+                <Button
+                    android:id="@+id/btnGrey"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btnBlue"
+                    android:layout_alignStart="@+id/btnBlue"
+                    android:layout_below="@+id/btnBlue"
+                    android:layout_marginTop="14dp"
+                    android:backgroundTint="@color/primary_grey" />
+
+                <Button
+                    android:id="@+id/btnRed"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textView3"
+                    android:layout_marginLeft="20dp"
+                    android:backgroundTint="@color/primary_red" />
+
+                <Button
+                    android:id="@+id/btnGreen"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/btnGrey"
+                    android:layout_alignBottom="@+id/btnGrey"
+                    android:layout_alignLeft="@+id/btnRed"
+                    android:layout_alignStart="@+id/btnRed"
+                    android:backgroundTint="@color/primary_green" />
+
+                <Button
+                    android:id="@+id/btnAmber"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/btnGrey"
+                    android:layout_alignBottom="@+id/btnGrey"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="@color/primary_amber" />
+
+                <Button
+                    android:id="@+id/btnPurple"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btnAmber"
+                    android:layout_alignStart="@+id/btnAmber"
+                    android:layout_below="@+id/textView3"
+                    android:backgroundTint="@color/primary_purple" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/lineTime"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPrivate"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/setting_politics"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+            <![CDATA[
         android:layout_marginBottom="10dp" />
+        ]]>
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Switch
-            android:id="@+id/schHideSchedule"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="19dp"
-            android:paddingRight="10dp"
-            android:text="@string/setting_shudow"
-            android:textSize="18sp" />
-    </RelativeLayout>
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:orientation="horizontal">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/view2"
-        android:layout_below="@+id/lineTime"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="10dp" />
+            <Button
+                android:id="@+id/btnDelete"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/setting_button_delete"
+                android:textStyle="normal|bold" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.08">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:orientation="horizontal">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/setting_mainColor"
-            android:id="@+id/textView3"
-            android:textSize="18sp"
-            android:textColor="@color/primary_text"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="15dp"
-            android:paddingBottom="10dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:paddingLeft="19dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnBlue"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/primary"
-            android:layout_below="@+id/textView3"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnGrey"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/primary_grey"
-            android:layout_marginTop="14dp"
-            android:layout_below="@+id/btnBlue"
-            android:layout_alignLeft="@+id/btnBlue"
-            android:layout_alignStart="@+id/btnBlue" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnRed"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/primary_red"
-            android:layout_below="@+id/textView3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnGreen"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/primary_green"
-            android:layout_alignBaseline="@+id/btnGrey"
-            android:layout_alignBottom="@+id/btnGrey"
-            android:layout_alignLeft="@+id/btnRed"
-            android:layout_alignStart="@+id/btnRed" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnAmber"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/primary_amber"
-            android:layout_marginRight="20dp"
-            android:layout_alignBaseline="@+id/btnGrey"
-            android:layout_alignBottom="@+id/btnGrey"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnPurple"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:backgroundTint="@color/primary_purple"
-            android:layout_below="@+id/textView3"
-            android:layout_alignLeft="@+id/btnAmber"
-            android:layout_alignStart="@+id/btnAmber" />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/view4"
-        android:layout_below="@+id/lineTime"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="10dp" />
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal|center">
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:text="@string/setting_politics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnPrivate"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textStyle="normal|bold" />
-    </RelativeLayout><![CDATA[
-    android:layout_marginBottom="10dp" />
-    ]]>
-
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal|center">
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:text="@string/setting_button_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDelete"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textStyle="normal|bold" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal|center">
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:text="@string/setting_button_deleteAuth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDeleteAuth"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textStyle="normal|bold" />
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/btnDeleteAuth"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/setting_button_deleteAuth"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
 
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal|center">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:orientation="horizontal">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:text="@string/setting_button_exit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnExit"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textStyle="normal|bold" />
-    </RelativeLayout>
-</LinearLayout>
+                <Button
+                    android:id="@+id/btnExit"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/setting_button_exit"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.design.widget.CoordinatorLayout>
