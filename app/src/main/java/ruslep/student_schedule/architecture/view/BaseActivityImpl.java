@@ -50,6 +50,7 @@ import java.util.List;
 import ruslep.student_schedule.R;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferens;
 import ruslep.student_schedule.architecture.model.Preferens.MyPreferensImpl;
+import ruslep.student_schedule.architecture.other.Const;
 import ruslep.student_schedule.architecture.other.Theme.UseTheme;
 import ruslep.student_schedule.architecture.other.Theme.UseThemeImpl;
 import ruslep.student_schedule.architecture.presenter.Base.PresenterBaseImpl;
@@ -361,6 +362,7 @@ public class BaseActivityImpl extends AppCompatActivity implements BaseActivity,
                                 .setAvailableProviders(
                                         Arrays.asList(
                                                 new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()))
+                                .setPrivacyPolicyUrl(Const.POLITICS_LINK)
                                 .build(),
                         RC_SIGN_IN);
                 break;

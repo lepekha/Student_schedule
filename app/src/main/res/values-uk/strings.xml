@@ -19,8 +19,8 @@
     <string name="baseActivity_typeOfWeek_Cheslitel">Чисельник</string>
     <string name="baseActivity_typeOfWeek_Znamenatel">Знаменник</string>
     <string name="baseActivity_typeOfWeek_AllWeek">Кожен тиждень</string>
-    <string name="baseActivity_share_message">Здесь будет текст!!!!</string>///////////////////////////////////////////////////////////////////////////
-    <string name="baseActivity_share_header">Текст</string>
+    <string name="baseActivity_share_message">Дуже легкий додаток для зберігання вашого студентського розкладу.\nhttps://play.google.com/store/apps/details?id=ruslep.student_schedule</string>///////////////////////////////////////////////////////////////////////////
+    <string name="baseActivity_share_header">AllUniver</string>
     <string name="baseActivity_Schedule_error">Помилка. Немає з\'єднання з інтернетом або проблеми на сервері.</string>
     <string name="baseActivity_Schedule_needAuth">Для початку роботи потрібно авторизуватися.</string>
     <string name="baseActivity_getSchedule_compl">Завантаження завершено.</string>

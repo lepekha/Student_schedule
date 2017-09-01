@@ -243,8 +243,7 @@ public class SettingActivityImpl extends AppCompatActivity implements SettingAct
                 recreate();
                 break;
             case R.id.btnPrivate:
-                String url="http://raspisanie-lruslan.rhcloud.com/";
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.POLITICS_LINK));
                 startActivity(browserIntent);
                 break;
             case R.id.btnExit:
